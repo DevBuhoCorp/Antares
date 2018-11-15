@@ -37,13 +37,13 @@ export class SigninComponent implements OnInit {
     this.submitButton.disabled = true;
     this.progressBar.mode = 'indeterminate';
     let origin = window.location.origin;
-    //ENTRAR
+    // ENTRAR
 
     this.crudService.login('oauth/token', {
       grant_type: 'password',
       scope: '*',
       client_id: '2',
-      client_secret: 'bHtHIdw5dIWoVR7sx6Qm9SBgDl8BihjfO57nGDQu',
+      client_secret: 'oUIkcYefAsgTPCl6En3CUvbOZdibmeg4nWvVjVfz',
       username: signinData.username,
       password: signinData.password
     }).subscribe(data => {

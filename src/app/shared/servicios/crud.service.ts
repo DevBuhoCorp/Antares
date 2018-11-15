@@ -31,7 +31,7 @@ export class CrudService {
 
   login(api, objeto) {
     var body = objeto;
-    //var headerOptions = new Headers({ 'Content-Type': 'application/json' });
+    // var headerOptions = new Headers({ 'Content-Type': 'application/json' });
     var requestOptions = new RequestOptions({  method: RequestMethod.Post, headers: this.getHeaders() });
     return this.http.post(this.puerto + api, body, requestOptions).map(res => res.json());
   }
