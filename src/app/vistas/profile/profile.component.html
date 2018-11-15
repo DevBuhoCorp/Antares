@@ -1,0 +1,23 @@
+<div fxLayout="row" fxLayoutWrap="wrap">
+  <div fxFlex="100" fxFlex.gt-md="300px" fxFlex.gt-sm="50">
+    <mat-card class="profile-sidebar mb-1 pb-0">
+      <div class="propic text-center">
+        <img [src]="DatosPersonales[0]?.FotoPerfil | sinfoto" (click)="FPerfilClick()">
+      </div>
+      <div class="profile-title text-center mb-1">
+        <div class="main-title">
+          {{ DatosPersonales[0]?.NombrePrimer }}
+          <b>{{ DatosPersonales[0]?.ApellidoPaterno }}</b>
+        </div>
+        <div class="subtitle mb-05">{{DatosPersonales[0]?.Rol}}</div>
+      </div>
+
+    </mat-card>
+
+  </div>
+
+  <!-- Profile Views -->
+  <div fxFlex="100" fxFlex.gt-sm="50" fxFlex.gt-md="calc(100% - 300px)">
+    <router-outlet></router-outlet>
+  </div>
+</div>

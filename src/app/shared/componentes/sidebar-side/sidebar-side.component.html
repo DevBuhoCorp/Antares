@@ -1,0 +1,54 @@
+<div class="sidebar-panel">
+  <div id="scroll-area" class="navigation-hold" fxLayout="column">
+    <!-- Logotipo de la aplicación -->
+    <div class="branding default-bg">
+     <!-- <img src="assets/images/logo.png" alt="" class="app-logo">-->
+      <!-- logo -->
+      <img src="assets/images/BUHOCORP_AZUL_72.png" alt="" class="app-logo-text">
+    </div>
+
+    <!-- Usuario de la barra lateral -->
+    <div class="app-user">
+      <div class="app-user-photo">
+        <img [src]="DatosPersonales[0]?.FotoPerfil | sinfoto" >
+      </div>
+      <span class="app-user-name mb-05">
+        <!--<mat-icon class="icon-xs text-muted">lock</mat-icon>-->
+        {{ DatosPersonales[0]?.NombrePrimer }}
+        <b>{{ DatosPersonales[0]?.ApellidoPaterno }}</b>
+      </span>
+      <!-- Small buttons -->
+      <div class="app-user-controls">
+        <button class="text-muted" mat-icon-button mat-xs-button [matMenuTriggerFor]="appUserMenu">
+          <mat-icon>settings</mat-icon>
+        </button>
+        <!--<button class="text-muted" mat-icon-button mat-xs-button matTooltip="Bandeja de entrada" routerLink="/inbox">-->
+          <!--<mat-icon>email</mat-icon>-->
+        <!--</button>-->
+        <button class="text-muted" mat-icon-button mat-xs-button matTooltip="Cerrar Sesión" (click)="logout()" routerLink="/sesiones/signin">
+          <mat-icon>exit_to_app</mat-icon>
+        </button>
+        <mat-menu #appUserMenu="matMenu">
+          <button mat-menu-item routerLink="/profile/overview">
+            <mat-icon>account_box</mat-icon>
+            <span>Perfil</span>
+          </button>
+          <!--<button mat-menu-item routerLink="/profile/settings">-->
+            <!--<mat-icon>settings</mat-icon>-->
+            <!--<span>Configuraciones de la cuenta</span>-->
+          <!--</button>-->
+          <!--<button mat-menu-item routerLink="/calendar">-->
+            <!--<mat-icon>date_range</mat-icon>-->
+            <!--<span>Calendario</span>-->
+          <!--</button>-->
+          <button mat-menu-item (click)="logout()" routerLink="/sesiones/signin">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Cerrar Sesión</span>
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+    <!-- Navigation -->
+    <app-sidenav [items]="menuItems" [hasIconMenu]="hasIconTypeMenuItem" [iconMenuTitle]="iconTypeMenuTitle"></app-sidenav>
+  </div>
+</div>

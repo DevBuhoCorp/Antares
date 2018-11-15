@@ -1,0 +1,108 @@
+<h1 matDialogTitle>{{ data.title }}</h1>
+<form [formGroup]="itemForm" (ngSubmit)="submit()">
+  <div fxLayout="row wrap" fxLayout.lt-sm="column">
+
+    <!--<div fxFlex="50" class="pr-1">-->
+    <!--<mat-form-field class="full-width">-->
+    <!--<input matInput name="Etiqueta" [formControl]="itemForm.controls['Etiqueta']" placeholder="Etiqueta cuenta o caja">-->
+    <!--</mat-form-field>-->
+    <!--</div>-->
+
+    <div fxFlex="50" class="pr-1">
+      <mat-form-field class="full-width">
+        <mat-select [formControl]="itemForm.controls['IDRol']" name="IDRol" placeholder="Rol">
+          <mat-option *ngFor="let rol of roles | async" [value]="rol.ID" ngDefaultControl>
+            {{ rol.Descripcion }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div fxFlex="50" class="pr-1">
+      <mat-form-field class="full-width">
+        <input matInput name="Cedula" [formControl]="itemForm.controls['Cedula']" placeholder="Cédula"
+           >
+      </mat-form-field>
+      <small *ngIf="itemForm.controls['Cedula'].hasError('minlength') || itemForm.controls['Cedula'].hasError('maxLength') && itemForm.controls['Cedula'].touched" class="form-error-msg">
+          Cédula
+        {{itemForm.controls['Cedula'].errors.minlength.requiredLength}} carácteres </small>
+    </div>
+
+    <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+            <input matInput name="NombrePrimer" [formControl]="itemForm.controls['NombrePrimer']" placeholder="Primer Nombre" >
+        </mat-form-field>
+        <small *ngIf="itemForm.controls['NombrePrimer'].hasError('required') && itemForm.controls['NombrePrimer'].touched"
+            class="form-error-msg"> Primer  nombre es requerido </small>
+    </div>
+
+    <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+            <input matInput name="NombreSegundo" [formControl]="itemForm.controls['NombreSegundo']" placeholder="Segundo Nombre" >
+        </mat-form-field>
+        <small *ngIf="itemForm.controls['NombreSegundo'].hasError('required') && itemForm.controls['NombreSegundo'].touched"
+            class="form-error-msg"> Segundo  nombre es requerido </small>
+    </div>
+
+    <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+            <input matInput name="ApellidoPaterno" [formControl]="itemForm.controls['ApellidoPaterno']" placeholder="Apellido Paterno" >
+        </mat-form-field>
+        <small *ngIf="itemForm.controls['ApellidoPaterno'].hasError('required') && itemForm.controls['ApellidoPaterno'].touched"
+            class="form-error-msg"> Apellido Paterno es requerido </small>
+    </div>
+
+    <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+            <input matInput name="ApellidoMaterno" [formControl]="itemForm.controls['ApellidoMaterno']" placeholder="Apellido Materno" >
+        </mat-form-field>
+        <small *ngIf="itemForm.controls['ApellidoMaterno'].hasError('required') && itemForm.controls['ApellidoMaterno'].touched"
+            class="form-error-msg"> Apellido Materno es requerido </small>
+    </div>
+
+    <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+            <input matInput name="NumConvencional" [formControl]="itemForm.controls['NumConvencional']" placeholder="Número Convencional">
+        </mat-form-field>
+        <small *ngIf="itemForm.controls['NumConvencional'].hasError('phone') && itemForm.controls['NumConvencional'].touched"
+            class="form-error-msg"> Número  invalido </small>
+    </div>
+
+    <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+            <input matInput name="phone" [formControl]="itemForm.controls['NumMovil']" placeholder="Número Movil">
+        </mat-form-field>
+        <small *ngIf="itemForm.controls['NumMovil'].hasError('phone') && itemForm.controls['NumMovil'].touched"
+            class="form-error-msg"> Número  invalido </small>
+    </div>
+
+    <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+            <input matInput name="name" [formControl]="itemForm.controls['name']" placeholder="Nombre de Usuario">
+        </mat-form-field>
+    </div>
+
+    <div fxFlex="50" class="pr-1">
+      <mat-form-field class="full-width">
+        <input matInput type="email" name="email" [formControl]="itemForm.controls['email']" placeholder="Correo Electrónico"
+          >
+      </mat-form-field>
+      <small *ngIf="itemForm.controls['email'].hasError('required') && itemForm.controls['email'].touched" class="form-error-msg">
+        Correo es requerido </small>
+      <small *ngIf="itemForm.controls['email'].hasError('email') && itemForm.controls['email'].touched" class="form-error-msg">
+        Correo inválido </small>
+    </div>
+
+
+    <div fxFlex="50" class="pt-1 pr-1">
+        <mat-slide-toggle [formControl]="itemForm.controls['Estado']">Estado</mat-slide-toggle>
+      </div>
+
+
+    <div fxFlex="100" class="mt-1">
+      <button mat-raised-button color="primary" [disabled]="itemForm.invalid">Guardar</button>
+      <span fxFlex></span>
+      <button mat-button color="warn" type="button" (click)="dialogRef.close(false)">Cancelar</button>
+    </div>
+  </div>
+</form>

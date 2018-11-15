@@ -1,0 +1,38 @@
+<h1 matDialogTitle>{{ data.title }}</h1>
+<div fxLayout="row wrap" fxLayout.lt-sm="column" >
+  <div fxFlex="50" class="pr-1">
+    <mat-form-field class="full-width">
+      <mat-select name="Empresa" placeholder="Empresa" [(value)]="selectEmpresa">
+        <mat-option *ngFor="let empresa of empresas" [value]="empresa.ID" ngDefaultControl>
+          {{ empresa.Descripcion }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div fxFlex="10" class="pr-1">
+    <button mat-icon-button color="primary" (click)="addList()">
+      <mat-icon aria-label="Example icon-button with a heart icon">arrow_forward</mat-icon>
+    </button>
+  </div>
+  <div fxFlex="40" class="pr-1">
+    <!--*ngIf="userEmpresa"-->
+    <mat-list >
+      <mat-list-item *ngFor="let empresa of userEmpresa ">
+        <h4 matLine> {{ empresa.Descripcion }} </h4>
+        <button mat-icon-button (click)="removeList(empresa)" *ngIf="empresa.Estado == 'ACT'">
+          <mat-icon class="mat-24" color="warn">delete</mat-icon>
+        </button>
+        <button mat-icon-button (click)="reAddList(empresa)" *ngIf="empresa.Estado != 'ACT'">
+          <mat-icon class="mat-24" color="primary">refresh</mat-icon>
+        </button>
+
+      </mat-list-item>
+    </mat-list>
+
+  </div>
+  <div fxFlex="100" class="mt-1">
+    <button mat-raised-button color="primary" (click)="save()">Guardar</button>
+    <span fxFlex></span>
+    <button mat-button color="warn" type="button" (click)="dialogRef.close(false)">Cancelar</button>
+  </div>
+</div>

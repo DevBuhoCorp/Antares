@@ -1,0 +1,54 @@
+[
+  {
+    "PADRE": "0",
+    "id": "9",
+    "cod": "2",
+    "etiq": "PASIVO",
+    "items": [
+
+    ]
+  },
+  {
+    "PADRE": "0",
+    "id": "5",
+    "cod": "1",
+    "etiq": "ACTIVO",
+    "items": [
+      {
+        "PADRE": "5",
+        "id": "11",
+        "cod": "1.02",
+        "etiq": "ACTIVO NO CORRIENTE",
+        "items": [
+
+        ]
+      },
+      {
+        "PADRE": "5",
+        "id": "7",
+        "cod": "1.01",
+        "etiq": "ACTIVO CORRIENTE",
+        "items": [
+          {
+            "PADRE": "7",
+            "id": "10",
+            "cod": "1.01.02",
+            "etiq": "ACTIVOS FINANCIEROS",
+            "items": [
+
+            ]
+          },
+          {
+            "PADRE": "7",
+            "id": "8",
+            "cod": "1.01.01",
+            "etiq": "EFECTIVO",
+            "items": [
+
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

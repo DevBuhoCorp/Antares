@@ -1,0 +1,67 @@
+<!--<div fxLayout="row" fxLayoutWrap="wrap">
+
+
+  <div fxFlex="100" fxFlex.gt-sm="33" *ngIf="lineChartData">
+    <mat-card class="p-0">
+      <mat-card-title class="">
+        <div class="card-title-text">Transacciones realizadas este año en dólares</div>
+        <mat-divider></mat-divider>
+      </mat-card-title>
+      <mat-card-content>
+        <canvas baseChart class="chart" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
+          [colors]="chartColors" [legend]="lineChartLegend" [chartType]="lineChartType"></canvas>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div fxFlex="100" fxFlex.gt-sm="33">
+    <mat-card class="p-0">
+      <mat-card-title class="">
+        <div class="card-title-text">
+          <span>Top cuentas con mayor Saldo</span>
+          <span fxFlex></span>
+        </div>
+        <mat-divider></mat-divider>
+      </mat-card-title>
+      <mat-card-content>
+        <div class="mb-1" *ngFor="let data of topcuentas">
+          <p class="mb-05 text-muted">{{data.Etiqueta}} {{data.Saldo | currency }}</p>
+          <mat-progress-bar class="" color="primary" mode="determinate" [value]="data.Saldo * 100 / top">
+          </mat-progress-bar>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div fxFlex="100" fxFlex.gt-sm="25" fxFlex.sm="50" *ngIf="porcentaje">
+    <mat-card>
+      <mat-card-title fxLayoutAlign="start center">
+        <small class="text-muted">Total Transacciones este mes</small>
+        <span fxFlex></span>
+        <mat-chip class="icon-chip" color="primary" selected="true" *ngIf="porcentaje > 0">
+          <mat-icon>trending_up</mat-icon>{{porcentaje}}%
+        </mat-chip>
+        <mat-chip class="icon-chip" color="warn" selected="true" *ngIf="porcentaje < 0">
+          <mat-icon>trending_down</mat-icon>{{porcentaje}}%
+        </mat-chip>
+      </mat-card-title>
+      <mat-card-content>
+        <h3 class="m-0 font-normal">{{totales[1]?.data | currency}}</h3>
+        <small class="text-muted">{{totales[1]?.label}}</small>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<div fxLayout="row" fxLayoutWrap="wrap">
+  <div fxFlex="100" fxFlex.gt-sm="33">
+    <mat-card class="p-0">
+      <mat-card-title class="">
+        <div class="card-title-text">Top cuentas con mayor movimiento</div>
+        <mat-divider></mat-divider>
+      </mat-card-title>
+      <mat-card-content>
+        <canvas baseChart class="chart" [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+          [colors]="chartColors" [legend]="barChartLegend" [chartType]="barChartType"></canvas>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>-->

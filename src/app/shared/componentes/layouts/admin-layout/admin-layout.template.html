@@ -1,0 +1,44 @@
+<div class="app-admin-wrap" [dir]='layoutConf.dir'>
+  <!-- Contenedor principal -->
+  <mat-sidenav-container [dir]='layoutConf.dir' class="app-admin-container app-side-nav-container mat-drawer-transition" [ngClass]="{
+    'navigation-top': layoutConf.navigationPos === 'top',
+    'sidebar-full': layoutConf.sidebarStyle === 'full',
+    'sidebar-compact': layoutConf.sidebarStyle === 'compact' && layoutConf.navigationPos === 'side',
+    'sidebar-compact-big': layoutConf.sidebarStyle === 'compact-big' && layoutConf.navigationPos === 'side',
+    'layout-intransition': layoutConf.layoutInTransition,
+    'sidebar-opened': layoutConf.sidebarStyle !== 'closed' && layoutConf.navigationPos === 'side',
+    'sidebar-closed': layoutConf.sidebarStyle === 'closed',
+    'fixed-topbar': layoutConf.topbarFixed && layoutConf.navigationPos === 'side'
+  }">
+    <!-- SIDEBAR -->
+    <app-sidebar-side></app-sidebar-side>
+    <!-- Contenido de la aplicación -->
+    <div class="main-content-wrap">
+      <!-- Encabezado para el diseño de navegación lateral -->
+      <app-header-side [notificPanel]="notificationPanel">
+      </app-header-side>
+      <div class="rightside-content-hold">
+        <!-- Ver cargador -->
+        <div class="view-loader" *ngIf="isModuleLoading">
+          <div class="spinner">
+            <div class="double-bounce1 mat-bg-accent"></div>
+            <div class="double-bounce2 mat-bg-primary"></div>
+          </div>
+        </div>
+        <!-- Breadcrumb -->
+        <app-breadcrumb></app-breadcrumb>
+        <!-- View outlet -->
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+    <!-- Ver superposición para navegación móvil -->
+    <div class="sidebar-backdrop" [ngClass]="{'visible': layoutConf.sidebarStyle !== 'closed' && layoutConf.isMobile}" (click)="closeSidebar()"></div>
+
+    <!-- Barra de notificación -->
+    <mat-sidenav #notificationPanel mode="over" class="" align="end">
+      <div class="navigation-hold" fxLayout="column">
+        <!--<app-notifications [notificPanel]="notificationPanel"></app-notifications>-->
+      </div>
+    </mat-sidenav>
+  </mat-sidenav-container>
+</div>
