@@ -49,6 +49,8 @@ import { ContribuyenteComponent } from './catalogos/contribuyente/contribuyente.
 import { PopupTipoEmisorComponent} from './catalogos/tipoemisor/popup/popup.component';
 import {PopupTipoIdentificacionComponent} from './catalogos/tipoidentificacion/popup/popup.component';
 import {PopupContribuyenteComponent} from './catalogos/contribuyente/popup/popup.component';
+import {ProveedorComponent} from './compras/proveedor/proveedor.component';
+import {PopupProveedorComponent} from './compras/proveedor/popup/popup.component';
 
 
 @NgModule({
@@ -100,10 +102,11 @@ import {PopupContribuyenteComponent} from './catalogos/contribuyente/popup/popup
     TipoemisorComponent,
     TipoidentificacionComponent,
     ContribuyenteComponent,
+    ProveedorComponent,
     PopupTipoIdentificacionComponent,
     PopupTipoEmisorComponent,
     PopupContribuyenteComponent,
-    
+    PopupProveedorComponent
 
   ],
   providers: [],
@@ -117,6 +120,7 @@ import {PopupContribuyenteComponent} from './catalogos/contribuyente/popup/popup
     PopupTipoIdentificacionComponent,
     PopupTipoEmisorComponent,
     PopupContribuyenteComponent,
+    PopupProveedorComponent,
    
   ]
 })

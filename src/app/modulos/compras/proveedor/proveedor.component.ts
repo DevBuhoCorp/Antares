@@ -5,14 +5,14 @@ import {AppLoaderService} from '../../../shared/servicios/app-loader/app-loader.
 import {AppConfirmService} from '../../../shared/servicios/app-confirm/app-confirm.service';
 import {Router} from '@angular/router';
 import {ToolsService} from '../../../shared/servicios/tools.service';
-import {PopupContribuyenteComponent} from './popup/popup.component';
+import {PopupProveedorComponent} from './popup/popup.component';
 
 @Component({
-  selector: 'app-contribuyente',
-  templateUrl: './contribuyente.component.html',
+  selector: 'app-proveedor',
+  templateUrl: './proveedor.component.html',
   styles: []
 })
-export class ContribuyenteComponent implements OnInit {
+export class ProveedorComponent implements OnInit {
 
   pageSize = this.toolsService.getPaginas();
   selPageSize : any = this.pageSize[0];
@@ -36,11 +36,11 @@ export class ContribuyenteComponent implements OnInit {
   }
 
   async loadApp(){
-    this.paginate = await this.crudService.SeleccionarAsync('contribuyente', { page: 1 , psize: this.selPageSize });
+    this.paginate = await this.crudService.SeleccionarAsync('proveedor', { page: 1 , psize: this.selPageSize });
   }
 
   async setPage(event){
-    this.paginate = await this.crudService.SeleccionarAsync('contribuyente', { page: event.offset + 1 , psize: this.selPageSize });
+    this.paginate = await this.crudService.SeleccionarAsync('proveedor', { page: event.offset + 1 , psize: this.selPageSize });
   }
 
   deleteItem(item){
@@ -48,7 +48,7 @@ export class ContribuyenteComponent implements OnInit {
       .subscribe(res => {
         if (res) {
           this.loader.open();
-          this.crudService.Eliminar(item.ID, 'contribuyente/').subscribe(data => {
+          this.crudService.Eliminar(item.ID, 'proveedor/').subscribe(data => {
             this.loadApp();
             this.loader.close();
             this.snack.open('Eliminado!', 'OK', { duration: 4000 });
@@ -60,9 +60,9 @@ export class ContribuyenteComponent implements OnInit {
   async openPopUp(data: any = {}, isNew?){
     let title = isNew ? 'Agregar' : 'Actualizar';
     if (!isNew) {
-      data = await this.crudService.SeleccionarAsync("contribuyente/" + data.ID);
+      data = await this.crudService.SeleccionarAsync("proveedor/" + data.ID);
     }
-    let dialogRef: MatDialogRef<any> = this.dialog.open(PopupContribuyenteComponent, {
+    let dialogRef: MatDialogRef<any> = this.dialog.open(PopupProveedorComponent, {
       width: '720px',
       disableClose: true,
       data: { title: title, payload: data }
@@ -74,14 +74,14 @@ export class ContribuyenteComponent implements OnInit {
 
       this.loader.open();
       if(isNew){
-        this.crudService.Insertar(response, 'contribuyente/').subscribe(data => {
+        this.crudService.Insertar(response, 'proveedor/').subscribe(data => {
           this.loadApp();
           this.loader.close();
           this.snack.open('Agregado!', 'OK', { duration: 4000 });
         });
       }
       else{
-        this.crudService.Actualizar(data.ID, response, 'contribuyente/')
+        this.crudService.Actualizar(data.ID, response, 'proveedor/')
           .subscribe(response2 => {
             this.loadApp();
             this.loader.close();
