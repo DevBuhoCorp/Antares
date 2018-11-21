@@ -51,6 +51,7 @@ export class NavigationService {
       sub: [
         { name: 'Área', state: 'area' },
         { name: 'Departamento', state: 'departamento' },
+        { name: 'Cargo', state: 'cargo' },
       ]
     },
     {
@@ -59,6 +60,7 @@ export class NavigationService {
       icon: 'person',
       state: 'modulos/nomina',
       sub: [
+        { name: 'Colaborador', state: 'colaborador' },
         { name: 'Usuario', state: 'usuario' },
         { name: 'Roles', state: 'roles' },
       ]

@@ -43,6 +43,10 @@ import { AreaComponent } from './catalogos/area/area.component';
 import { AreaPopupComponent } from './catalogos/area/popup/popup.component';
 import { DepartamentoComponent } from './catalogos/departamento/departamento.component';
 import { DepartamentoPopupComponent } from './catalogos/departamento/popup/popup.component';
+import { CargoComponent } from './catalogos/cargo/cargo.component';
+import { CargoPopupComponent } from './catalogos/cargo/popup/popup.component';
+import { ColaboradorComponent } from './nomina/colaborador/colaborador.component';
+import { ColaboradorPopupComponent } from './nomina/colaborador/popup/popup.component';
 
 
 @NgModule({
@@ -91,6 +95,10 @@ import { DepartamentoPopupComponent } from './catalogos/departamento/popup/popup
     AreaPopupComponent,
     DepartamentoComponent,
     DepartamentoPopupComponent,
+    CargoComponent,
+    CargoPopupComponent,
+    ColaboradorComponent,
+    ColaboradorPopupComponent,
     
 
   ],
@@ -101,7 +109,9 @@ import { DepartamentoPopupComponent } from './catalogos/departamento/popup/popup
     PopupComponentUser,
     UsersempresaComponent,
     AreaPopupComponent,
-    DepartamentoPopupComponent
+    DepartamentoPopupComponent,
+    CargoPopupComponent,
+    ColaboradorPopupComponent
    
   ]
 })
