@@ -3,16 +3,15 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
-  selector: 'app-profile-blank',
-  templateUrl: './profile-blank.component.html',
+  selector: 'app-popup',
+  templateUrl: './popup.component.html',
   styles: []
 })
-export class ProfileBlankComponent implements OnInit {
+export class DepartamentoPopupComponent implements OnInit {
   public itemForm: FormGroup;
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef: MatDialogRef<ProfileBlankComponent>,
-    private fb: FormBuilder, ) { }
-
+    public dialogRef: MatDialogRef<DepartamentoPopupComponent>,
+    private fb: FormBuilder) { }
   ngOnInit() {
     if (Array.isArray(this.data.payload)) {
       this.buildItemForm(this.data.payload[0]);
@@ -20,17 +19,16 @@ export class ProfileBlankComponent implements OnInit {
       this.buildItemForm(this.data.payload);
     }
   }
-
   buildItemForm(item) {
     this.itemForm = this.fb.group({
-      OldPass: [item.OldPass || '', Validators.required],
-      NewPass: [item.NewPass || '', Validators.required],
-
+      Descripcion: [item.Descripcion || '', Validators.required],
+      Estado: [item.Estado || false, Validators.required]
     })
   }
 
   submit() {
     this.dialogRef.close(this.itemForm.value)
   }
+
 
 }

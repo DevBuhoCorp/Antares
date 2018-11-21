@@ -67,7 +67,6 @@ export class ProfileSettingsComponent implements OnInit {
       else {
         this.crudService.Actualizar(this.toolService.getEmpresaActive().IDUsers, response, 'changepass/')
           .subscribe(response2 => {
-            console.log(response2); 
             if (response2) {
               localStorage.clear();
               location.reload();

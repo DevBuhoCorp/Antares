@@ -1,0 +1,48 @@
+<div class="m-333" style="display: flex; justify-content: space-between;">
+  <button mat-raised-button class="mb-05" color="primary" (click)="openPopUp({}, true)">Agregar</button>
+  <div class="select-group">
+    <mat-form-field class="full-width">
+    <mat-select placeholder=" Seleccione número de ítems:" [(ngModel)]="selPageSize" (selectionChange)="loadApp()">
+      <mat-option *ngFor="let page of pageSize" [value]="page" ngDefaultControl>{{ page }}</mat-option>
+    </mat-select>
+    </mat-form-field> 
+  </div>
+</div>
+
+<mat-card class="p-0" >
+  <mat-card-content class="p-0" >
+    <ngx-datatable class="material ml-0 mr-0"
+                   [rows]="paginate.data"
+                   [columnMode]="'flex'"
+                   [headerHeight]="50"
+                   [footerHeight]="50"
+                   [rowHeight]="'auto'"
+                   [externalPaging]="true"
+                   [count]="paginate.total"
+                   [limit]="paginate.per_page"
+                   (page)='setPage($event)' >
+      <ngx-datatable-column name="Descripción" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.Descripcion }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Estado" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <mat-chip mat-sm-chip [color]="'primary'" [selected]="row.Estado">
+            {{ row.Estado == 'ACT' ? 'activo' : 'inactivo' }}
+          </mat-chip>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Acciones" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <button mat-icon-button mat-sm-button color="primary" class="mr-1" (click)="openPopUp(row)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button mat-sm-button color="warn" class="mr-1" (click)="deleteItem(row)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </mat-card-content>
+</mat-card>

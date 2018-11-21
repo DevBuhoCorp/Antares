@@ -44,6 +44,16 @@ export class NavigationService {
       name: 'Items Principales'
     },
     {
+      name: 'Catálogos',
+      type: 'dropDown',
+      icon: 'description',
+      state: 'modulos/catalogos',
+      sub: [
+        { name: 'Área', state: 'area' },
+        { name: 'Departamento', state: 'departamento' },
+      ]
+    },
+    {
       name: 'Nómina',
       type: 'dropDown',
       icon: 'person',
@@ -53,87 +63,7 @@ export class NavigationService {
         { name: 'Roles', state: 'roles' },
       ]
     },
-    /*
-    {
-      name: 'Finanzas',
-      type: 'dropDown',
-      icon: 'account_balance',
-      state: 'modulos/finanzas',
-      sub: [
-        { name: 'Banco', state: 'banco' },
-        { name: 'Tipo Cuenta Bancaria', state: 'tipocuentabancaria' },
-        { name: 'Cuentas Bancarias', state: 'cuentabancaria' },
-      ]
-    },
-    {
-      name: 'Configurar',
-      type: 'dropDown',
-      icon: 'settings',
-      state: 'modulos/configurar',
-      sub: [
-        { name: 'Empresa', state: 'empresas' },
-        { name: 'Aplicación', state: 'aplicacion' },
-        { name: 'Diarios Contables', state: 'diarioscontables' },
-        { name: 'Modelos de Planes Contables', state: 'modelosplanescontables' },
-        { name: 'Plan Contable', state: 'plancontable' },
-        { name: 'Cuenta Balance', state: 'cuentabalance' },
-      ]
-    },
-    {
-      name: 'Transacciones',
-      type: 'dropDown',
-      icon: 'transform',
-      state: 'modulos',
-      sub: [
-        { name: 'Nueva', state: 'transacciones' },
-        { name: 'Contabilizar Transacciones', icon: 'account_balance_wallet', state: 'contabilizarcliente/contabilizar' },
-      ]
-    },
-    {
-      name: 'Libro Diario',
-      type: 'link',
-      icon: 'local_library',
-      state: 'modulos/libromayor',
-    },
-    {
-      name: 'Libro Mayor',
-      type: 'link',
-      icon: 'business_center',
-      state: 'modulos/mayor',
-    },
-    {
-      name: 'Reportes',
-      type: 'dropDown',
-      icon: 'list_alt',
-      state: 'modulos',
-      sub: [
-        {
-          name: 'Balances',
-          type: 'dropDown',
-          state: 'reportes',
-          sub: [
-            { name: 'Balance de Comprobación', state: 'balancecomprobacion' },
-            { name: 'Balance Final', state: 'balancefinal' },
-          ]
-        },
-        {
-          name: 'Estados',
-          type: 'dropDown',
-          state: 'reportes',
-          sub: [
-            { name: 'Estado de Resultados', state: 'estadoresultado' },
-          ]
-        },
-        {
-          name: 'Hojas',
-          type: 'dropDown',
-          state: 'reportes',
-          sub: [
-            { name: 'Hoja de Trabajo', state: 'hojatrabajo' },
-          ]
-        },
-      ]
-    },*/
+   
   ];
 
   // Icon menu TITLE at the very top of navigation.

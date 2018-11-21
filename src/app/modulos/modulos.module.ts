@@ -39,6 +39,10 @@ import { PopupComponentUser } from './nomina/usuario/popup/popup.component';
 import { UsersempresaComponent } from './nomina/usuario/usersempresa/usersempresa.component';
 import {UserempresafilterPipe} from '../shared/pipes/userempresafilter.pipe';
 import { UsuarioComponent } from './nomina/usuario/usuario.component';
+import { AreaComponent } from './catalogos/area/area.component';
+import { AreaPopupComponent } from './catalogos/area/popup/popup.component';
+import { DepartamentoComponent } from './catalogos/departamento/departamento.component';
+import { DepartamentoPopupComponent } from './catalogos/departamento/popup/popup.component';
 
 
 @NgModule({
@@ -83,6 +87,10 @@ import { UsuarioComponent } from './nomina/usuario/usuario.component';
     PopupComponentUser,
     UsersempresaComponent,
     UserempresafilterPipe,
+    AreaComponent,
+    AreaPopupComponent,
+    DepartamentoComponent,
+    DepartamentoPopupComponent,
     
 
   ],
@@ -91,7 +99,9 @@ import { UsuarioComponent } from './nomina/usuario/usuario.component';
     //pop-ups 
     PopupComponentRoles,
     PopupComponentUser,
-    UsersempresaComponent
+    UsersempresaComponent,
+    AreaPopupComponent,
+    DepartamentoPopupComponent
    
   ]
 })

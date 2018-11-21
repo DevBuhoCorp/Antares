@@ -24,7 +24,6 @@ export class PopupComponentUser implements OnInit {
 
   ngOnInit() {
     this.roles = this.crudService.SeleccionarAsync('rol_combo');
-    console.log(this.data.payload);
     if (Array.isArray(this.data.payload)) {
       this.buildItemForm(this.data.payload[0]);
     } else {
