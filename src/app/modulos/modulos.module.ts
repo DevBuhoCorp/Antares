@@ -32,7 +32,7 @@ import {AppConfirmModule} from '../shared/servicios/app-confirm/app-confirm.modu
 import {AppLoaderModule} from '../shared/servicios/app-loader/app-loader.module';
 import {ModulosRoutes} from './modulos.routing';
 import {FileUploadModule} from 'ng2-file-upload';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { RolesComponent } from './nomina/roles/roles.component';
 import { PopupComponentRoles } from './nomina/roles/popup/popup.component';
 import { PopupComponentUser } from './nomina/usuario/popup/popup.component';
@@ -43,6 +43,12 @@ import { AreaComponent } from './catalogos/area/area.component';
 import { AreaPopupComponent } from './catalogos/area/popup/popup.component';
 import { DepartamentoComponent } from './catalogos/departamento/departamento.component';
 import { DepartamentoPopupComponent } from './catalogos/departamento/popup/popup.component';
+import { TipoemisorComponent } from './catalogos/tipoemisor/tipoemisor.component';
+import { TipoidentificacionComponent } from './catalogos/tipoidentificacion/tipoidentificacion.component';
+import { ContribuyenteComponent } from './catalogos/contribuyente/contribuyente.component';
+import { PopupTipoEmisorComponent} from './catalogos/tipoemisor/popup/popup.component';
+import {PopupTipoIdentificacionComponent} from './catalogos/tipoidentificacion/popup/popup.component';
+import {PopupContribuyenteComponent} from './catalogos/contribuyente/popup/popup.component';
 
 
 @NgModule({
@@ -91,6 +97,12 @@ import { DepartamentoPopupComponent } from './catalogos/departamento/popup/popup
     AreaPopupComponent,
     DepartamentoComponent,
     DepartamentoPopupComponent,
+    TipoemisorComponent,
+    TipoidentificacionComponent,
+    ContribuyenteComponent,
+    PopupTipoIdentificacionComponent,
+    PopupTipoEmisorComponent,
+    PopupContribuyenteComponent,
     
 
   ],
@@ -101,7 +113,10 @@ import { DepartamentoPopupComponent } from './catalogos/departamento/popup/popup
     PopupComponentUser,
     UsersempresaComponent,
     AreaPopupComponent,
-    DepartamentoPopupComponent
+    DepartamentoPopupComponent,
+    PopupTipoIdentificacionComponent,
+    PopupTipoEmisorComponent,
+    PopupContribuyenteComponent,
    
   ]
 })
