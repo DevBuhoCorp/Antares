@@ -5,6 +5,7 @@ import { AreaComponent } from './catalogos/area/area.component';
 import { DepartamentoComponent } from './catalogos/departamento/departamento.component';
 import { CargoComponent } from './catalogos/cargo/cargo.component';
 import { ColaboradorComponent } from './nomina/colaborador/colaborador.component';
+import { ColaboradorareaComponent } from './nomina/colaboradorarea/colaboradorarea.component';
 
 
 export const ModulosRoutes: Routes = [
@@ -24,6 +25,11 @@ export const ModulosRoutes: Routes = [
     path: 'nomina/colaborador',
     component: ColaboradorComponent,
     data: {title: 'Configuración Colaborador', breadcrumb: 'CONFIGURACIÓN COLABORADOR'}
+  },
+  {
+    path: 'nomina/colaboradorarea',
+    component: ColaboradorareaComponent,
+    data: {title: 'Asignar Área-Colaborador', breadcrumb: 'ASIGNAR ÁREA-COLABORADOR'}
   },
   //#endregion
   

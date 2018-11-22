@@ -61,6 +61,7 @@ export class NavigationService {
       state: 'modulos/nomina',
       sub: [
         { name: 'Colaborador', state: 'colaborador' },
+        { name: 'Colaborador-Área', state: 'colaboradorarea' },
         { name: 'Usuario', state: 'usuario' },
         { name: 'Roles', state: 'roles' },
       ]

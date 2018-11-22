@@ -47,6 +47,8 @@ import { CargoComponent } from './catalogos/cargo/cargo.component';
 import { CargoPopupComponent } from './catalogos/cargo/popup/popup.component';
 import { ColaboradorComponent } from './nomina/colaborador/colaborador.component';
 import { ColaboradorPopupComponent } from './nomina/colaborador/popup/popup.component';
+import { ColaboradorareaComponent } from './nomina/colaboradorarea/colaboradorarea.component';
+import { ColaboradorAreaPopupComponent } from './nomina/colaboradorarea/popup/popup.component';
 
 
 @NgModule({
@@ -99,6 +101,8 @@ import { ColaboradorPopupComponent } from './nomina/colaborador/popup/popup.comp
     CargoPopupComponent,
     ColaboradorComponent,
     ColaboradorPopupComponent,
+    ColaboradorareaComponent,
+    ColaboradorAreaPopupComponent,
     
 
   ],
@@ -111,7 +115,8 @@ import { ColaboradorPopupComponent } from './nomina/colaborador/popup/popup.comp
     AreaPopupComponent,
     DepartamentoPopupComponent,
     CargoPopupComponent,
-    ColaboradorPopupComponent
+    ColaboradorPopupComponent,
+    ColaboradorAreaPopupComponent
    
   ]
 })
