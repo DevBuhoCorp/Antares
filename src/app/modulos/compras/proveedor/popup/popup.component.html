@@ -1,0 +1,88 @@
+<h1 matDialogTitle>{{data.title}}</h1>
+<form name="itemForm" (ngSubmit)="submit()">
+  <div fxLayout="row wrap" fxLayout.lt-sm="column">
+
+    <div fxFlex="50" class="pr-1">
+      <mat-form-field class="full-width">
+        <mat-select placeholder=" Seleccione Tipo Identificacion" [formControl]="itemForm.controls['IDTipoIdentificacion']">
+          <mat-option *ngFor="let row of TIdentificacions | async" [value]="row.ID" ngDefaultControl>{{ row.Descripcion }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div fxFlex="50" class="pr-1">
+      <mat-form-field class="full-width">
+        <input matInput name="Identificación" [formControl]="itemForm.controls['Identificacion']"
+               placeholder="Identificacion">
+      </mat-form-field>
+    </div>
+
+    <div fxFlex="50" class="pr-1">
+      <mat-form-field class="full-width">
+        <input matInput name="RazonSocial" [formControl]="itemForm.controls['RazonSocial']" placeholder="Razón Social">
+      </mat-form-field>
+    </div>
+
+    <div fxFlex="50" class="pr-1">
+      <mat-form-field class="full-width">
+        <input matInput name="AutorizacionSRI" [formControl]="itemForm.controls['AutorizacionSRI']"
+               placeholder="Autorización SRI">
+      </mat-form-field>
+    </div>
+
+    <div fxFlex="50" class="pr-1">
+      <mat-form-field class="full-width">
+        <input type="email" matInput name="Email" [formControl]="itemForm.controls['Email']" placeholder="Email">
+      </mat-form-field>
+    </div>
+
+    <div fxFlex="50" class="pr-1">
+      <mat-form-field class="full-width">
+        <mat-select placeholder=" Seleccione Contribuyente" [formControl]="itemForm.controls['IDContribuyente']">
+          <mat-option *ngFor="let row of Contribuyentes | async" [value]="row.ID" ngDefaultControl>{{ row.Descripcion }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div fxFlex="50" class="pr-1">
+      <mat-form-field class="full-width">
+        <mat-select placeholder=" Seleccione Tipo Emisor" [formControl]="itemForm.controls['IDTipoEmisor']">
+          <mat-option *ngFor="let row of TEmisors | async" [value]="row.ID" ngDefaultControl>{{ row.Descripcion }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div fxFlex="50" class="pr-1">
+      <mat-form-field class="full-width">
+        <input matInput name="RazonSocial" [formControl]="itemForm.controls['Telefono']" placeholder="Teléfono">
+      </mat-form-field>
+    </div>
+
+    <div fxFlex="50" class="pr-1">
+      <mat-form-field class="full-width">
+        <input matInput name="RazonSocial" [formControl]="itemForm.controls['Celular']" placeholder="Celular">
+      </mat-form-field>
+    </div>
+
+    <div fxFlex="50" class="pt-1 pr-1">
+      <mat-slide-toggle [formControl]="itemForm.controls['Estado']">Estado</mat-slide-toggle>
+    </div>
+
+    <div fxFlex="100" class="pr-1">
+      <mat-form-field class="full-width">
+        <input matInput name="Direccion" [formControl]="itemForm.controls['Direccion']" placeholder="Dirección">
+      </mat-form-field>
+    </div>
+
+
+
+    <div fxFlex="100" class="mt-1">
+      <button mat-raised-button color="primary" [disabled]="itemForm.invalid">Guardar</button>
+      <span fxFlex></span>
+      <button mat-button color="warn" type="button" (click)="dialogRef.close(false)">Cancelar</button>
+    </div>
+  </div>
+</form>

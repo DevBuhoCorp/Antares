@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 interface IMenuItem {
   type: string,       // Possible values: link/dropDown/icon/separator/extLink
@@ -52,6 +52,11 @@ export class NavigationService {
         { name: 'Área', state: 'area' },
         { name: 'Departamento', state: 'departamento' },
         { name: 'Cargo', state: 'cargo' },
+        {name: 'Área', state: 'area'},
+        {name: 'Departamento', state: 'departamento'},
+        {name: 'Contribuyente', state: 'contribuyente'},
+        {name: 'Tipo Emisor', state: 'tipoemisor'},
+        {name: 'Tipo Identifación', state: 'tipoidentificacion'},
       ]
     },
     {
@@ -64,9 +69,21 @@ export class NavigationService {
         { name: 'Colaborador-Área', state: 'colaboradorarea' },
         { name: 'Usuario', state: 'usuario' },
         { name: 'Roles', state: 'roles' },
+        {name: 'Usuario', state: 'usuario'},
+        {name: 'Roles', state: 'roles'},
       ]
     },
-   
+    {
+      name: 'Compras',
+      type: 'dropDown',
+      icon: 'person',
+      state: 'modulos/compras',
+      sub: [
+        {name: 'Proveedor', state: 'proveedor'},
+        {name: 'Presupuesto', state: 'presupuesto'},
+      ]
+    },
+
   ];
 
   // Icon menu TITLE at the very top of navigation.

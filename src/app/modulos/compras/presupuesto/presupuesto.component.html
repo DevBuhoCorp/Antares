@@ -1,0 +1,120 @@
+<div fxFlex="30" class="pr-1">
+  <mat-card >
+    <mat-card-header >
+
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Datos Generales</mat-card-title>
+
+    </mat-card-header>
+    <mat-card-content>
+      <!--<form name="itemForm" (ngSubmit)="submit()">-->
+      <div fxLayout="row wrap" fxLayout.lt-sm="column">
+
+        <div fxFlex="100" class="pr-1">
+          <mat-form-field class="full-width">
+            <mat-select placeholder=" Seleccione Departamentos" [(ngModel)]="selDepartamento" (selectionChange)="loadData()">
+              <mat-option *ngFor="let row of departamentos | async" [value]="row.ID"  >
+                {{ row.Descripcion }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div fxFlex="100" class="pr-1" *ngIf="selDepartamento">
+          <mat-form-field class="full-width">
+            <mat-select placeholder=" Seleccione Año" [(ngModel)]="selAnio" (selectionChange)="loadData()">
+              <mat-option *ngFor="let row of anios " [value]="row" >
+                {{ row }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div fxFlex="50" class="pr-1" *ngIf="selAnio">
+          <mat-form-field class="full-width">
+            <input matInput [value]="rowData.PInicial | currency" placeholder="Presupuesto Inicial" [disabled]="true">
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="pr-1" *ngIf="selAnio">
+          <mat-form-field class="full-width">
+            <input matInput [value]="rowData.OPedido | currency" placeholder="O. Pedido" [disabled]="true">
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="pr-1" *ngIf="selAnio">
+          <mat-form-field class="full-width">
+            <input matInput [value]="rowData.OCompra | currency" placeholder="O. Compras" [disabled]="true">
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="pr-1" *ngIf="selAnio">
+          <mat-form-field class="full-width">
+            <input matInput [value]="rowData.Compras | currency" placeholder="Compra Facturada" [disabled]="true">
+          </mat-form-field>
+        </div>
+
+      </div>
+
+    </mat-card-content>
+    <mat-card-actions style="text-align: right;">
+
+      <button mat-raised-button color="primary" [disabled]="rowData.PInicial == 0" (click)="save()">Guardar</button>
+      <button mat-raised-button color="warn" (click)="limpiar()" >Cancelar</button>
+
+    </mat-card-actions>
+
+  </mat-card>
+</div>
+
+<div fxFlex="50" class="pr-1">
+  <mat-card class="p-0">
+    <mat-card-header class="p-1">
+      <div mat-card-avatar class="ecommerce-header-image"></div>
+      <mat-card-title>Ajustar presupuesto mensual</mat-card-title>
+    </mat-card-header>
+
+
+    <mat-card-content class="p-0">
+      <ngx-datatable class="material ml-0 mr-0" *ngIf="selAnio"
+                     [rows]="initMeses"
+                     [columnMode]="'flex'"
+                     [headerHeight]="50"
+                     [footerHeight]="50"
+                     [rowHeight]="'auto'">
+
+        <ngx-datatable-column name="Mes" [flexGrow]="1">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            {{ row?.Mes }}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Precio" [flexGrow]="1">
+
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="Precio" let-row="row">
+            <input
+              autofocus
+              matInput
+              (change)="updateValue($event, 'Precio', rowIndex)"
+              type="text"
+              mask='0*.0000'
+              style="text-align: right;"
+              [value]="row?.Precio | currency"
+            />
+          </ng-template>
+
+        </ngx-datatable-column>
+
+
+        <ngx-datatable-footer>
+          <ng-template ngx-datatable-footer-template>
+            <div style="padding: 5px 10px">
+              <div>
+                <strong>Total </strong>: {{ rowData.PInicial | currency }}
+              </div>
+              <hr style="width:100%"/>
+            </div>
+          </ng-template>
+        </ngx-datatable-footer>
+
+      </ngx-datatable>
+    </mat-card-content>
+  </mat-card>
+</div>

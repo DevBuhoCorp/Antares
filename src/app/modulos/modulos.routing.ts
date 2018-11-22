@@ -6,6 +6,11 @@ import { DepartamentoComponent } from './catalogos/departamento/departamento.com
 import { CargoComponent } from './catalogos/cargo/cargo.component';
 import { ColaboradorComponent } from './nomina/colaborador/colaborador.component';
 import { ColaboradorareaComponent } from './nomina/colaboradorarea/colaboradorarea.component';
+import {ContribuyenteComponent} from './catalogos/contribuyente/contribuyente.component';
+import {TipoemisorComponent} from './catalogos/tipoemisor/tipoemisor.component';
+import {TipoidentificacionComponent} from './catalogos/tipoidentificacion/tipoidentificacion.component';
+import {ProveedorComponent} from './compras/proveedor/proveedor.component';
+import {PresupuestoComponent} from './compras/presupuesto/presupuesto.component';
 
 
 export const ModulosRoutes: Routes = [
@@ -51,5 +56,30 @@ export const ModulosRoutes: Routes = [
   },
   
   //#endregion
+  {
+    path: 'catalogos/contribuyente',
+    component: ContribuyenteComponent,
+    data: {title: 'Configuración Contribuyente', breadcrumb: 'CONFIGURACIÓN CONTRIBUYENTE'}
+  },
+  {
+    path: 'catalogos/tipoemisor',
+    component: TipoemisorComponent,
+    data: {title: 'Configuración Tipo Emisor', breadcrumb: 'CONFIGURACIÓN TIPO EMISOR'}
+  },
+  {
+    path: 'catalogos/tipoidentificacion',
+    component: TipoidentificacionComponent,
+    data: {title: 'Configuración Tipo Identificación', breadcrumb: 'CONFIGURACIÓN TIPO IDENTIFICACIÓN'}
+  },
+  {
+    path: 'compras/proveedor',
+    component: ProveedorComponent,
+    data: {title: 'Configuración Proveedor', breadcrumb: 'CONFIGURACIÓN PROVEEDOR'}
+  },
+  {
+    path: 'compras/presupuesto',
+    component: PresupuestoComponent,
+    data: {title: 'Compras -> Presupuesto', breadcrumb: 'CONFIGURACIÓN PRESUPUESTO'}
+  },
 
 ];
