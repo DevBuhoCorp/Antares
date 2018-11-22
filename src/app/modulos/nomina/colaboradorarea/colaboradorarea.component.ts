@@ -36,10 +36,12 @@ export class ColaboradorareaComponent implements OnInit {
 
   async loadApp() {
     this.paginate = await this.crudService.SeleccionarAsync('colaboradorarea', { page: 1, psize: this.selPageSize });
+    this.paginate.data = this.crudService.SetBool(this.paginate.data);
   }
 
   async setPage(event) {
     this.paginate = await this.crudService.SeleccionarAsync('colaboradorarea', { page: event.offset + 1, psize: this.selPageSize });
+    this.paginate.data = this.crudService.SetBool(this.paginate.data);
   }
 
   deleteItem(item) {
