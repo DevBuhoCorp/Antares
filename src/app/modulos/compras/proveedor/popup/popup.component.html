@@ -33,7 +33,7 @@
 
     <div fxFlex="50" class="pr-1">
       <mat-form-field class="full-width">
-        <input matInput name="Email" [formControl]="itemForm.controls['Email']" placeholder="Email">
+        <input type="email" matInput name="Email" [formControl]="itemForm.controls['Email']" placeholder="Email">
       </mat-form-field>
     </div>
 
@@ -55,12 +55,29 @@
       </mat-form-field>
     </div>
 
+    <div fxFlex="50" class="pr-1">
+      <mat-form-field class="full-width">
+        <input matInput name="RazonSocial" [formControl]="itemForm.controls['Telefono']" placeholder="Teléfono">
+      </mat-form-field>
+    </div>
 
-
+    <div fxFlex="50" class="pr-1">
+      <mat-form-field class="full-width">
+        <input matInput name="RazonSocial" [formControl]="itemForm.controls['Celular']" placeholder="Celular">
+      </mat-form-field>
+    </div>
 
     <div fxFlex="50" class="pt-1 pr-1">
       <mat-slide-toggle [formControl]="itemForm.controls['Estado']">Estado</mat-slide-toggle>
     </div>
+
+    <div fxFlex="100" class="pr-1">
+      <mat-form-field class="full-width">
+        <input matInput name="Direccion" [formControl]="itemForm.controls['Direccion']" placeholder="Dirección">
+      </mat-form-field>
+    </div>
+
+
 
     <div fxFlex="100" class="mt-1">
       <button mat-raised-button color="primary" [disabled]="itemForm.invalid">Guardar</button>

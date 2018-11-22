@@ -73,6 +73,7 @@ export class NavigationService {
       state: 'modulos/compras',
       sub: [
         {name: 'Proveedor', state: 'proveedor'},
+        {name: 'Presupuesto', state: 'presupuesto'},
       ]
     },
 

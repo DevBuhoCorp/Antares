@@ -51,6 +51,8 @@ import {PopupTipoIdentificacionComponent} from './catalogos/tipoidentificacion/p
 import {PopupContribuyenteComponent} from './catalogos/contribuyente/popup/popup.component';
 import {ProveedorComponent} from './compras/proveedor/proveedor.component';
 import {PopupProveedorComponent} from './compras/proveedor/popup/popup.component';
+import { PresupuestoComponent } from './compras/presupuesto/presupuesto.component';
+import {NgxMaskModule} from 'ngx-mask';
 
 
 @NgModule({
@@ -85,6 +87,7 @@ import {PopupProveedorComponent} from './compras/proveedor/popup/popup.component
     MatAutocompleteModule,
     //PrimeNG
     TreeModule,
+    NgxMaskModule.forRoot(),
     RouterModule.forChild(ModulosRoutes)
   ],
   declarations: [
@@ -106,7 +109,8 @@ import {PopupProveedorComponent} from './compras/proveedor/popup/popup.component
     PopupTipoIdentificacionComponent,
     PopupTipoEmisorComponent,
     PopupContribuyenteComponent,
-    PopupProveedorComponent
+    PopupProveedorComponent,
+    PresupuestoComponent
 
   ],
   providers: [],

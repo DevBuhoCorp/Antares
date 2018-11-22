@@ -1,0 +1,14 @@
+.example-header-image {
+  background-image: url('../../../../assets/images/icons8-settings-48.png');
+  background-size: cover;
+  height: 25px;
+  width: 25px;
+}
+
+
+.ecommerce-header-image {
+  background-image: url('../../../../assets/images/icons8-E-commerce-50.png');
+  background-size: cover;
+  height: 25px;
+  width: 25px;
+}

@@ -7,6 +7,7 @@ import {ContribuyenteComponent} from './catalogos/contribuyente/contribuyente.co
 import {TipoemisorComponent} from './catalogos/tipoemisor/tipoemisor.component';
 import {TipoidentificacionComponent} from './catalogos/tipoidentificacion/tipoidentificacion.component';
 import {ProveedorComponent} from './compras/proveedor/proveedor.component';
+import {PresupuestoComponent} from './compras/presupuesto/presupuesto.component';
 
 
 export const ModulosRoutes: Routes = [
@@ -50,6 +51,11 @@ export const ModulosRoutes: Routes = [
     path: 'compras/proveedor',
     component: ProveedorComponent,
     data: {title: 'Configuración Proveedor', breadcrumb: 'CONFIGURACIÓN PROVEEDOR'}
+  },
+  {
+    path: 'compras/presupuesto',
+    component: PresupuestoComponent,
+    data: {title: 'Compras -> Presupuesto', breadcrumb: 'CONFIGURACIÓN PRESUPUESTO'}
   },
 
 ];

@@ -37,6 +37,8 @@ export class PopupProveedorComponent implements OnInit {
       RazonSocial: [item.RazonSocial || '', Validators.required],
       AutorizacionSRI: [item.AutorizacionSRI || '', Validators.required],
       Email: [ item.Email || '', Validators.required],
+      Telefono: [ item.Telefono || '' ],
+      Celular: [ item.Celular || '' ],
       IDContribuyente: [ item.IDContribuyente || '', Validators.required],
       IDTipoEmisor: [ item.IDTipoEmisor || '', Validators.required],
       IDTipoIdentificacion: [ item.IDTipoIdentificacion || '', Validators.required],
