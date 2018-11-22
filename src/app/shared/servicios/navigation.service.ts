@@ -52,8 +52,6 @@ export class NavigationService {
         { name: 'Área', state: 'area' },
         { name: 'Departamento', state: 'departamento' },
         { name: 'Cargo', state: 'cargo' },
-        {name: 'Área', state: 'area'},
-        {name: 'Departamento', state: 'departamento'},
         {name: 'Contribuyente', state: 'contribuyente'},
         {name: 'Tipo Emisor', state: 'tipoemisor'},
         {name: 'Tipo Identifación', state: 'tipoidentificacion'},
@@ -67,8 +65,6 @@ export class NavigationService {
       sub: [
         { name: 'Colaborador', state: 'colaborador' },
         { name: 'Colaborador-Área', state: 'colaboradorarea' },
-        { name: 'Usuario', state: 'usuario' },
-        { name: 'Roles', state: 'roles' },
         {name: 'Usuario', state: 'usuario'},
         {name: 'Roles', state: 'roles'},
       ]
@@ -76,7 +72,7 @@ export class NavigationService {
     {
       name: 'Compras',
       type: 'dropDown',
-      icon: 'person',
+      icon: 'attach_money',
       state: 'modulos/compras',
       sub: [
         {name: 'Proveedor', state: 'proveedor'},
