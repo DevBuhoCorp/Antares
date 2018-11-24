@@ -11,6 +11,7 @@ import {TipoemisorComponent} from './catalogos/tipoemisor/tipoemisor.component';
 import {TipoidentificacionComponent} from './catalogos/tipoidentificacion/tipoidentificacion.component';
 import {ProveedorComponent} from './compras/proveedor/proveedor.component';
 import {PresupuestoComponent} from './compras/presupuesto/presupuesto.component';
+import { OrdenpedidoComponent } from './compras/ordenpedido/ordenpedido.component';
 
 
 export const ModulosRoutes: Routes = [
@@ -54,8 +55,6 @@ export const ModulosRoutes: Routes = [
     component: CargoComponent,
     data: {title: 'Configuración Cargo', breadcrumb: 'CONFIGURACIÓN CARGO'}
   },
-  
-  //#endregion
   {
     path: 'catalogos/contribuyente',
     component: ContribuyenteComponent,
@@ -71,6 +70,10 @@ export const ModulosRoutes: Routes = [
     component: TipoidentificacionComponent,
     data: {title: 'Configuración Tipo Identificación', breadcrumb: 'CONFIGURACIÓN TIPO IDENTIFICACIÓN'}
   },
+  
+  //#endregion
+  
+  //#region Proveedor
   {
     path: 'compras/proveedor',
     component: ProveedorComponent,
@@ -81,5 +84,11 @@ export const ModulosRoutes: Routes = [
     component: PresupuestoComponent,
     data: {title: 'Compras -> Presupuesto', breadcrumb: 'CONFIGURACIÓN PRESUPUESTO'}
   },
+  {
+    path: 'compras/ordenpedido',
+    component: OrdenpedidoComponent,
+    data: {title: 'Compras -> Orden Pedido', breadcrumb: 'CONFIGURACIÓN ORDEN PEDIDO'}
+  },
 
+  //#endregion
 ];

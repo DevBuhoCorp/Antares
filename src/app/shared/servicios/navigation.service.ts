@@ -77,6 +77,7 @@ export class NavigationService {
       sub: [
         {name: 'Proveedor', state: 'proveedor'},
         {name: 'Presupuesto', state: 'presupuesto'},
+        {name: 'Orden de Pedido', state: 'ordenpedido'},
       ]
     },
 
