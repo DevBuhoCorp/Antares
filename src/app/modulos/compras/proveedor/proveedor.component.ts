@@ -28,7 +28,6 @@ export class ProveedorComponent implements OnInit {
     private crudService : CrudService,
     private loader: AppLoaderService,
     private confirmService: AppConfirmService,
-    private router:Router,
     private toolsService: ToolsService,) { }
 
   ngOnInit() {

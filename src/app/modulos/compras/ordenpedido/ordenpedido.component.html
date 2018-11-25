@@ -1,53 +1,180 @@
-<div class="m-333">
-    <button mat-icon-button mat-sm-button color="primary" class="mr-1" (click)="agregar()" matTooltip="Agregar">
-        <mat-icon>add</mat-icon>
-    </button>
-    <button mat-icon-button mat-sm-button color="warn" class="mr-1" (click)="deleteItem(row)">
-        <mat-icon>delete</mat-icon>
-    </button>
-</div>
-
 <mat-card class="p-0">
-    <mat-card-content class="p-0">
-        <ngx-datatable class="material ml-0 mr-0" [rows]="Pedidos" [columnMode]="'flex'" [headerHeight]="50"
-            [footerHeight]="50" [rowHeight]="'auto'" [limit]="10">
+  <mat-card-content class="mt-1">
+    <h1 matDialogTitle>Crear Nueva Orden de Pedido</h1>
+    <form [formGroup]="itemForm" (ngSubmit)="submitTransaccion()">
+      <div fxLayout="row wrap" fxLayout.lt-sm="column">
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              name="Referencia"
+              placeholder="Referencia"
+              value="Borrador"
+              [formControl]="itemForm.controls['Estado']"
+            />
+          </mat-form-field>
+        </div>
 
-            <ngx-datatable-column name="Cantidad" [flexGrow]="1">
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              name="Fecha"
+              placeholder="Fecha"
+              value="{{Fecha | date}}"
+              [formControl]="itemForm.controls['FechaRegistro']"
+            />
+          </mat-form-field>
+        </div>
 
-                <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="Cantidad" let-row="row">
-                    <input matInput (change)="updateValue($event, 'Cantidad', rowIndex)" type="text" mask='0*.0000'
-                        [value]="row?.Cantidad" />
-                </ng-template>
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              name="Nota"
+              placeholder="Nota"
+              [formControl]="itemForm.controls['Observacion']"
+            />
+          </mat-form-field>
+        </div>
+        <div fxFlex="100" class="pr-1" style="display: flex; justify-content: space-between;">
+          <button
+            mat-raised-button
+            class="mb-05"
+            color="primary"
+            [disabled]="itemForm.invalid"
+          >
+            Crear
+          </button>
+        
+          <a
+            mat-raised-button
+            class="mb-05"
+            color="primary"
+            (click)="cancelar()"
+          >
+            Cancelar
+        </a>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
 
-            </ngx-datatable-column>
+<mat-card class="p-0" *ngIf="Creado">
+  <div class="m-333">
+    <button
+      mat-icon-button
+      mat-sm-button
+      color="primary"
+      class="mr-1"
+      (click)="agregar()"
+      matTooltip="Agregar"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      mat-sm-button
+      color="warn"
+      class="mr-1"
+      (click)="eliminar()"
+      matTooltip="Eliminar"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      mat-sm-button
+      color="warn"
+      class="mr-1"
+      (click)="openPopUp({}, true)"
+      matTooltip="Buscar Producto"
+    >
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
+  <mat-card-content class="p-0">
+    <mat-card-title class="mat-bg-primary m-0">
+      <div class="card-title-text">
+        <span>Total: {{ Total | currency }}</span>
+      </div>
+      <mat-divider></mat-divider>
+    </mat-card-title>
+    <ngx-datatable
+      class="material ml-0 mr-0"
+      [rows]="Pedidos"
+      [columnMode]="'flex'"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [rowHeight]="'auto'"
+      [limit]="10"
+    >
+      <ngx-datatable-column name="Seleccionar" [flexGrow]="1">
+        <ng-template
+          ngx-datatable-cell-template
+          let-rowIndex="rowIndex"
+          let-value="Seleccionar"
+          let-row="row"
+        >
+          <mat-checkbox
+            #checkboxMultiple
+            (change)="updateValueCheck($event, 'Seleccionar', rowIndex)"
+          ></mat-checkbox>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Cantidad" [flexGrow]="1">
+        <ng-template
+          ngx-datatable-cell-template
+          let-rowIndex="rowIndex"
+          let-value="Cantidad"
+          let-row="row"
+        >
+          <input
+            autofocus
+            matInput
+            (change)="updateValue($event, 'Cantidad', rowIndex)"
+            type="text"
+            mask="0*.0000"
+            [value]="row?.Cantidad"
+          />
+        </ng-template>
+      </ngx-datatable-column>
 
-            <ngx-datatable-column name="Descripción" [flexGrow]="1">
+      <ngx-datatable-column name="Descripción" [flexGrow]="1">
+        <ng-template
+          ngx-datatable-cell-template
+          let-rowIndex="rowIndex"
+          let-value="Descripcion"
+          let-row="row"
+        >
+          <input
+            autofocus
+            matInput
+            (change)="updateValue($event, 'Descripcion', rowIndex)"
+            type="text"
+            [value]="row?.Descripcion"
+          />
+        </ng-template>
+      </ngx-datatable-column>
 
-                <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="Descripcion" let-row="row">
-                    <input matInput (change)="updateValue($event, 'Descripcion', rowIndex)" type="text" [value]="row?.Descripcion" />
-                </ng-template>
-
-            </ngx-datatable-column>
-
-            <ngx-datatable-column name="Precio Referencia" [flexGrow]="1">
-
-                <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="Referencia" let-row="row">
-                    <input matInput (change)="updateValue($event, 'Referencia', rowIndex)" type="text" mask='0*.0000'
-                        [value]="row?.Referencia | currency" />
-                </ng-template>
-
-            </ngx-datatable-column>
-
-            <ngx-datatable-footer>
-                <ng-template ngx-datatable-footer-template>
-                    <div style="padding: 5px 10px">
-                        <div>
-                            <strong>Total </strong>: {{ Total | currency }}
-                        </div>
-                        <hr style="width:100%" />
-                    </div>
-                </ng-template>
-            </ngx-datatable-footer>
-        </ngx-datatable>
-    </mat-card-content>
+      <ngx-datatable-column name="Precio Referencia" [flexGrow]="1">
+        <ng-template
+          ngx-datatable-cell-template
+          let-rowIndex="rowIndex"
+          let-value="Referencia"
+          let-row="row"
+        >
+          <input
+            autofocus
+            matInput
+            (change)="updateValue($event, 'Referencia', rowIndex)"
+            type="text"
+            mask="0*.0000"
+            [value]="row?.Referencia | currency"
+          />
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </mat-card-content>
 </mat-card>

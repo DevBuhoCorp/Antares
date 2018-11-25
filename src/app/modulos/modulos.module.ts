@@ -60,6 +60,7 @@ import {PopupProveedorComponent} from './compras/proveedor/popup/popup.component
 import { PresupuestoComponent } from './compras/presupuesto/presupuesto.component';
 import {NgxMaskModule} from 'ngx-mask';
 import { OrdenpedidoComponent } from './compras/ordenpedido/ordenpedido.component';
+import { OPedidoPopupComponent } from './compras/ordenpedido/popup/popup.component';
 
 
 @NgModule({
@@ -125,7 +126,8 @@ import { OrdenpedidoComponent } from './compras/ordenpedido/ordenpedido.componen
     PopupContribuyenteComponent,
     PopupProveedorComponent,
     PresupuestoComponent,
-    OrdenpedidoComponent
+    OrdenpedidoComponent,
+    OPedidoPopupComponent
 
   ],
   providers: [],
@@ -143,6 +145,7 @@ import { OrdenpedidoComponent } from './compras/ordenpedido/ordenpedido.componen
     PopupTipoEmisorComponent,
     PopupContribuyenteComponent,
     PopupProveedorComponent,
+    OPedidoPopupComponent
    
   ]
 })
