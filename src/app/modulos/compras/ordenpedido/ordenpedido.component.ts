@@ -100,8 +100,8 @@ export class OrdenpedidoComponent implements OnInit {
     this.Creado = false;
     this.OPedido = [];
     this.Pedidos = [];
-    this.itemForm.reset();
-    this.itemForm.enable();
+    this.buildItemForm();
+    
   }
 
   save() {

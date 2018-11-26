@@ -42,7 +42,7 @@
             mat-raised-button
             class="mb-05"
             color="primary"
-            [disabled]="itemForm.invalid"
+            [disabled]="itemForm.invalid || Creado"
           >
             Crear
           </button>
@@ -100,6 +100,7 @@
       class="mr-1"
       (click)="save()"
       matTooltip="Guardar"
+      *ngIf="Pedidos.length > 0"
     >
       <mat-icon>save</mat-icon>
     </button>
