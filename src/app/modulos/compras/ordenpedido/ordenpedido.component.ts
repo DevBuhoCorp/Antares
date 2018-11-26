@@ -37,26 +37,26 @@ export class OrdenpedidoComponent implements OnInit {
     this.buildItemForm();
     this.Pedidos = [];
     this.Total = 0;
-    console.log(this.toolsService.getEmpresaActive())
   }
   buildItemForm() {
     this.itemForm = this.fb.group({
       Estado: [{ value: "BRR", disabled: true }],
       FechaRegistro: [{ value: this.Fecha.toDateString(), disabled: true }],
-      Observacion: [""],
+      Observacion: ["", Validators.required]
       //IdUsers: [this.toolsService.getEmpresaActive().IDUsers]
     });
   }
   updateValue(event, cell, rowIndex) {
     this.Pedidos[rowIndex][cell] = event.target.value;
-    this.Pedidos[rowIndex]['Saldo'] = parseFloat(this.Pedidos[rowIndex]['Cantidad']) * parseFloat(this.Pedidos[rowIndex]['PrecioRef']);
+    this.Pedidos[rowIndex]["Saldo"] =
+      parseFloat(this.Pedidos[rowIndex]["Cantidad"]) *
+      parseFloat(this.Pedidos[rowIndex]["PrecioRef"]);
     this.Pedidos = [...this.Pedidos];
 
     this.Total = this.Pedidos.reduce(
       (a, b) => a + parseFloat(b.PrecioRef) * parseFloat(b.Cantidad),
       0
     );
-    
   }
   updateValueCheck(event, cell, rowIndex) {
     this.Pedidos[rowIndex][cell] = event.checked;
@@ -93,21 +93,24 @@ export class OrdenpedidoComponent implements OnInit {
     this.itemForm.disable();
     this.OPedido = this.itemForm.value;
     this.Creado = true;
+    this.itemForm.disable();
   }
 
   cancelar() {
     this.Creado = false;
+    this.OPedido = [];
+    this.Pedidos = [];
+    this.itemForm.reset();
+    this.itemForm.enable();
   }
 
   save() {
     this.OPedido.Detalles = [...this.Pedidos];
     console.log(this.OPedido);
-    this.crudService
-      .Insertar(this.OPedido, 'opedido')
-      .subscribe(res => {
-        this.snack.open("Orden de Pedido Registrada", "OK", { duration: 4000 });
-       // this.limpiar();
-      });
+    this.crudService.Insertar(this.OPedido, "opedido").subscribe(res => {
+      this.snack.open("Orden de Pedido Registrada", "OK", { duration: 4000 });
+      this.cancelar();
+    });
   }
 
   async openPopUp(data: any = {}, isNew?) {
