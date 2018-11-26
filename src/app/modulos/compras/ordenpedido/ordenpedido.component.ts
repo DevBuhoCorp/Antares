@@ -14,6 +14,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 })
 export class OrdenpedidoComponent implements OnInit {
   Pedidos: any = [];
+  checked = false;
   Total = 0;
   Fecha: any = new Date();
   Creado: boolean = false;
@@ -41,7 +42,7 @@ export class OrdenpedidoComponent implements OnInit {
   buildItemForm() {
     this.itemForm = this.fb.group({
       Estado: [{ value: "BRR", disabled: true }],
-      FechaRegistro: [{ value: this.Fecha.toDateString(), disabled: true }],
+      FechaRegistro: ["", Validators.required],
       Observacion: ["", Validators.required]
       //IdUsers: [this.toolsService.getEmpresaActive().IDUsers]
     });
@@ -90,6 +91,7 @@ export class OrdenpedidoComponent implements OnInit {
 
   submitTransaccion() {
     this.snack.open("Agregado!", "OK", { duration: 4000 });
+    this.itemForm.value.FechaRegistro = this.itemForm.value.FechaRegistro.toDateString();
     this.OPedido = this.itemForm.value;
     this.Creado = true;
   }
@@ -102,6 +104,9 @@ export class OrdenpedidoComponent implements OnInit {
   }
 
   save() {
+    if(this.checked){
+      this.OPedido.Estado = "ENV";
+    }
     this.OPedido.Detalles = [...this.Pedidos];
     console.log(this.OPedido);
     this.crudService.Insertar(this.OPedido, "opedido").subscribe(res => {

@@ -19,12 +19,17 @@
           <mat-form-field class="full-width">
             <input
               matInput
+              [formControl]="itemForm.controls['FechaRegistro']"
               name="Fecha"
               placeholder="Fecha"
-              value="{{Fecha | date}}"
-              [formControl]="itemForm.controls['FechaRegistro']"
+              [matDatepicker]="appDatepicker"
             />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="appDatepicker"
+            ></mat-datepicker-toggle>
           </mat-form-field>
+          <mat-datepicker #appDatepicker></mat-datepicker>
         </div>
 
         <div fxFlex="50" class="pr-1">
@@ -108,6 +113,7 @@
     >
       <mat-icon>save</mat-icon>
     </button>
+    <mat-checkbox *ngIf="Pedidos.length > 0" [(ngModel)]="checked">Enviar para Autorización</mat-checkbox>
   </div>
   <mat-card-content class="p-0">
     <mat-card-title class="mat-bg-primary m-0">
@@ -166,7 +172,7 @@
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column name="Cantidad" [flexGrow]="1">
+      <ngx-datatable-column name="Cantidad" [flexGrow]="0.12">
         <ng-template
           ngx-datatable-cell-template
           let-rowIndex="rowIndex"
@@ -184,7 +190,7 @@
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column name="Precio Referencia" [flexGrow]="1">
+      <ngx-datatable-column name="Precio Referencia" [flexGrow]="0.12">
         <ng-template
           ngx-datatable-cell-template
           let-rowIndex="rowIndex"
