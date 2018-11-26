@@ -93,6 +93,16 @@
     >
       <mat-icon>search</mat-icon>
     </button>
+    <button
+      mat-icon-button
+      mat-sm-button
+      color="warn"
+      class="mr-1"
+      (click)="save()"
+      matTooltip="Guardar"
+    >
+      <mat-icon>save</mat-icon>
+    </button>
   </div>
   <mat-card-content class="p-0">
     <mat-card-title class="mat-bg-primary m-0">
@@ -141,19 +151,19 @@
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column name="Descripción" [flexGrow]="1">
+      <ngx-datatable-column name="Etiqueta" [flexGrow]="1">
         <ng-template
           ngx-datatable-cell-template
           let-rowIndex="rowIndex"
-          let-value="Descripcion"
+          let-value="Etiqueta"
           let-row="row"
         >
           <input
             autofocus
             matInput
-            (change)="updateValue($event, 'Descripcion', rowIndex)"
+            (change)="updateValue($event, 'Etiqueta', rowIndex)"
             type="text"
-            [value]="row?.Descripcion"
+            [value]="row?.Etiqueta"
           />
         </ng-template>
       </ngx-datatable-column>
@@ -162,16 +172,16 @@
         <ng-template
           ngx-datatable-cell-template
           let-rowIndex="rowIndex"
-          let-value="Referencia"
+          let-value="PrecioRef"
           let-row="row"
         >
           <input
             autofocus
             matInput
-            (change)="updateValue($event, 'Referencia', rowIndex)"
+            (change)="updateValue($event, 'PrecioRef', rowIndex)"
             type="text"
             mask="0*.0000"
-            [value]="row?.Referencia | currency"
+            [value]="row?.PrecioRef | currency"
           />
         </ng-template>
       </ngx-datatable-column>

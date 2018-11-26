@@ -29,15 +29,27 @@ export class OPedidoPopupComponent implements OnInit {
   }
 
   async loadApp(){
-    //this.paginate = await this.crudService.SeleccionarAsync('proveedor', { page: 1 , psize: this.selPageSize });
+    this.paginate = await this.crudService.SeleccionarAsync('items', { page: 1 , psize: this.selPageSize });
   }
 
   async setPage(event){
-    //this.paginate = await this.crudService.SeleccionarAsync('proveedor', { page: event.offset + 1 , psize: this.selPageSize });
+    this.paginate = await this.crudService.SeleccionarAsync('items', { page: event.offset + 1 , psize: this.selPageSize });
   }
 
   submit() {
-    this.dialogRef.close()
+    let data = [];
+    this.paginate.data.forEach(i => {
+      if(i.Seleccionar){
+        data = data.concat(i);
+      }      
+    });
+    this.dialogRef.close(data)
+  }
+
+  updateValueCheck(event, cell, rowIndex) {
+    this.paginate.data[rowIndex][cell] = event.checked;
+    this.paginate.data = [...this.paginate.data];
+    console.log(this.paginate.data);
   }
 
 }

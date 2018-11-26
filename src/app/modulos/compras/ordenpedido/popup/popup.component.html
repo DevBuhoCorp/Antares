@@ -1,7 +1,5 @@
 <div class="m-333" style="display: flex; justify-content: space-between;">
-  <button mat-raised-button color="primary">
-    Guardar
-  </button>
+  <button mat-raised-button color="primary" (click)="submit(false)">Guardar</button>
   <span fxFlex></span>
   <button
     mat-button
@@ -45,7 +43,7 @@
     >
       <ngx-datatable-column name="Item" [flexGrow]="1">
         <ng-template let-row="row" ngx-datatable-cell-template>
-          {{ row?.Item }}
+          {{ row?.Descripcion }}
         </ng-template>
       </ngx-datatable-column>
 
@@ -56,12 +54,18 @@
       </ngx-datatable-column>
 
       <ngx-datatable-column name="Seleccionar" [flexGrow]="1">
-        <ng-template let-row="row" ngx-datatable-cell-template>
-          {{ row?.Seleccionar }}
+        <ng-template
+          ngx-datatable-cell-template
+          let-rowIndex="rowIndex"
+          let-value="Seleccionar"
+          let-row="row"
+        >
+          <mat-checkbox
+            #checkboxMultiple
+            (change)="updateValueCheck($event, 'Seleccionar', rowIndex)"
+          ></mat-checkbox>
         </ng-template>
       </ngx-datatable-column>
-
-      
     </ngx-datatable>
   </mat-card-content>
 </mat-card>

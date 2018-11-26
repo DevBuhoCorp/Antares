@@ -37,25 +37,26 @@ export class OrdenpedidoComponent implements OnInit {
     this.buildItemForm();
     this.Pedidos = [];
     this.Total = 0;
+    console.log(this.toolsService.getEmpresaActive())
   }
   buildItemForm() {
     this.itemForm = this.fb.group({
       Estado: [{ value: "BRR", disabled: true }],
       FechaRegistro: [{ value: this.Fecha.toDateString(), disabled: true }],
-      Observacion: [""]
+      Observacion: [""],
+      //IdUsers: [this.toolsService.getEmpresaActive().IDUsers]
     });
   }
   updateValue(event, cell, rowIndex) {
     this.Pedidos[rowIndex][cell] = event.target.value;
+    this.Pedidos[rowIndex]['Saldo'] = parseFloat(this.Pedidos[rowIndex]['Cantidad']) * parseFloat(this.Pedidos[rowIndex]['PrecioRef']);
     this.Pedidos = [...this.Pedidos];
 
     this.Total = this.Pedidos.reduce(
-      (a, b) => a + parseFloat(b.Referencia) * parseFloat(b.Cantidad),
+      (a, b) => a + parseFloat(b.PrecioRef) * parseFloat(b.Cantidad),
       0
     );
-    this.OPedido.Detalles = this.Pedidos;
-    console.log(this.OPedido);
-    // this.rowData.PInicial = this.initMeses.reduce((a, b) => a + b.Precio, 0);
+    
   }
   updateValueCheck(event, cell, rowIndex) {
     this.Pedidos[rowIndex][cell] = event.checked;
@@ -65,8 +66,9 @@ export class OrdenpedidoComponent implements OnInit {
     const nuevo = {
       Seleccionar: false,
       Cantidad: 0,
-      Descripcion: "",
-      Referencia: 0
+      Etiqueta: "",
+      PrecioRef: 0,
+      Saldo: 0
     };
     this.Pedidos = this.Pedidos.concat(nuevo);
     // this.Total = this.Pedidos.reduce((a, b) => a + b.Referencia, 0);
@@ -97,6 +99,17 @@ export class OrdenpedidoComponent implements OnInit {
     this.Creado = false;
   }
 
+  save() {
+    this.OPedido.Detalles = [...this.Pedidos];
+    console.log(this.OPedido);
+    this.crudService
+      .Insertar(this.OPedido, 'opedido')
+      .subscribe(res => {
+        this.snack.open("Orden de Pedido Registrada", "OK", { duration: 4000 });
+       // this.limpiar();
+      });
+  }
+
   async openPopUp(data: any = {}, isNew?) {
     let title = isNew ? "Agregar" : "Actualizar";
     if (!isNew) {
@@ -110,24 +123,21 @@ export class OrdenpedidoComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(response => {
+      console.log(response);
       if (!response) return;
+      response.forEach(i => {
+        const nuevo = {
+          Seleccionar: false,
+          Cantidad: 0,
+          Etiqueta: i.Descripcion,
+          PrecioRef: 0,
+          Saldo: 0,
+          IdItem: i.ID
+        };
+        this.Pedidos = this.Pedidos.concat(nuevo);
+      });
 
-      this.loader.open();
-      if (isNew) {
-        this.crudService.Insertar(response, "proveedor/").subscribe(data => {
-          //  this.loadApp();
-          this.loader.close();
-          this.snack.open("Agregado!", "OK", { duration: 4000 });
-        });
-      } else {
-        this.crudService
-          .Actualizar(data.ID, response, "proveedor/")
-          .subscribe(response2 => {
-            // this.loadApp();
-            this.loader.close();
-            this.snack.open("Actualizado!", "OK", { duration: 4000 });
-          });
-      }
+      console.log(this.Pedidos);
     });
   }
 }
