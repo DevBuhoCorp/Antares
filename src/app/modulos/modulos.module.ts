@@ -59,6 +59,12 @@ import {ProveedorComponent} from './compras/proveedor/proveedor.component';
 import {PopupProveedorComponent} from './compras/proveedor/popup/popup.component';
 import { PresupuestoComponent } from './compras/presupuesto/presupuesto.component';
 import {NgxMaskModule} from 'ngx-mask';
+import { PaisComponent } from './localizacion/pais/pais.component';
+import { CiudadComponent } from './localizacion/ciudad/ciudad.component';
+import { PopupPaisComponent} from './localizacion/pais/popup/popup.component';
+import {PopupCiudadComponent} from './localizacion/ciudad/popup/popup.component';
+import { BodegaComponent } from './bodega/bodega/bodega.component';
+import {PopupBodegaComponent} from './bodega/bodega/popup/popup.component';
 
 
 @NgModule({
@@ -123,7 +129,14 @@ import {NgxMaskModule} from 'ngx-mask';
     PopupTipoEmisorComponent,
     PopupContribuyenteComponent,
     PopupProveedorComponent,
-    PresupuestoComponent
+    PresupuestoComponent,
+    PaisComponent,
+    CiudadComponent,
+    PopupCiudadComponent,
+    PopupPaisComponent,
+    BodegaComponent,
+    PopupBodegaComponent,
+
 
   ],
   providers: [],
@@ -141,7 +154,10 @@ import {NgxMaskModule} from 'ngx-mask';
     PopupTipoEmisorComponent,
     PopupContribuyenteComponent,
     PopupProveedorComponent,
-   
+    PopupCiudadComponent,
+    PopupPaisComponent,
+    PopupBodegaComponent,
+
   ]
 })
 export class ModulosModule {

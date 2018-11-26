@@ -11,6 +11,9 @@ import {TipoemisorComponent} from './catalogos/tipoemisor/tipoemisor.component';
 import {TipoidentificacionComponent} from './catalogos/tipoidentificacion/tipoidentificacion.component';
 import {ProveedorComponent} from './compras/proveedor/proveedor.component';
 import {PresupuestoComponent} from './compras/presupuesto/presupuesto.component';
+import {PaisComponent} from './localizacion/pais/pais.component';
+import {CiudadComponent} from './localizacion/ciudad/ciudad.component';
+import {BodegaComponent} from './bodega/bodega/bodega.component';
 
 
 export const ModulosRoutes: Routes = [
@@ -80,6 +83,21 @@ export const ModulosRoutes: Routes = [
     path: 'compras/presupuesto',
     component: PresupuestoComponent,
     data: {title: 'Compras -> Presupuesto', breadcrumb: 'CONFIGURACIÓN PRESUPUESTO'}
+  },
+  {
+    path: 'localizacion/pais',
+    component: PaisComponent,
+    data: {title: 'Localización País', breadcrumb: 'LOCALIZACIÓN - PAÍS'}
+  },
+  {
+    path: 'localizacion/ciudad',
+    component: CiudadComponent,
+    data: {title: 'Localización Ciudad -> Presupuesto', breadcrumb: 'LOCALIZACIÓN CIUDAD'}
+  },
+  {
+    path: 'bodega/bodega',
+    component: BodegaComponent,
+    data: {title: 'Bodega', breadcrumb: 'CONFIGURACIÓN BODEGA'}
   },
 
 ];
