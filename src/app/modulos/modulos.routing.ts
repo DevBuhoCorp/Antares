@@ -1,11 +1,11 @@
 import {Routes} from '@angular/router';
-import {UsuarioComponent} from './nomina/usuario/usuario.component';
-import {RolesComponent} from './nomina/roles/roles.component';
-import {AreaComponent} from './catalogos/area/area.component';
-import {DepartamentoComponent} from './catalogos/departamento/departamento.component';
-import {CargoComponent} from './catalogos/cargo/cargo.component';
-import {ColaboradorComponent} from './nomina/colaborador/colaborador.component';
-import {ColaboradorareaComponent} from './nomina/colaboradorarea/colaboradorarea.component';
+import { UsuarioComponent } from './nomina/usuario/usuario.component';
+import { RolesComponent } from './nomina/roles/roles.component';
+import { AreaComponent } from './catalogos/area/area.component';
+import { DepartamentoComponent } from './catalogos/departamento/departamento.component';
+import { CargoComponent } from './catalogos/cargo/cargo.component';
+import { ColaboradorComponent } from './nomina/colaborador/colaborador.component';
+import { ColaboradorareaComponent } from './nomina/colaboradorarea/colaboradorarea.component';
 import {ContribuyenteComponent} from './catalogos/contribuyente/contribuyente.component';
 import {TipoemisorComponent} from './catalogos/tipoemisor/tipoemisor.component';
 import {TipoidentificacionComponent} from './catalogos/tipoidentificacion/tipoidentificacion.component';
@@ -15,6 +15,7 @@ import {PaisComponent} from './localizacion/pais/pais.component';
 import {CiudadComponent} from './localizacion/ciudad/ciudad.component';
 import {BodegaComponent} from './bodega/bodega/bodega.component';
 import {TipomovimientoComponent} from './bodega/tipomovimiento/tipomovimiento.component';
+import { OrdenpedidoComponent } from './compras/ordenpedido/ordenpedido.component';
 
 
 export const ModulosRoutes: Routes = [
@@ -75,6 +76,10 @@ export const ModulosRoutes: Routes = [
     component: TipoidentificacionComponent,
     data: {title: 'Configuración Tipo Identificación', breadcrumb: 'CONFIGURACIÓN TIPO IDENTIFICACIÓN'}
   },
+
+  //#endregion
+
+  //#region Proveedor
   {
     path: 'compras/proveedor',
     component: ProveedorComponent,
@@ -105,5 +110,11 @@ export const ModulosRoutes: Routes = [
     component: TipomovimientoComponent,
     data: {title: 'Tipo Movimiento', breadcrumb: 'CONFIGURACIÓN TIPO MOVIMIENTO'}
   },
+  {
+    path: 'compras/ordenpedido',
+    component: OrdenpedidoComponent,
+    data: {title: 'Compras -> Orden Pedido', breadcrumb: 'CONFIGURACIÓN ORDEN PEDIDO'}
+  },
 
+  //#endregion
 ];

@@ -67,6 +67,8 @@ import { BodegaComponent } from './bodega/bodega/bodega.component';
 import {PopupBodegaComponent} from './bodega/bodega/popup/popup.component';
 import { TipomovimientoComponent } from './bodega/tipomovimiento/tipomovimiento.component';
 import { PopupTipoMovimientoComponent } from './bodega/tipomovimiento/popup/popup.component';
+import { OrdenpedidoComponent } from './compras/ordenpedido/ordenpedido.component';
+import { OPedidoPopupComponent } from './compras/ordenpedido/popup/popup.component';
 
 
 @NgModule({
@@ -141,6 +143,9 @@ import { PopupTipoMovimientoComponent } from './bodega/tipomovimiento/popup/popu
     TipomovimientoComponent,
     PopupTipoMovimientoComponent,
 
+    PresupuestoComponent,
+    OrdenpedidoComponent,
+    OPedidoPopupComponent
 
   ],
   providers: [],
@@ -158,6 +163,7 @@ import { PopupTipoMovimientoComponent } from './bodega/tipomovimiento/popup/popu
     PopupTipoEmisorComponent,
     PopupContribuyenteComponent,
     PopupProveedorComponent,
+    OPedidoPopupComponent,
     PopupCiudadComponent,
     PopupPaisComponent,
     PopupBodegaComponent,

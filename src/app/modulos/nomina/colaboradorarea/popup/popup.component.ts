@@ -42,8 +42,8 @@ export class ColaboradorAreaPopupComponent implements OnInit {
 
   buildItemForm(item) {
     this.itemForm = this.fb.group({
-      IdCargo: [item.IdCargo || ''],
-      IdArea: [item.IdArea || ''],
+      IdCargo: [item.IdCargo || '',Validators.required],
+      IdArea: [item.IdArea || '',Validators.required],
       FechaInicio: [item.FechaInicio || '', Validators.required],
       Estado: [item.Estado || false, Validators.required]
     })

@@ -1,0 +1,71 @@
+<div class="m-333" style="display: flex; justify-content: space-between;">
+  <button mat-raised-button color="primary" (click)="submit(false)">Guardar</button>
+  <span fxFlex></span>
+  <button
+    mat-button
+    color="warn"
+    type="button"
+    (click)="dialogRef.close(false)"
+  >
+    Cancelar
+  </button>
+  <div class="select-group">
+    <mat-form-field class="full-width">
+      <mat-select
+        placeholder=" Seleccione número de ítems:"
+        [(ngModel)]="selPageSize"
+        (selectionChange)="loadApp()"
+      >
+        <mat-option
+          *ngFor="let page of pageSize"
+          [value]="page"
+          ngDefaultControl
+          >{{ page }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+
+<mat-card class="p-0">
+  <mat-card-content class="p-0">
+    <ngx-datatable
+      class="material ml-0 mr-0"
+      [rows]="paginate.data"
+      [columnMode]="'flex'"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [rowHeight]="'auto'"
+      [externalPaging]="true"
+      [count]="paginate.total"
+      [limit]="paginate.per_page"
+      (page)="setPage($event)"
+    >
+      <ngx-datatable-column name="Item" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.Descripcion }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Stock" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.Stock }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Seleccionar" [flexGrow]="1">
+        <ng-template
+          ngx-datatable-cell-template
+          let-rowIndex="rowIndex"
+          let-value="Seleccionar"
+          let-row="row"
+        >
+          <mat-checkbox
+            #checkboxMultiple
+            (change)="updateValueCheck($event, 'Seleccionar', rowIndex)"
+          ></mat-checkbox>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </mat-card-content>
+</mat-card>
