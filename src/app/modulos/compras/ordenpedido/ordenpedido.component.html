@@ -37,7 +37,11 @@
             />
           </mat-form-field>
         </div>
-        <div fxFlex="100" class="pr-1" style="display: flex; justify-content: space-between;">
+        <div
+          fxFlex="100"
+          class="pr-1"
+          style="display: flex; justify-content: space-between;"
+        >
           <button
             mat-raised-button
             class="mb-05"
@@ -46,7 +50,7 @@
           >
             Crear
           </button>
-        
+
           <a
             mat-raised-button
             class="mb-05"
@@ -54,7 +58,7 @@
             (click)="cancelar()"
           >
             Cancelar
-        </a>
+          </a>
         </div>
       </div>
     </form>
@@ -108,7 +112,10 @@
   <mat-card-content class="p-0">
     <mat-card-title class="mat-bg-primary m-0">
       <div class="card-title-text">
-        <span>Total: {{ Total | currency }}</span>
+        <span
+          >Total estimado a pagar de la Orden Pedida:
+          {{ Total | currency }}</span
+        >
       </div>
       <mat-divider></mat-divider>
     </mat-card-title>
@@ -121,7 +128,14 @@
       [rowHeight]="'auto'"
       [limit]="10"
     >
-      <ngx-datatable-column name="Seleccionar" [flexGrow]="1">
+      <ngx-datatable-column
+        [width]="50"
+        [sortable]="false"
+        [canAutoResize]="false"
+        [draggable]="false"
+        [resizeable]="false"
+        [flexGrow]="1"
+      >
         <ng-template
           ngx-datatable-cell-template
           let-rowIndex="rowIndex"
@@ -132,23 +146,6 @@
             #checkboxMultiple
             (change)="updateValueCheck($event, 'Seleccionar', rowIndex)"
           ></mat-checkbox>
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column name="Cantidad" [flexGrow]="1">
-        <ng-template
-          ngx-datatable-cell-template
-          let-rowIndex="rowIndex"
-          let-value="Cantidad"
-          let-row="row"
-        >
-          <input
-            autofocus
-            matInput
-            (change)="updateValue($event, 'Cantidad', rowIndex)"
-            type="text"
-            mask="0*.0000"
-            [value]="row?.Cantidad"
-          />
         </ng-template>
       </ngx-datatable-column>
 
@@ -169,6 +166,24 @@
         </ng-template>
       </ngx-datatable-column>
 
+      <ngx-datatable-column name="Cantidad" [flexGrow]="1">
+        <ng-template
+          ngx-datatable-cell-template
+          let-rowIndex="rowIndex"
+          let-value="Cantidad"
+          let-row="row"
+        >
+          <input
+            autofocus
+            matInput
+            (change)="updateValue($event, 'Cantidad', rowIndex)"
+            type="text"
+            mask="0*.0000"
+            [value]="row?.Cantidad"
+          />
+        </ng-template>
+      </ngx-datatable-column>
+
       <ngx-datatable-column name="Precio Referencia" [flexGrow]="1">
         <ng-template
           ngx-datatable-cell-template
@@ -177,6 +192,7 @@
           let-row="row"
         >
           <input
+            style="text-align: right;"
             autofocus
             matInput
             (change)="updateValue($event, 'PrecioRef', rowIndex)"

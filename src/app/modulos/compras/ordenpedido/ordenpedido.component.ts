@@ -90,18 +90,15 @@ export class OrdenpedidoComponent implements OnInit {
 
   submitTransaccion() {
     this.snack.open("Agregado!", "OK", { duration: 4000 });
-    this.itemForm.disable();
     this.OPedido = this.itemForm.value;
     this.Creado = true;
-    this.itemForm.disable();
   }
 
   cancelar() {
     this.Creado = false;
+    this.itemForm.controls['Observacion'].setValue("");
     this.OPedido = [];
     this.Pedidos = [];
-    this.buildItemForm();
-    
   }
 
   save() {
@@ -115,9 +112,6 @@ export class OrdenpedidoComponent implements OnInit {
 
   async openPopUp(data: any = {}, isNew?) {
     let title = isNew ? "Agregar" : "Actualizar";
-    if (!isNew) {
-      data = await this.crudService.SeleccionarAsync("proveedor/" + data.ID);
-    }
     let dialogRef: MatDialogRef<any> = this.dialog.open(OPedidoPopupComponent, {
       width: "1080px",
       height: "720px",
