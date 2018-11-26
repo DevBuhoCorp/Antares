@@ -1,11 +1,11 @@
 import {Routes} from '@angular/router';
-import { UsuarioComponent } from './nomina/usuario/usuario.component';
-import { RolesComponent } from './nomina/roles/roles.component';
-import { AreaComponent } from './catalogos/area/area.component';
-import { DepartamentoComponent } from './catalogos/departamento/departamento.component';
-import { CargoComponent } from './catalogos/cargo/cargo.component';
-import { ColaboradorComponent } from './nomina/colaborador/colaborador.component';
-import { ColaboradorareaComponent } from './nomina/colaboradorarea/colaboradorarea.component';
+import {UsuarioComponent} from './nomina/usuario/usuario.component';
+import {RolesComponent} from './nomina/roles/roles.component';
+import {AreaComponent} from './catalogos/area/area.component';
+import {DepartamentoComponent} from './catalogos/departamento/departamento.component';
+import {CargoComponent} from './catalogos/cargo/cargo.component';
+import {ColaboradorComponent} from './nomina/colaborador/colaborador.component';
+import {ColaboradorareaComponent} from './nomina/colaboradorarea/colaboradorarea.component';
 import {ContribuyenteComponent} from './catalogos/contribuyente/contribuyente.component';
 import {TipoemisorComponent} from './catalogos/tipoemisor/tipoemisor.component';
 import {TipoidentificacionComponent} from './catalogos/tipoidentificacion/tipoidentificacion.component';
@@ -14,6 +14,7 @@ import {PresupuestoComponent} from './compras/presupuesto/presupuesto.component'
 import {PaisComponent} from './localizacion/pais/pais.component';
 import {CiudadComponent} from './localizacion/ciudad/ciudad.component';
 import {BodegaComponent} from './bodega/bodega/bodega.component';
+import {TipomovimientoComponent} from './bodega/tipomovimiento/tipomovimiento.component';
 
 
 export const ModulosRoutes: Routes = [
@@ -40,7 +41,7 @@ export const ModulosRoutes: Routes = [
     data: {title: 'Asignar Área-Colaborador', breadcrumb: 'ASIGNAR ÁREA-COLABORADOR'}
   },
   //#endregion
-  
+
   //#region Catálogos
   {
     path: 'catalogos/area',
@@ -57,7 +58,7 @@ export const ModulosRoutes: Routes = [
     component: CargoComponent,
     data: {title: 'Configuración Cargo', breadcrumb: 'CONFIGURACIÓN CARGO'}
   },
-  
+
   //#endregion
   {
     path: 'catalogos/contribuyente',
@@ -98,6 +99,11 @@ export const ModulosRoutes: Routes = [
     path: 'bodega/bodega',
     component: BodegaComponent,
     data: {title: 'Bodega', breadcrumb: 'CONFIGURACIÓN BODEGA'}
+  },
+  {
+    path: 'bodega/tipomovimiento',
+    component: TipomovimientoComponent,
+    data: {title: 'Tipo Movimiento', breadcrumb: 'CONFIGURACIÓN TIPO MOVIMIENTO'}
   },
 
 ];

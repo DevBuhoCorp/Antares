@@ -96,7 +96,7 @@ export class NavigationService {
       state: 'modulos/bodega',
       sub: [
         {name: 'Bodega', state: 'bodega'},
-        // {name: 'Ciudad', state: 'ciudad'},
+        {name: 'Tipo Movimiento', state: 'tipomovimiento'},
       ]
     },
 

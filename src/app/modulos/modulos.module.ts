@@ -65,6 +65,8 @@ import { PopupPaisComponent} from './localizacion/pais/popup/popup.component';
 import {PopupCiudadComponent} from './localizacion/ciudad/popup/popup.component';
 import { BodegaComponent } from './bodega/bodega/bodega.component';
 import {PopupBodegaComponent} from './bodega/bodega/popup/popup.component';
+import { TipomovimientoComponent } from './bodega/tipomovimiento/tipomovimiento.component';
+import { PopupTipoMovimientoComponent } from './bodega/tipomovimiento/popup/popup.component';
 
 
 @NgModule({
@@ -136,6 +138,8 @@ import {PopupBodegaComponent} from './bodega/bodega/popup/popup.component';
     PopupPaisComponent,
     BodegaComponent,
     PopupBodegaComponent,
+    TipomovimientoComponent,
+    PopupTipoMovimientoComponent,
 
 
   ],
@@ -157,6 +161,7 @@ import {PopupBodegaComponent} from './bodega/bodega/popup/popup.component';
     PopupCiudadComponent,
     PopupPaisComponent,
     PopupBodegaComponent,
+    PopupTipoMovimientoComponent,
 
   ]
 })
