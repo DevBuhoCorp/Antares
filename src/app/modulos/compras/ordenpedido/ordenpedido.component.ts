@@ -5,14 +5,23 @@ import { AppLoaderService } from "../../../shared/servicios/app-loader/app-loade
 import { AppConfirmService } from "../../../shared/servicios/app-confirm/app-confirm.service";
 import { ToolsService } from "../../../shared/servicios/tools.service";
 import { OPedidoPopupComponent } from "./popup/popup.component";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-
+import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
+import { startWith, map } from "rxjs/operators";
+export interface Items {
+  ID: number;
+  Descripcion: string;
+}
 @Component({
   selector: "app-ordenpedido",
   templateUrl: "./ordenpedido.component.html",
   styleUrls: []
 })
 export class OrdenpedidoComponent implements OnInit {
+  item: any = {
+    ID: 0
+  };
+  Items: any = [];
+  itemCtrl = new FormControl();
   Pedidos: any = [];
   checked = false;
   Total = 0;
@@ -32,16 +41,33 @@ export class OrdenpedidoComponent implements OnInit {
     private confirmService: AppConfirmService,
     private fb: FormBuilder,
     private toolsService: ToolsService
-  ) {}
+  ) {
+    this.CargarAuto();
+    this.buildItemForm();
+  }
 
   ngOnInit() {
-    this.buildItemForm();
-    this.Pedidos = [];
-    this.Total = 0;
+    this.item = this.itemCtrl.valueChanges
+      .pipe(
+        startWith<string | Items>(''),
+        map(value => typeof value === 'string' ? value : value.Descripcion),
+        map(cuenta => cuenta ? this._filter(cuenta) : this.Items.slice())
+      ); 
+  }
+  private _filter(name: string): Items[] {
+    const filterValue = name.toLowerCase();
+    return this.Items.filter(option => option.Descripcion.toLowerCase().includes(filterValue));
+  }
+  displayFn(user?: Items): string | undefined {
+    return user ? user.Descripcion : undefined;
+  }
+  async CargarAuto() {
+    this.Items = await this.crudService.SeleccionarAsync("autocompleteitems");
   }
   buildItemForm() {
+    this.itemCtrl = new FormControl();
     this.itemForm = this.fb.group({
-      Estado: [{ value: "BRR", disabled: true }],
+      Estado: [{ value: "Borrador", disabled: true }],
       FechaRegistro: ["", Validators.required],
       Observacion: ["", Validators.required]
       //IdUsers: [this.toolsService.getEmpresaActive().IDUsers]
@@ -52,8 +78,12 @@ export class OrdenpedidoComponent implements OnInit {
     this.Pedidos[rowIndex]["Saldo"] =
       parseFloat(this.Pedidos[rowIndex]["Cantidad"]) *
       parseFloat(this.Pedidos[rowIndex]["PrecioRef"]);
+    if(this.itemCtrl.value.ID){
+      this.Pedidos[rowIndex]["Etiqueta"] = this.itemCtrl.value.Descripcion;
+      this.Pedidos[rowIndex]["IdItem"] = this.itemCtrl.value.ID;
+    }
+    
     this.Pedidos = [...this.Pedidos];
-
     this.Total = this.Pedidos.reduce(
       (a, b) => a + parseFloat(b.PrecioRef) * parseFloat(b.Cantidad),
       0
@@ -72,40 +102,45 @@ export class OrdenpedidoComponent implements OnInit {
       Saldo: 0
     };
     this.Pedidos = this.Pedidos.concat(nuevo);
-    // this.Total = this.Pedidos.reduce((a, b) => a + b.Referencia, 0);
+    
   }
 
   eliminar() {
     let count = 0;
     let checkboxesArray = this.checkboxesMultiple.toArray();
-    let a = this.Pedidos.filter(function seleccionado(i) {
+    let nuevo = this.Pedidos.filter(function seleccionado(i) {
       checkboxesArray[count].checked = false;
       count++;
       if (!i.Seleccionar) {
         return i;
       }
     });
-    this.Pedidos = [...a];
-    console.log(a);
+    this.Pedidos = [...nuevo];
   }
 
   submitTransaccion() {
     this.snack.open("Agregado!", "OK", { duration: 4000 });
     this.itemForm.value.FechaRegistro = this.itemForm.value.FechaRegistro.toDateString();
+    this.itemForm.disable();
     this.OPedido = this.itemForm.value;
     this.Creado = true;
   }
 
   cancelar() {
     this.Creado = false;
-    this.itemForm.controls['Observacion'].setValue("");
+    //this.itemForm.controls["Observacion"].setValue("");
+    //this.itemForm.controls["FechaRegistro"].setValue("");
+    this.buildItemForm();
     this.OPedido = [];
     this.Pedidos = [];
   }
 
   save() {
-    if(this.checked){
+    if (this.checked) {
       this.OPedido.Estado = "ENV";
+    }
+    else{
+      this.OPedido.Estado = "BRR";
     }
     this.OPedido.Detalles = [...this.Pedidos];
     console.log(this.OPedido);
