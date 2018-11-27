@@ -16,6 +16,7 @@ import {CiudadComponent} from './localizacion/ciudad/ciudad.component';
 import {BodegaComponent} from './bodega/bodega/bodega.component';
 import {TipomovimientoComponent} from './bodega/tipomovimiento/tipomovimiento.component';
 import { OrdenpedidoComponent } from './compras/ordenpedido/ordenpedido.component';
+import {BodegatmovimientoComponent} from './bodega/bodegatmovimiento/bodegatmovimiento.component';
 
 
 export const ModulosRoutes: Routes = [
@@ -114,6 +115,11 @@ export const ModulosRoutes: Routes = [
     path: 'compras/ordenpedido',
     component: OrdenpedidoComponent,
     data: {title: 'Compras -> Orden Pedido', breadcrumb: 'CONFIGURACIÓN ORDEN PEDIDO'}
+  },
+  {
+    path: 'bodega/bodegatmovimiento',
+    component: BodegatmovimientoComponent,
+    data: {title: 'Bodega -> Tipo Movimiento', breadcrumb: 'Bodega -> Tipo Movimiento'}
   },
 
   //#endregion
