@@ -29,15 +29,17 @@ export class BodegatmovimientoComponent implements OnInit {
   }
 
   async loadTMovimiento(){
-    let rows = await this.crudService.SeleccionarAsync(`bodegatmov/${ this.selBodega }`);
-    this.selectedtipoMovimientos = rows;
+    let rows: any = await this.crudService.SeleccionarAsync(`bodegatmov/${ this.selBodega }`);
+    this.selectedtipoMovimientos = [...rows];
   }
 
   save(){
-    let selected = this.selectedtipoMovimientos.map(row =>  row.ID );
+    let selected = this.ngxDatatable.selected.map(row =>  row.ID );
+
     this.crudService.Insertar( selected, `bodegatmov/${ this.selBodega }` )
       .subscribe(res => {
         this.snack.open('Guardado!', 'OK', { duration: 4000 });
+        this.cancel();
       });
   }
 
@@ -46,7 +48,7 @@ export class BodegatmovimientoComponent implements OnInit {
   }
 
   cancel(){
-    this.selectedtipoMovimientos = [];
+    this.selectedtipoMovimientos = this.ngxDatatable.selected = [];
     this.selBodega = null;
   }
 
