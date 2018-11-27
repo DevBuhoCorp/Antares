@@ -66,6 +66,8 @@ export class NavigationService {
         {name: 'Colaborador', state: 'colaborador'},
         {name: 'Colaborador-Área', state: 'colaboradorarea'},
         {name: 'Usuario', state: 'usuario'},
+        {name: 'Usuario - T. Movimiento', state: 'usuariotmovimiento'},
+        {name: 'Usuario - Bodega', state: 'usuariobodega'},
         {name: 'Roles', state: 'roles'},
       ]
     },

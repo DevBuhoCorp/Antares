@@ -1,27 +1,24 @@
 <mat-card class="pb-0 pt-0">
-  <mat-card-content>
+  <mat-card-content >
     <div class="m-333" style="display: flex; justify-content: space-between; align-items: center;">
-
       <div class="select-group">
         <mat-form-field class="full-width">
-          <mat-select placeholder=" Seleccione Bodega:" [(ngModel)]="selBodega" (selectionChange)="loadTMovimiento()">
-            <mat-option *ngFor="let bodega of bodegas | async" [value]="bodega.ID" ngDefaultControl>{{
-              bodega.Descripcion }}
-            </mat-option>
+          <mat-select placeholder=" Seleccione Usuario:" [(ngModel)]="selUsuario" (selectionChange)="loadTMovimiento()">
+            <mat-option *ngFor="let usuario of usuarios | async" [value]="usuario.id" ngDefaultControl>{{ usuario.name }}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
-
       <div>
-        <button mat-raised-button class="mr-1" color="warn" (click)="cancel()">Cancelar</button>
-        <button mat-raised-button color="primary" [disabled]="!selBodega" (click)="save()">Guardar</button>
+        <button mat-raised-button class="mr-1" color="warn" (click)="cancel()" >Cancelar</button>
+        <button mat-raised-button color="primary" [disabled]="!selUsuario" (click)="save()" >Guardar</button>
       </div>
     </div>
   </mat-card-content>
 </mat-card>
 
-<mat-card class="p-0">
-  <mat-card-content class="p-0">
+
+<mat-card class="p-0" >
+  <mat-card-content class="p-0" >
     <ngx-datatable #MyDatatableComponent class="material ml-0 mr-0"
                    [rows]="tipoMovimientos"
                    [columnMode]="'flex'"
@@ -49,7 +46,7 @@
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column name="Tipo " [flexGrow]="1">
+      <ngx-datatable-column name="Tipo " [flexGrow]="1" >
         <ng-template let-row="row" ngx-datatable-cell-template>
           {{ row.Tipo == 'I' ? 'INGRESO' : 'EGRESO' }}
         </ng-template>

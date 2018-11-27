@@ -17,6 +17,8 @@ import {BodegaComponent} from './bodega/bodega/bodega.component';
 import {TipomovimientoComponent} from './bodega/tipomovimiento/tipomovimiento.component';
 import { OrdenpedidoComponent } from './compras/ordenpedido/ordenpedido.component';
 import {BodegatmovimientoComponent} from './bodega/bodegatmovimiento/bodegatmovimiento.component';
+import {UsuariotmovimientoComponent} from './nomina/usuariotmovimiento/usuariotmovimiento.component';
+import {UsuariobodegaComponent} from './nomina/usuariobodega/usuariobodega.component';
 
 
 export const ModulosRoutes: Routes = [
@@ -86,6 +88,7 @@ export const ModulosRoutes: Routes = [
     component: ProveedorComponent,
     data: {title: 'Configuración Proveedor', breadcrumb: 'CONFIGURACIÓN PROVEEDOR'}
   },
+  //#endregion
   {
     path: 'compras/presupuesto',
     component: PresupuestoComponent,
@@ -119,8 +122,21 @@ export const ModulosRoutes: Routes = [
   {
     path: 'bodega/bodegatmovimiento',
     component: BodegatmovimientoComponent,
-    data: {title: 'Bodega -> Tipo Movimiento', breadcrumb: 'Bodega -> Tipo Movimiento'}
+    data: {title: 'Bodega - Tipo Movimiento', breadcrumb: 'Bodega - Tipo Movimiento'}
   },
 
+  //#region Nomina
+  {
+    path: 'nomina/usuariotmovimiento',
+    component: UsuariotmovimientoComponent,
+    data: {title: 'Usuario - Tipo Movimiento', breadcrumb: 'Usuario - Tipo Movimiento'}
+  },
+  {
+    path: 'nomina/usuariobodega',
+    component: UsuariobodegaComponent,
+    data: {title: 'Usuario - Bodega', breadcrumb: 'Usuario - Bodega'}
+  },
   //#endregion
+
+
 ];
