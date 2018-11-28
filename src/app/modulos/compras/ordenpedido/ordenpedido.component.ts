@@ -39,7 +39,7 @@ export class OrdenpedidoComponent implements OnInit {
   @ViewChildren("checkboxMultiple") private checkboxesMultiple: any;
   @ViewChildren("textboxMultiple") private textboxMultiple: any;
   @ViewChildren("cantidadMultiple") private cantidadMultiple: any;
-  
+
   public itemForm: FormGroup;
   constructor(
     private dialog: MatDialog,
@@ -74,7 +74,6 @@ export class OrdenpedidoComponent implements OnInit {
     this.Items = await this.crudService.SeleccionarAsync("autocompleteitems");
   }
   buildItemForm() {
-    //this.itemCtrl = new FormControl();
     this.itemForm = this.fb.group({
       Estado: [{ value: "Borrador", disabled: true }],
       FechaRegistro: ["", Validators.required],
@@ -92,7 +91,7 @@ export class OrdenpedidoComponent implements OnInit {
       });
     }
     if (cell == "Cantidad") {
-      if( parseFloat(event.target.value) <= 0){
+      if (parseFloat(event.target.value) <= 0) {
         this.snack.open("Cantidad debe ser mayor que 0", "OK", {
           duration: 4000
         });
@@ -101,7 +100,6 @@ export class OrdenpedidoComponent implements OnInit {
         this.Pedidos[rowIndex][cell] = null;
         this.Pedidos = [...this.Pedidos];
         return;
-        
       }
     }
     if (!bandera) {
@@ -111,10 +109,7 @@ export class OrdenpedidoComponent implements OnInit {
         parseFloat(this.Pedidos[rowIndex]["PrecioRef"]);
 
       this.Pedidos = [...this.Pedidos];
-      this.Total = this.Pedidos.reduce(
-        (a, b) => a + parseFloat(b.PrecioRef) * parseFloat(b.Cantidad),
-        0
-      );
+      
     } else {
       let textboxMultiple = this.textboxMultiple.toArray();
       textboxMultiple[rowIndex].nativeElement.value = null;
@@ -124,6 +119,17 @@ export class OrdenpedidoComponent implements OnInit {
         duration: 4000
       });
     }
+    /*this.Total = this.Pedidos.reduce(
+      (a, b) => a + parseFloat(b.PrecioRef) * parseFloat(b.Cantidad),
+      0
+    );*/
+    this.Total = 0;
+    this.Pedidos.forEach(i => {
+      if(parseFloat(i.Cantidad) || parseFloat(i.PrecioRef)){
+        this.Total += parseFloat(i.Cantidad) * parseFloat(i.PrecioRef);
+      }
+    });
+    console.log(this.Total);
   }
   updateValueCheck(event, cell, rowIndex) {
     this.Pedidos[rowIndex][cell] = event.checked;
@@ -213,21 +219,37 @@ export class OrdenpedidoComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(response => {
-      console.log(response);
+      let bandera = false;
       if (!response) return;
       response.forEach(i => {
-        const nuevo = {
-          Seleccionar: false,
-          Cantidad: null,
-          Etiqueta: i.Descripcion,
-          PrecioRef: 0,
-          Saldo: 0,
-          IdItem: i.ID
-        };
-        this.Pedidos = this.Pedidos.concat(nuevo);
+        this.Pedidos.forEach(element => {
+          if (element.IdItem == i.ID) {
+            bandera = true;
+            return;
+          }
+        });
+        if (!bandera) {
+          const nuevo = {
+            Seleccionar: false,
+            Cantidad: null,
+            Etiqueta: i.Descripcion,
+            PrecioRef: 0,
+            Saldo: 0,
+            IdItem: i.ID
+          };
+          this.Pedidos = this.Pedidos.concat(nuevo);
+        }
+        else{
+          this.snack.open(
+            "Item repetido",
+            "OK",
+            { duration: 4000 }
+          );
+        }
+        bandera = false;
       });
 
-      console.log(this.Pedidos);
+
     });
   }
 }
