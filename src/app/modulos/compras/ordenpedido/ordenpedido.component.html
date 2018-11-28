@@ -95,7 +95,7 @@
     <button
       mat-icon-button
       mat-sm-button
-      color="warn"
+      color="primary"
       class="mr-1"
       (click)="openPopUp({}, true)"
       matTooltip="Buscar Producto"
@@ -184,6 +184,7 @@
         >
           <input
             #cantidadMultiple
+            style="text-align: right;"
             autofocus
             matInput
             (change)="updateValue($event, 'Cantidad', rowIndex)"
