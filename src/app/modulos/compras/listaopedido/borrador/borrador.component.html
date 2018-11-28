@@ -1,17 +1,8 @@
 <mat-card class="p-0">
   <div class="m-333" style="display: flex; justify-content: space-between;">
-    <div class="m-333">
-      <button
-        mat-raised-button
-        class="mb-05"
-        color="primary"
-        (click)="Guardar()"
-      >
-        Guardar
-      </button>
-    </div>
+   
 
-    <div fxFlex="100" class="pr-1">
+    <div class="select-group">
       <mat-form-field class="full-width">
         <mat-select
           placeholder=" Seleccione Estado"
@@ -41,6 +32,16 @@
         </mat-select>
       </mat-form-field>
     </div>
+  </div>
+  <div class="m-333"   *ngIf="selEstado == 'BRR'">
+    <button
+      mat-raised-button
+      class="mb-05"
+      color="primary"
+      (click)="Guardar()"
+    >
+      Guardar
+    </button>
   </div>
 
   <mat-card-content class="p-0">

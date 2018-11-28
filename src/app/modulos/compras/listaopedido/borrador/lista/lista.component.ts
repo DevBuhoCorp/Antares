@@ -34,7 +34,7 @@ export class ListaComponent implements OnInit {
     total: 0,
     per_page: 0
   };
-
+  
   @ViewChildren("checkboxMultiple") private checkboxesMultiple: any;
   @ViewChildren("textboxMultiple") private textboxMultiple: any;
   @ViewChildren("cantidadMultiple") private cantidadMultiple: any;
@@ -55,6 +55,7 @@ export class ListaComponent implements OnInit {
   ngOnInit() {
     this.router.params.subscribe(async params => {
       this.IDOrdenPedido = params["id"];
+   
       this.loadApp();
     });
   }

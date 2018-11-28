@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { ToolsService } from "../../../../shared/servicios/tools.service";
 import { CrudService } from "../../../../shared/servicios/crud.service";
-import { MatSnackBar } from "@angular/material";
+import { MatSnackBar, MatDialogRef, MatDialog } from "@angular/material";
+import { AutorizarPopupComponent } from "./popup/popup.component";
 
 @Component({
   selector: "app-autorizar",
@@ -20,7 +21,8 @@ export class AutorizarComponent implements OnInit {
   constructor(
     private toolsService: ToolsService,
     private crudService: CrudService,
-    private snack: MatSnackBar
+    private snack: MatSnackBar,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -43,17 +45,48 @@ export class AutorizarComponent implements OnInit {
   }
 
   Autorizar(value, row) {
-    row.Estado = value;
-    this.crudService.Actualizar(row.ID, row, "opedido/").subscribe(
-      async data => {
-        this.snack.open("Transacción Finalizada!", "OK", {
-          duration: 4000
-        });
-        this.loadApp();
-      },
-      error => {
-        this.snack.open(error._body, "OK", { duration: 4000 });
-      }
-    );
+    if (value == "RCH") {
+      let title = "Observación del Rechazo";
+      let dialogRef: MatDialogRef<any> = this.dialog.open(
+        AutorizarPopupComponent,
+        {
+          width: "720px",
+          disableClose: true,
+          data: { title: title, payload: {} }
+        }
+      );
+
+      dialogRef.afterClosed().subscribe(response => {
+        if (!response) return;
+        else {
+          row.Estado = value;
+          row.ObservacionAutorizacion = response.ObservacionAutorizacion;
+          this.crudService.Actualizar(row.ID, row, "opedido/").subscribe(
+            async data => {
+              this.snack.open("Transacción Finalizada!", "OK", {
+                duration: 4000
+              });
+              this.loadApp();
+            },
+            error => {
+              this.snack.open(error._body, "OK", { duration: 4000 });
+            }
+          );
+        }
+      });
+    } else {
+      row.Estado = value;
+      this.crudService.Actualizar(row.ID, row, "opedido/").subscribe(
+        async data => {
+          this.snack.open("Transacción Finalizada!", "OK", {
+            duration: 4000
+          });
+          this.loadApp();
+        },
+        error => {
+          this.snack.open(error._body, "OK", { duration: 4000 });
+        }
+      );
+    }
   }
 }

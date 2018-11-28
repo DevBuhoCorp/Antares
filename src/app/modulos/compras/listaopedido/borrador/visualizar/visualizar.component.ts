@@ -19,6 +19,7 @@ export class VisualizarComponent implements OnInit {
     total: 0,
     per_page: 0
   };
+  Bandera: any;
   constructor(
     private crudService: CrudService,
     private toolsService: ToolsService,
@@ -28,6 +29,8 @@ export class VisualizarComponent implements OnInit {
   ngOnInit() {
     this.router.params.subscribe(async params => {
       this.IDOrdenPedido = params["id"];
+      this.Bandera = params["bandera"];
+      console.log(this.Bandera)
       this.loadApp();
     });
   }

@@ -54,7 +54,23 @@
   </mat-card-content>
 </mat-card>
 
-<div class="m-333">
+
+
+<div class="m-333" *ngIf="Bandera">
+  <button
+    mat-raised-button
+    class="mb-05"
+    color="primary"
+    [routerLink]="['/modulos/compras/listaopedido/autorizar']"
+  >
+    <mat-icon>arrow_back</mat-icon>
+    Regresar
+  </button>
+</div>
+
+
+
+<div class="m-333" *ngIf="!Bandera">
   <button
     mat-raised-button
     class="mb-05"
@@ -65,3 +81,4 @@
     Regresar
   </button>
 </div>
+

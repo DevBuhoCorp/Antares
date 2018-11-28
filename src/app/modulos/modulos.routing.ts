@@ -169,7 +169,7 @@ export const ModulosRoutes: Routes = [
     }
   },
   {
-    path: "compras/listaopedido/autorizar/visualizar/:id",
+    path: "compras/listaopedido/autorizar/visualizar/:id/:bandera",
     component: VisualizarComponent,
     data: {
       title: "Compras -> Ver Orden Pedido",
