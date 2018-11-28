@@ -1,30 +1,5 @@
 <mat-card class="p-0">
   <div class="m-333" style="display: flex; justify-content: space-between;">
-    <div class="m-333">
-      <button
-        mat-raised-button
-        class="mb-05"
-        color="primary"
-        (click)="Guardar()"
-      >
-        Guardar
-      </button>
-    </div>
-
-    <div fxFlex="100" class="pr-1">
-      <mat-form-field class="full-width">
-        <mat-select
-          placeholder=" Seleccione Estado"
-          [(ngModel)]="selEstado"
-          (selectionChange)="loadApp()"
-        >
-          <mat-option *ngFor="let row of Estados" [value]="row.ID">
-            {{ row.value }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-
     <div class="select-group">
       <mat-form-field class="full-width">
         <mat-select
@@ -68,37 +43,7 @@
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column
-        name="Enviar Ordenes para su autorización"
-        [flexGrow]="1"
-        *ngIf="selEstado == 'BRR'"
-      >
-        <ng-template let-row="row" ngx-datatable-cell-template>
-          <mat-checkbox [(ngModel)]="row.Estado"></mat-checkbox>
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column
-        *ngIf="selEstado == 'BRR'"
-        name="Detalles Orden Pedido"
-        [flexGrow]="1"
-      >
-        <ng-template let-row="row" ngx-datatable-cell-template>
-          <button
-            mat-icon-button
-            mat-sm-button
-            color="warn"
-            [routerLink]="['lista', row.ID]"
-          >
-            <mat-icon>list</mat-icon>
-          </button>
-        </ng-template>
-      </ngx-datatable-column>
-
-      <ngx-datatable-column
-        *ngIf="selEstado != 'BRR'"
-        name="Detalles Orden Pedido"
-        [flexGrow]="1"
-      >
+      <ngx-datatable-column name="Detalles Orden Pedido" [flexGrow]="1">
         <ng-template let-row="row" ngx-datatable-cell-template>
           <button
             mat-icon-button
@@ -107,6 +52,31 @@
             [routerLink]="['visualizar', row.ID]"
           >
             <mat-icon>list</mat-icon>
+          </button>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Acciones" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <button
+            mat-icon-button
+            mat-sm-button
+            color="primary"
+            class="mr-1"
+            (click)="Autorizar('ACT', row)"
+            matTooltip="Aceptar"
+          >
+            <mat-icon>check_circle</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            mat-sm-button
+            color="warn"
+            class="mr-1"
+            (click)="Autorizar('RCH', row)"
+            matTooltip="Rechazar"
+          >
+            <mat-icon>delete</mat-icon>
           </button>
         </ng-template>
       </ngx-datatable-column>

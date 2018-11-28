@@ -38,7 +38,8 @@ export class OrdenpedidoComponent implements OnInit {
 
   @ViewChildren("checkboxMultiple") private checkboxesMultiple: any;
   @ViewChildren("textboxMultiple") private textboxMultiple: any;
-
+  @ViewChildren("cantidadMultiple") private cantidadMultiple: any;
+  
   public itemForm: FormGroup;
   constructor(
     private dialog: MatDialog,
@@ -90,6 +91,19 @@ export class OrdenpedidoComponent implements OnInit {
         }
       });
     }
+    if (cell == "Cantidad") {
+      if( parseFloat(event.target.value) <= 0){
+        this.snack.open("Cantidad debe ser mayor que 0", "OK", {
+          duration: 4000
+        });
+        let textboxMultiple = this.cantidadMultiple.toArray();
+        textboxMultiple[rowIndex].nativeElement.value = null;
+        this.Pedidos[rowIndex][cell] = null;
+        this.Pedidos = [...this.Pedidos];
+        return;
+        
+      }
+    }
     if (!bandera) {
       this.Pedidos[rowIndex][cell] = event.target.value;
       this.Pedidos[rowIndex]["Saldo"] =
@@ -103,12 +117,12 @@ export class OrdenpedidoComponent implements OnInit {
       );
     } else {
       let textboxMultiple = this.textboxMultiple.toArray();
-      console.log(textboxMultiple);
       textboxMultiple[rowIndex].nativeElement.value = null;
       this.Pedidos[rowIndex][cell] = null;
       this.Pedidos = [...this.Pedidos];
-      console.log(this.Pedidos);
-      this.snack.open("Item Repetido, Ingrese Otro", "OK", { duration: 4000 });
+      this.snack.open("Dato Incorrecto, Ingrese Otro", "OK", {
+        duration: 4000
+      });
     }
   }
   updateValueCheck(event, cell, rowIndex) {
@@ -119,7 +133,7 @@ export class OrdenpedidoComponent implements OnInit {
     const nuevo = {
       Seleccionar: false,
       Cantidad: null,
-      Etiqueta: "",
+      Etiqueta: null,
       PrecioRef: 0,
       Saldo: 0
     };
@@ -169,7 +183,7 @@ export class OrdenpedidoComponent implements OnInit {
     }
 
     this.Pedidos.forEach(i => {
-      if (i.Etiqueta == null) {
+      if (i.Etiqueta == null || i.Cantidad == null) {
         bandera = true;
       }
     });
@@ -180,9 +194,12 @@ export class OrdenpedidoComponent implements OnInit {
         this.snack.open("Orden de Pedido Registrada", "OK", { duration: 4000 });
         this.cancelar();
       });
-    }
-    else{
-      this.snack.open("Orden de Pedido Incorrecta, Revise que todos los datos estén correctos", "OK", { duration: 4000 });
+    } else {
+      this.snack.open(
+        "Orden de Pedido Incorrecta, Revise que todos los datos estén correctos",
+        "OK",
+        { duration: 4000 }
+      );
     }
   }
 

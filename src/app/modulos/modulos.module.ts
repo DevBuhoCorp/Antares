@@ -74,6 +74,8 @@ import { ListaComponent } from './compras/listaopedido/borrador/lista/lista.comp
 import { BodegatmovimientoComponent } from './bodega/bodegatmovimiento/bodegatmovimiento.component';
 import { UsuariotmovimientoComponent } from './nomina/usuariotmovimiento/usuariotmovimiento.component';
 import { UsuariobodegaComponent } from './nomina/usuariobodega/usuariobodega.component';
+import { VisualizarComponent } from './compras/listaopedido/borrador/visualizar/visualizar.component';
+import { AutorizarComponent } from './compras/listaopedido/autorizar/autorizar.component';
 
 
 @NgModule({
@@ -155,7 +157,9 @@ import { UsuariobodegaComponent } from './nomina/usuariobodega/usuariobodega.com
     ListaComponent,
     BodegatmovimientoComponent,
     UsuariotmovimientoComponent,
-    UsuariobodegaComponent
+    UsuariobodegaComponent,
+    VisualizarComponent,
+    AutorizarComponent
 
   ],
   providers: [],

@@ -183,12 +183,13 @@
           let-row="row"
         >
           <input
+            #cantidadMultiple
             autofocus
             matInput
             (change)="updateValue($event, 'Cantidad', rowIndex)"
-            type="number"
+            type="text"
             [value]="row?.Cantidad"
-            min="1"
+            mask="0*.0000"
           />
         </ng-template>
       </ngx-datatable-column>

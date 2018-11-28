@@ -91,6 +91,7 @@
         >
           <mat-form-field style="width: 50%;">
             <input
+              #textboxMultiple
               autofocus
               matInput
               (change)="updateValue($event, 'Etiqueta', rowIndex)"
@@ -109,6 +110,7 @@
           let-row="row"
         >
           <input
+            #cantidadMultiple
             autofocus
             matInput
             (change)="updateValue($event, 'Cantidad', rowIndex)"

@@ -86,6 +86,7 @@ export class NavigationService {
           state: 'listaopedido',
           sub: [
             { name: 'Borrador', state: 'borrador' },
+            { name: 'Autorizar', state: 'autorizar' },
           ]
         },
       ],
