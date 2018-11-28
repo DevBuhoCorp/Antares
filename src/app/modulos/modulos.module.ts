@@ -69,6 +69,8 @@ import { TipomovimientoComponent } from './bodega/tipomovimiento/tipomovimiento.
 import { PopupTipoMovimientoComponent } from './bodega/tipomovimiento/popup/popup.component';
 import { OrdenpedidoComponent } from './compras/ordenpedido/ordenpedido.component';
 import { OPedidoPopupComponent } from './compras/ordenpedido/popup/popup.component';
+import { BorradorComponent } from './compras/listaopedido/borrador/borrador.component';
+import { ListaComponent } from './compras/listaopedido/borrador/lista/lista.component';
 
 
 @NgModule({
@@ -145,7 +147,9 @@ import { OPedidoPopupComponent } from './compras/ordenpedido/popup/popup.compone
 
     PresupuestoComponent,
     OrdenpedidoComponent,
-    OPedidoPopupComponent
+    OPedidoPopupComponent,
+    BorradorComponent,
+    ListaComponent
 
   ],
   providers: [],

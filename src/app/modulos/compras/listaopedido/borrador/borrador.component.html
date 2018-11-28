@@ -1,0 +1,76 @@
+<mat-card class="p-0">
+  <div class="m-333" style="display: flex; justify-content: space-between;">
+    <div class="m-333">
+      <button
+        mat-raised-button
+        class="mb-05"
+        color="primary"
+        (click)="Guardar()"
+      >
+        Guardar
+      </button>
+    </div>
+
+    <div class="select-group">
+      <mat-form-field class="full-width">
+        <mat-select
+          placeholder=" Seleccione número de ítems:"
+          [(ngModel)]="selPageSize"
+          (selectionChange)="loadApp()"
+        >
+          <mat-option
+            *ngFor="let page of pageSize"
+            [value]="page"
+            ngDefaultControl
+            >{{ page }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <mat-card-content class="p-0">
+    <ngx-datatable
+      class="material ml-0 mr-0"
+      [rows]="paginate.data"
+      [columnMode]="'flex'"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [rowHeight]="'auto'"
+      [externalPaging]="true"
+      [count]="paginate.total"
+      [limit]="paginate.per_page"
+      (page)="setPage($event)"
+    >
+      <ngx-datatable-column name="Fecha Registro" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.FechaRegistro | date: "medium" }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Observación" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.Observacion }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Enviar Ordenes para su autorización" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <mat-checkbox [(ngModel)]="row.Estado"></mat-checkbox>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Detalles Orden Pedido" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <button
+            mat-icon-button
+            mat-sm-button
+            color="warn"
+            [routerLink]="['lista', row.ID]"
+          >
+            <mat-icon>list</mat-icon>
+          </button>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </mat-card-content>
+</mat-card>
