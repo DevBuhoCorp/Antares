@@ -51,6 +51,16 @@ export const ModulosRoutes: Routes = [
       breadcrumb: "ASIGNAR ÁREA-COLABORADOR"
     }
   },
+  {
+    path: 'nomina/usuariotmovimiento',
+    component: UsuariotmovimientoComponent,
+    data: {title: 'Usuario - Tipo Movimiento', breadcrumb: 'Usuario - Tipo Movimiento'}
+  },
+  {
+    path: 'nomina/usuariobodega',
+    component: UsuariobodegaComponent,
+    data: {title: 'Usuario - Bodega', breadcrumb: 'Usuario - Bodega'}
+  },
   //#endregion
 
   //#region Catálogos
@@ -108,7 +118,6 @@ export const ModulosRoutes: Routes = [
       breadcrumb: "CONFIGURACIÓN PROVEEDOR"
     }
   },
-  //#endregion
   {
     path: "compras/presupuesto",
     component: PresupuestoComponent,
@@ -158,6 +167,7 @@ export const ModulosRoutes: Routes = [
       breadcrumb: "LOCALIZACIÓN CIUDAD"
     }
   },
+  //#endregion
 
   //#region Bodega
   {
@@ -177,18 +187,7 @@ export const ModulosRoutes: Routes = [
     component: BodegatmovimientoComponent,
     data: {title: 'Bodega - Tipo Movimiento', breadcrumb: 'Bodega - Tipo Movimiento'}
   },
-
-  //#region Nomina
-  {
-    path: 'nomina/usuariotmovimiento',
-    component: UsuariotmovimientoComponent,
-    data: {title: 'Usuario - Tipo Movimiento', breadcrumb: 'Usuario - Tipo Movimiento'}
-  },
-  {
-    path: 'nomina/usuariobodega',
-    component: UsuariobodegaComponent,
-    data: {title: 'Usuario - Bodega', breadcrumb: 'Usuario - Bodega'}
-  },
   //#endregion
 
+  
 ];
