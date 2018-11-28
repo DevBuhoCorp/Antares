@@ -1,23 +1,27 @@
-import { Routes } from "@angular/router";
-import { UsuarioComponent } from "./nomina/usuario/usuario.component";
-import { RolesComponent } from "./nomina/roles/roles.component";
-import { AreaComponent } from "./catalogos/area/area.component";
-import { DepartamentoComponent } from "./catalogos/departamento/departamento.component";
-import { CargoComponent } from "./catalogos/cargo/cargo.component";
-import { ColaboradorComponent } from "./nomina/colaborador/colaborador.component";
-import { ColaboradorareaComponent } from "./nomina/colaboradorarea/colaboradorarea.component";
-import { ContribuyenteComponent } from "./catalogos/contribuyente/contribuyente.component";
-import { TipoemisorComponent } from "./catalogos/tipoemisor/tipoemisor.component";
-import { TipoidentificacionComponent } from "./catalogos/tipoidentificacion/tipoidentificacion.component";
-import { ProveedorComponent } from "./compras/proveedor/proveedor.component";
-import { PresupuestoComponent } from "./compras/presupuesto/presupuesto.component";
-import { PaisComponent } from "./localizacion/pais/pais.component";
-import { CiudadComponent } from "./localizacion/ciudad/ciudad.component";
-import { BodegaComponent } from "./bodega/bodega/bodega.component";
-import { TipomovimientoComponent } from "./bodega/tipomovimiento/tipomovimiento.component";
-import { OrdenpedidoComponent } from "./compras/ordenpedido/ordenpedido.component";
+import {Routes} from '@angular/router';
+import { UsuarioComponent } from './nomina/usuario/usuario.component';
+import { RolesComponent } from './nomina/roles/roles.component';
+import { AreaComponent } from './catalogos/area/area.component';
+import { DepartamentoComponent } from './catalogos/departamento/departamento.component';
+import { CargoComponent } from './catalogos/cargo/cargo.component';
+import { ColaboradorComponent } from './nomina/colaborador/colaborador.component';
+import { ColaboradorareaComponent } from './nomina/colaboradorarea/colaboradorarea.component';
+import {ContribuyenteComponent} from './catalogos/contribuyente/contribuyente.component';
+import {TipoemisorComponent} from './catalogos/tipoemisor/tipoemisor.component';
+import {TipoidentificacionComponent} from './catalogos/tipoidentificacion/tipoidentificacion.component';
+import {ProveedorComponent} from './compras/proveedor/proveedor.component';
+import {PresupuestoComponent} from './compras/presupuesto/presupuesto.component';
+import {PaisComponent} from './localizacion/pais/pais.component';
+import {CiudadComponent} from './localizacion/ciudad/ciudad.component';
+import {BodegaComponent} from './bodega/bodega/bodega.component';
+import {TipomovimientoComponent} from './bodega/tipomovimiento/tipomovimiento.component';
+import { OrdenpedidoComponent } from './compras/ordenpedido/ordenpedido.component';
+import {BodegatmovimientoComponent} from './bodega/bodegatmovimiento/bodegatmovimiento.component';
+import {UsuariotmovimientoComponent} from './nomina/usuariotmovimiento/usuariotmovimiento.component';
+import {UsuariobodegaComponent} from './nomina/usuariobodega/usuariobodega.component';
 import { BorradorComponent } from "./compras/listaopedido/borrador/borrador.component";
 import { ListaComponent } from "./compras/listaopedido/borrador/lista/lista.component";
+
 
 export const ModulosRoutes: Routes = [
   //#region Nómina
@@ -104,6 +108,7 @@ export const ModulosRoutes: Routes = [
       breadcrumb: "CONFIGURACIÓN PROVEEDOR"
     }
   },
+  //#endregion
   {
     path: "compras/presupuesto",
     component: PresupuestoComponent,
@@ -153,7 +158,6 @@ export const ModulosRoutes: Routes = [
       breadcrumb: "LOCALIZACIÓN CIUDAD"
     }
   },
-  //#endregion
 
   //#region Bodega
   {
@@ -168,6 +172,23 @@ export const ModulosRoutes: Routes = [
       title: "Tipo Movimiento",
       breadcrumb: "CONFIGURACIÓN TIPO MOVIMIENTO"
     }
-  }
+  },
+  {
+    component: BodegatmovimientoComponent,
+    data: {title: 'Bodega - Tipo Movimiento', breadcrumb: 'Bodega - Tipo Movimiento'}
+  },
+
+  //#region Nomina
+  {
+    path: 'nomina/usuariotmovimiento',
+    component: UsuariotmovimientoComponent,
+    data: {title: 'Usuario - Tipo Movimiento', breadcrumb: 'Usuario - Tipo Movimiento'}
+  },
+  {
+    path: 'nomina/usuariobodega',
+    component: UsuariobodegaComponent,
+    data: {title: 'Usuario - Bodega', breadcrumb: 'Usuario - Bodega'}
+  },
   //#endregion
+
 ];

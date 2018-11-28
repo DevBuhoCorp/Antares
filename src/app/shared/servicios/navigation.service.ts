@@ -66,6 +66,8 @@ export class NavigationService {
         {name: 'Colaborador', state: 'colaborador'},
         {name: 'Colaborador-Área', state: 'colaboradorarea'},
         {name: 'Usuario', state: 'usuario'},
+        {name: 'Usuario - T. Movimiento', state: 'usuariotmovimiento'},
+        {name: 'Usuario - Bodega', state: 'usuariobodega'},
         {name: 'Roles', state: 'roles'},
       ]
     },
@@ -106,6 +108,7 @@ export class NavigationService {
       sub: [
         {name: 'Bodega', state: 'bodega'},
         {name: 'Tipo Movimiento', state: 'tipomovimiento'},
+        {name: 'Bodega - T. Movimiento', state: 'bodegatmovimiento'},
       ]
     },
 

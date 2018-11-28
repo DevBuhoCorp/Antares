@@ -71,6 +71,9 @@ import { OrdenpedidoComponent } from './compras/ordenpedido/ordenpedido.componen
 import { OPedidoPopupComponent } from './compras/ordenpedido/popup/popup.component';
 import { BorradorComponent } from './compras/listaopedido/borrador/borrador.component';
 import { ListaComponent } from './compras/listaopedido/borrador/lista/lista.component';
+import { BodegatmovimientoComponent } from './bodega/bodegatmovimiento/bodegatmovimiento.component';
+import { UsuariotmovimientoComponent } from './nomina/usuariotmovimiento/usuariotmovimiento.component';
+import { UsuariobodegaComponent } from './nomina/usuariobodega/usuariobodega.component';
 
 
 @NgModule({
@@ -149,7 +152,10 @@ import { ListaComponent } from './compras/listaopedido/borrador/lista/lista.comp
     OrdenpedidoComponent,
     OPedidoPopupComponent,
     BorradorComponent,
-    ListaComponent
+    ListaComponent,
+    BodegatmovimientoComponent,
+    UsuariotmovimientoComponent,
+    UsuariobodegaComponent
 
   ],
   providers: [],
