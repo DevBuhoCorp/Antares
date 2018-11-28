@@ -1,0 +1,152 @@
+<mat-card class="p-0">
+  <div class="m-333">
+    <button
+      mat-icon-button
+      mat-sm-button
+      color="primary"
+      class="mr-1"
+      (click)="agregar()"
+      matTooltip="Agregar"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      mat-sm-button
+      color="warn"
+      class="mr-1"
+      (click)="eliminar()"
+      matTooltip="Eliminar"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      mat-sm-button
+      color="warn"
+      class="mr-1"
+      (click)="openPopUp({}, true)"
+      matTooltip="Buscar Producto"
+    >
+      <mat-icon>search</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      mat-sm-button
+      color="warn"
+      class="mr-1"
+      (click)="save()"
+      matTooltip="Guardar"
+      *ngIf="Pedidos.length > 0"
+    >
+      <mat-icon>save</mat-icon>
+    </button>
+  </div>
+  <mat-card-content class="p-0">
+    <mat-card-title class="mat-bg-primary m-0">
+      <div class="card-title-text">
+        <span
+          >Total estimado a pagar de la Orden Pedida:
+          {{ Total | currency }}</span
+        >
+      </div>
+      <mat-divider></mat-divider>
+    </mat-card-title>
+    <ngx-datatable
+      class="material ml-0 mr-0"
+      [rows]="Pedidos"
+      [columnMode]="'flex'"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [rowHeight]="'auto'"
+      [limit]="10"
+    >
+      <ngx-datatable-column
+        [width]="50"
+        [sortable]="false"
+        [canAutoResize]="false"
+        [draggable]="false"
+        [resizeable]="false"
+        [flexGrow]="1"
+      >
+        <ng-template
+          ngx-datatable-cell-template
+          let-rowIndex="rowIndex"
+          let-value="Seleccionar"
+          let-row="row"
+        >
+          <mat-checkbox
+            #checkboxMultiple
+            (change)="updateValueCheck($event, 'Seleccionar', rowIndex)"
+          ></mat-checkbox>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Etiqueta" [flexGrow]="1">
+        <ng-template
+          ngx-datatable-cell-template
+          let-rowIndex="rowIndex"
+          let-value="Etiqueta"
+          let-row="row"
+        >
+          <mat-form-field style="width: 50%;">
+            <input
+              autofocus
+              matInput
+              (change)="updateValue($event, 'Etiqueta', rowIndex)"
+              type="text"
+              [value]="row?.Etiqueta"
+            />
+          </mat-form-field>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Cantidad" [flexGrow]="0.12">
+        <ng-template
+          ngx-datatable-cell-template
+          let-rowIndex="rowIndex"
+          let-value="Cantidad"
+          let-row="row"
+        >
+          <input
+            autofocus
+            matInput
+            (change)="updateValue($event, 'Cantidad', rowIndex)"
+            type="text"
+            [value]="row?.Cantidad"
+          />
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Precio Referencia" [flexGrow]="0.12">
+        <ng-template
+          ngx-datatable-cell-template
+          let-rowIndex="rowIndex"
+          let-value="PrecioRef"
+          let-row="row"
+        >
+          <input
+            style="text-align: right;"
+            autofocus
+            matInput
+            (change)="updateValue($event, 'PrecioRef', rowIndex)"
+            type="text"
+            [value]="row?.PrecioRef | currency"
+          />
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </mat-card-content>
+</mat-card>
+
+<div class="m-333">
+  <button
+    mat-raised-button
+    class="mb-05"
+    color="primary"
+    [routerLink]="['/modulos/compras/listaopedido/borrador']"
+  >
+    <mat-icon>arrow_back</mat-icon>
+    Regresar
+  </button>
+</div>

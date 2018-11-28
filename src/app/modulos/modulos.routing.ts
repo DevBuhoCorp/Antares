@@ -19,113 +19,39 @@ import { OrdenpedidoComponent } from './compras/ordenpedido/ordenpedido.componen
 import {BodegatmovimientoComponent} from './bodega/bodegatmovimiento/bodegatmovimiento.component';
 import {UsuariotmovimientoComponent} from './nomina/usuariotmovimiento/usuariotmovimiento.component';
 import {UsuariobodegaComponent} from './nomina/usuariobodega/usuariobodega.component';
+import { BorradorComponent } from "./compras/listaopedido/borrador/borrador.component";
+import { ListaComponent } from "./compras/listaopedido/borrador/lista/lista.component";
 
 
 export const ModulosRoutes: Routes = [
 
   //#region Nómina
   {
-    path: 'nomina/usuario',
+    path: "nomina/usuario",
     component: UsuarioComponent,
-    data: {title: 'Configuración Nomina', breadcrumb: 'CONFIGURACIÓN USUARIO'}
+    data: { title: "Configuración Nomina", breadcrumb: "CONFIGURACIÓN USUARIO" }
   },
   {
-    path: 'nomina/roles',
+    path: "nomina/roles",
     component: RolesComponent,
-    data: {title: 'Configuración Nomina', breadcrumb: 'CONFIGURACIÓN ROLES'}
+    data: { title: "Configuración Nomina", breadcrumb: "CONFIGURACIÓN ROLES" }
   },
   {
-    path: 'nomina/colaborador',
+    path: "nomina/colaborador",
     component: ColaboradorComponent,
-    data: {title: 'Configuración Colaborador', breadcrumb: 'CONFIGURACIÓN COLABORADOR'}
+    data: {
+      title: "Configuración Colaborador",
+      breadcrumb: "CONFIGURACIÓN COLABORADOR"
+    }
   },
   {
-    path: 'nomina/colaboradorarea',
+    path: "nomina/colaboradorarea",
     component: ColaboradorareaComponent,
-    data: {title: 'Asignar Área-Colaborador', breadcrumb: 'ASIGNAR ÁREA-COLABORADOR'}
+    data: {
+      title: "Asignar Área-Colaborador",
+      breadcrumb: "ASIGNAR ÁREA-COLABORADOR"
+    }
   },
-  //#endregion
-
-  //#region Catálogos
-  {
-    path: 'catalogos/area',
-    component: AreaComponent,
-    data: {title: 'Configuración Área', breadcrumb: 'CONFIGURACIÓN ÁREA'}
-  },
-  {
-    path: 'catalogos/departamento',
-    component: DepartamentoComponent,
-    data: {title: 'Configuración Departamento', breadcrumb: 'CONFIGURACIÓN DEPARTAMENTO'}
-  },
-  {
-    path: 'catalogos/cargo',
-    component: CargoComponent,
-    data: {title: 'Configuración Cargo', breadcrumb: 'CONFIGURACIÓN CARGO'}
-  },
-
-  //#endregion
-  {
-    path: 'catalogos/contribuyente',
-    component: ContribuyenteComponent,
-    data: {title: 'Configuración Contribuyente', breadcrumb: 'CONFIGURACIÓN CONTRIBUYENTE'}
-  },
-  {
-    path: 'catalogos/tipoemisor',
-    component: TipoemisorComponent,
-    data: {title: 'Configuración Tipo Emisor', breadcrumb: 'CONFIGURACIÓN TIPO EMISOR'}
-  },
-  {
-    path: 'catalogos/tipoidentificacion',
-    component: TipoidentificacionComponent,
-    data: {title: 'Configuración Tipo Identificación', breadcrumb: 'CONFIGURACIÓN TIPO IDENTIFICACIÓN'}
-  },
-
-  //#endregion
-
-  //#region Proveedor
-  {
-    path: 'compras/proveedor',
-    component: ProveedorComponent,
-    data: {title: 'Configuración Proveedor', breadcrumb: 'CONFIGURACIÓN PROVEEDOR'}
-  },
-  //#endregion
-  {
-    path: 'compras/presupuesto',
-    component: PresupuestoComponent,
-    data: {title: 'Compras -> Presupuesto', breadcrumb: 'CONFIGURACIÓN PRESUPUESTO'}
-  },
-  {
-    path: 'localizacion/pais',
-    component: PaisComponent,
-    data: {title: 'Localización País', breadcrumb: 'LOCALIZACIÓN - PAÍS'}
-  },
-  {
-    path: 'localizacion/ciudad',
-    component: CiudadComponent,
-    data: {title: 'Localización Ciudad -> Presupuesto', breadcrumb: 'LOCALIZACIÓN CIUDAD'}
-  },
-  {
-    path: 'bodega/bodega',
-    component: BodegaComponent,
-    data: {title: 'Bodega', breadcrumb: 'CONFIGURACIÓN BODEGA'}
-  },
-  {
-    path: 'bodega/tipomovimiento',
-    component: TipomovimientoComponent,
-    data: {title: 'Tipo Movimiento', breadcrumb: 'CONFIGURACIÓN TIPO MOVIMIENTO'}
-  },
-  {
-    path: 'compras/ordenpedido',
-    component: OrdenpedidoComponent,
-    data: {title: 'Compras -> Orden Pedido', breadcrumb: 'CONFIGURACIÓN ORDEN PEDIDO'}
-  },
-  {
-    path: 'bodega/bodegatmovimiento',
-    component: BodegatmovimientoComponent,
-    data: {title: 'Bodega - Tipo Movimiento', breadcrumb: 'Bodega - Tipo Movimiento'}
-  },
-
-  //#region Nomina
   {
     path: 'nomina/usuariotmovimiento',
     component: UsuariotmovimientoComponent,
@@ -135,6 +61,133 @@ export const ModulosRoutes: Routes = [
     path: 'nomina/usuariobodega',
     component: UsuariobodegaComponent,
     data: {title: 'Usuario - Bodega', breadcrumb: 'Usuario - Bodega'}
+  },
+  //#endregion
+
+  //#region Catálogos
+  {
+    path: "catalogos/contribuyente",
+    component: ContribuyenteComponent,
+    data: {
+      title: "Configuración Contribuyente",
+      breadcrumb: "CONFIGURACIÓN CONTRIBUYENTE"
+    }
+  },
+  {
+    path: "catalogos/tipoemisor",
+    component: TipoemisorComponent,
+    data: {
+      title: "Configuración Tipo Emisor",
+      breadcrumb: "CONFIGURACIÓN TIPO EMISOR"
+    }
+  },
+  {
+    path: "catalogos/tipoidentificacion",
+    component: TipoidentificacionComponent,
+    data: {
+      title: "Configuración Tipo Identificación",
+      breadcrumb: "CONFIGURACIÓN TIPO IDENTIFICACIÓN"
+    }
+  },
+  {
+    path: "catalogos/area",
+    component: AreaComponent,
+    data: { title: "Configuración Área", breadcrumb: "CONFIGURACIÓN ÁREA" }
+  },
+  {
+    path: "catalogos/departamento",
+    component: DepartamentoComponent,
+    data: {
+      title: "Configuración Departamento",
+      breadcrumb: "CONFIGURACIÓN DEPARTAMENTO"
+    }
+  },
+  {
+    path: "catalogos/cargo",
+    component: CargoComponent,
+    data: { title: "Configuración Cargo", breadcrumb: "CONFIGURACIÓN CARGO" }
+  },
+
+  //#endregion
+
+  //#region Compras
+  {
+    path: "compras/proveedor",
+    component: ProveedorComponent,
+    data: {
+      title: "Configuración Proveedor",
+      breadcrumb: "CONFIGURACIÓN PROVEEDOR"
+    }
+  },
+  {
+    path: "compras/presupuesto",
+    component: PresupuestoComponent,
+    data: {
+      title: "Compras -> Presupuesto",
+      breadcrumb: "CONFIGURACIÓN PRESUPUESTO"
+    }
+  },
+  {
+    path: "compras/ordenpedido",
+    component: OrdenpedidoComponent,
+    data: {
+      title: "Compras -> Orden Pedido",
+      breadcrumb: "CONFIGURACIÓN ORDEN PEDIDO"
+    }
+  },
+  {
+    path: "compras/listaopedido/borrador",
+    component: BorradorComponent,
+    data: {
+      title: "Compras -> Listas de Orden Pedido",
+      breadcrumb: "CONFIGURACIÓN LISTAS DE ORDEN PEDIDO"
+    }
+  },
+  {
+    path: "compras/listaopedido/borrador/lista/:id",
+    component: ListaComponent,
+    data: {
+      title: "Compras -> Editar Orden Pedido",
+      breadcrumb: "EDITAR ORDEN DE PEDIDO"
+    }
+  },
+
+  //#endregion
+
+  //#region Localización
+  {
+    path: "localizacion/pais",
+    component: PaisComponent,
+    data: { title: "Localización País", breadcrumb: "LOCALIZACIÓN - PAÍS" }
+  },
+  {
+    path: "localizacion/ciudad",
+    component: CiudadComponent,
+    data: {
+      title: "Localización Ciudad -> Presupuesto",
+      breadcrumb: "LOCALIZACIÓN CIUDAD"
+    }
+  },
+  //#endregion
+
+  //#region Bodega
+  {
+    path: "bodega/bodega",
+    component: BodegaComponent,
+    data: { title: "Bodega", breadcrumb: "CONFIGURACIÓN BODEGA" }
+  },
+  {
+    path: "bodega/tipomovimiento",
+    component: TipomovimientoComponent,
+    data: {
+      title: "Tipo Movimiento",
+      breadcrumb: "CONFIGURACIÓN TIPO MOVIMIENTO"
+    }
+  },
+  {
+    path: 'bodega/bodegatmovimiento',
+    component: BodegatmovimientoComponent,
+    data: {title: 'Bodega - Tipo Movimiento', breadcrumb: 'Bodega - Tipo Movimiento'}
   },
   //#endregion
 

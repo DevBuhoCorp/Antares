@@ -72,6 +72,8 @@ import { OPedidoPopupComponent } from './compras/ordenpedido/popup/popup.compone
 import { BodegatmovimientoComponent } from './bodega/bodegatmovimiento/bodegatmovimiento.component';
 import { UsuariotmovimientoComponent } from './nomina/usuariotmovimiento/usuariotmovimiento.component';
 import { UsuariobodegaComponent } from './nomina/usuariobodega/usuariobodega.component';
+import { BorradorComponent } from './compras/listaopedido/borrador/borrador.component';
+import { ListaComponent } from './compras/listaopedido/borrador/lista/lista.component';
 
 
 @NgModule({
@@ -148,6 +150,9 @@ import { UsuariobodegaComponent } from './nomina/usuariobodega/usuariobodega.com
 
     PresupuestoComponent,
     OrdenpedidoComponent,
+    OPedidoPopupComponent,
+    BorradorComponent,
+    ListaComponent,
     OPedidoPopupComponent,
     BodegatmovimientoComponent,
     UsuariotmovimientoComponent,

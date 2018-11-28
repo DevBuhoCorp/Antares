@@ -80,7 +80,15 @@ export class NavigationService {
         {name: 'Proveedor', state: 'proveedor'},
         {name: 'Presupuesto', state: 'presupuesto'},
         {name: 'Orden de Pedido', state: 'ordenpedido'},
-      ]
+        {
+          name: 'Lista Ordenes Pedido',
+          type: 'dropDown',
+          state: 'listaopedido',
+          sub: [
+            {name: 'Borrador', state: 'borrador'},
+          ]
+        },
+      ],
     },
     {
       name: 'Localización',
