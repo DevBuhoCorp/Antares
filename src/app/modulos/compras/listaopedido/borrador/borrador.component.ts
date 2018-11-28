@@ -9,6 +9,24 @@ import { MatSnackBar } from "@angular/material";
   styleUrls: []
 })
 export class BorradorComponent implements OnInit {
+  Estados: any = [
+    {
+      value: "Borrador",
+      ID: "BRR"
+    },
+    {
+      value: "Enviados",
+      ID: "ENV"
+    },
+    {
+      value: "Aceptados",
+      ID: "ACT"
+    },
+    {
+      value: "Rechazados",
+      ID: "RCH"
+    }
+  ];
   pageSize = this.toolsService.getPaginas();
   selPageSize: any = this.pageSize[0];
   paginate: any = {
@@ -17,6 +35,7 @@ export class BorradorComponent implements OnInit {
     total: 0,
     per_page: 0
   };
+  selEstado: any;
   constructor(
     private toolsService: ToolsService,
     private crudService: CrudService,
@@ -30,6 +49,7 @@ export class BorradorComponent implements OnInit {
   Guardar() {
     this.paginate.data.map(i => {
       if (i.Estado) {
+        i.Estado = "ENV";
         this.crudService.Actualizar(i.ID, i, "opedido/").subscribe(
           async data => {
             this.snack.open("Transacción Finalizada!", "OK", {
@@ -47,7 +67,8 @@ export class BorradorComponent implements OnInit {
   async loadApp() {
     this.paginate = await this.crudService.SeleccionarAsync("opedido", {
       page: 1,
-      psize: this.selPageSize
+      psize: this.selPageSize,
+      Estado: this.selEstado
     });
     this.paginate.data = this.crudService.SetBool(this.paginate.data);
   }

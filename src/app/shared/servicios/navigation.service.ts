@@ -85,7 +85,8 @@ export class NavigationService {
           type: 'dropDown',
           state: 'listaopedido',
           sub: [
-            {name: 'Borrador', state: 'borrador'},
+            { name: 'Borrador', state: 'borrador' },
+            { name: 'Autorizar', state: 'autorizar' },
           ]
         },
       ],

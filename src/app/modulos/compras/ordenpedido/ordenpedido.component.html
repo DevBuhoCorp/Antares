@@ -164,35 +164,14 @@
           let-value="Etiqueta"
           let-row="row"
         >
-          <!--
-            <input
-              autofocus
-              matInput
-              (change)="updateValue($event, 'Etiqueta', rowIndex)"
-              type="text"
-              [value]="row?.Etiqueta"
-            />
-          -->
-          <mat-form-field style="width: 50%;">
-            <input
-              autofocus
-              matInput
-              (change)="updateValue($event, 'Etiqueta', rowIndex)"
-              type="text"
-              [value]="row?.Etiqueta"
-              [matAutocomplete]="auto"
-              [formControl]="itemCtrl"
-            />
-
-            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-              <mat-option
-                *ngFor="let seleccionado of (item | async)"
-                [value]="seleccionado"
-              >
-                {{ seleccionado.Descripcion }}
-              </mat-option>
-            </mat-autocomplete>
-          </mat-form-field>
+          <input
+            #textboxMultiple
+            autofocus
+            matInput
+            (change)="updateValue($event, 'Etiqueta', rowIndex)"
+            type="text"
+            [value]="row?.Etiqueta"
+          />
         </ng-template>
       </ngx-datatable-column>
 
@@ -204,12 +183,13 @@
           let-row="row"
         >
           <input
+            #cantidadMultiple
             autofocus
             matInput
             (change)="updateValue($event, 'Cantidad', rowIndex)"
             type="text"
-            mask="0*.0000"
             [value]="row?.Cantidad"
+            mask="0*.0000"
           />
         </ng-template>
       </ngx-datatable-column>

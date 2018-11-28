@@ -69,11 +69,14 @@ import { TipomovimientoComponent } from './bodega/tipomovimiento/tipomovimiento.
 import { PopupTipoMovimientoComponent } from './bodega/tipomovimiento/popup/popup.component';
 import { OrdenpedidoComponent } from './compras/ordenpedido/ordenpedido.component';
 import { OPedidoPopupComponent } from './compras/ordenpedido/popup/popup.component';
+import { BorradorComponent } from './compras/listaopedido/borrador/borrador.component';
+import { ListaComponent } from './compras/listaopedido/borrador/lista/lista.component';
 import { BodegatmovimientoComponent } from './bodega/bodegatmovimiento/bodegatmovimiento.component';
 import { UsuariotmovimientoComponent } from './nomina/usuariotmovimiento/usuariotmovimiento.component';
 import { UsuariobodegaComponent } from './nomina/usuariobodega/usuariobodega.component';
-import { BorradorComponent } from './compras/listaopedido/borrador/borrador.component';
-import { ListaComponent } from './compras/listaopedido/borrador/lista/lista.component';
+import { VisualizarComponent } from './compras/listaopedido/borrador/visualizar/visualizar.component';
+import { AutorizarComponent } from './compras/listaopedido/autorizar/autorizar.component';
+import { AutorizarPopupComponent } from './compras/listaopedido/autorizar/popup/popup.component';
 
 
 @NgModule({
@@ -153,10 +156,12 @@ import { ListaComponent } from './compras/listaopedido/borrador/lista/lista.comp
     OPedidoPopupComponent,
     BorradorComponent,
     ListaComponent,
-    OPedidoPopupComponent,
     BodegatmovimientoComponent,
     UsuariotmovimientoComponent,
-    UsuariobodegaComponent
+    UsuariobodegaComponent,
+    VisualizarComponent,
+    AutorizarComponent,
+    AutorizarPopupComponent
 
   ],
   providers: [],
@@ -179,7 +184,7 @@ import { ListaComponent } from './compras/listaopedido/borrador/lista/lista.comp
     PopupPaisComponent,
     PopupBodegaComponent,
     PopupTipoMovimientoComponent,
-
+    AutorizarPopupComponent
   ]
 })
 export class ModulosModule {

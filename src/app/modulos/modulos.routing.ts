@@ -21,10 +21,11 @@ import {UsuariotmovimientoComponent} from './nomina/usuariotmovimiento/usuariotm
 import {UsuariobodegaComponent} from './nomina/usuariobodega/usuariobodega.component';
 import { BorradorComponent } from "./compras/listaopedido/borrador/borrador.component";
 import { ListaComponent } from "./compras/listaopedido/borrador/lista/lista.component";
+import { VisualizarComponent } from './compras/listaopedido/borrador/visualizar/visualizar.component';
+import { AutorizarComponent } from './compras/listaopedido/autorizar/autorizar.component';
 
 
 export const ModulosRoutes: Routes = [
-
   //#region Nómina
   {
     path: "nomina/usuario",
@@ -151,6 +152,30 @@ export const ModulosRoutes: Routes = [
       breadcrumb: "EDITAR ORDEN DE PEDIDO"
     }
   },
+  {
+    path: "compras/listaopedido/borrador/visualizar/:id",
+    component: VisualizarComponent,
+    data: {
+      title: "Compras -> Ver Orden Pedido",
+      breadcrumb: "VER ORDEN DE PEDIDO"
+    }
+  },
+  {
+    path: "compras/listaopedido/autorizar",
+    component: AutorizarComponent,
+    data: {
+      title: "Compras -> Autorizar Orden Pedido",
+      breadcrumb: "AUTORIZAR ORDEN DE PEDIDO"
+    }
+  },
+  {
+    path: "compras/listaopedido/autorizar/visualizar/:id/:bandera",
+    component: VisualizarComponent,
+    data: {
+      title: "Compras -> Ver Orden Pedido",
+      breadcrumb: "VER ORDEN DE PEDIDO"
+    }
+  },
 
   //#endregion
 
@@ -185,11 +210,10 @@ export const ModulosRoutes: Routes = [
     }
   },
   {
-    path: 'bodega/bodegatmovimiento',
     component: BodegatmovimientoComponent,
     data: {title: 'Bodega - Tipo Movimiento', breadcrumb: 'Bodega - Tipo Movimiento'}
   },
   //#endregion
 
-
+  
 ];
