@@ -37,6 +37,8 @@ export class OrdenpedidoComponent implements OnInit {
   };
 
   @ViewChildren("checkboxMultiple") private checkboxesMultiple: any;
+  @ViewChildren("textboxMultiple") private textboxMultiple: any;
+
   public itemForm: FormGroup;
   constructor(
     private dialog: MatDialog,
@@ -79,20 +81,35 @@ export class OrdenpedidoComponent implements OnInit {
     });
   }
   updateValue(event, cell, rowIndex) {
-    this.Pedidos[rowIndex][cell] = event.target.value;
-    this.Pedidos[rowIndex]["Saldo"] =
-      parseFloat(this.Pedidos[rowIndex]["Cantidad"]) *
-      parseFloat(this.Pedidos[rowIndex]["PrecioRef"]);
-    if (this.itemCtrl.value.ID) {
-      this.Pedidos[rowIndex]["Etiqueta"] = this.itemCtrl.value.Descripcion;
-      this.Pedidos[rowIndex]["IdItem"] = this.itemCtrl.value.ID;
+    let bandera = false;
+    if (cell == "Etiqueta") {
+      this.Pedidos.forEach(i => {
+        if (i.Etiqueta == event.target.value) {
+          bandera = true;
+          return;
+        }
+      });
     }
+    if (!bandera) {
+      this.Pedidos[rowIndex][cell] = event.target.value;
+      this.Pedidos[rowIndex]["Saldo"] =
+        parseFloat(this.Pedidos[rowIndex]["Cantidad"]) *
+        parseFloat(this.Pedidos[rowIndex]["PrecioRef"]);
 
-    this.Pedidos = [...this.Pedidos];
-    this.Total = this.Pedidos.reduce(
-      (a, b) => a + parseFloat(b.PrecioRef) * parseFloat(b.Cantidad),
-      0
-    );
+      this.Pedidos = [...this.Pedidos];
+      this.Total = this.Pedidos.reduce(
+        (a, b) => a + parseFloat(b.PrecioRef) * parseFloat(b.Cantidad),
+        0
+      );
+    } else {
+      let textboxMultiple = this.textboxMultiple.toArray();
+      console.log(textboxMultiple);
+      textboxMultiple[rowIndex].nativeElement.value = null;
+      this.Pedidos[rowIndex][cell] = null;
+      this.Pedidos = [...this.Pedidos];
+      console.log(this.Pedidos);
+      this.snack.open("Item Repetido, Ingrese Otro", "OK", { duration: 4000 });
+    }
   }
   updateValueCheck(event, cell, rowIndex) {
     this.Pedidos[rowIndex][cell] = event.checked;
@@ -101,19 +118,18 @@ export class OrdenpedidoComponent implements OnInit {
   agregar() {
     const nuevo = {
       Seleccionar: false,
-      Cantidad: 0,
+      Cantidad: null,
       Etiqueta: "",
       PrecioRef: 0,
       Saldo: 0
     };
-    
+
     this.Pedidos = this.Pedidos.concat(nuevo);
-    
+
     try {
       this.itemCtrl.value.Descripcion = "";
-      
     } catch {}
-    this.CargarAuto();    
+    this.CargarAuto();
   }
 
   eliminar() {
@@ -145,17 +161,29 @@ export class OrdenpedidoComponent implements OnInit {
   }
 
   save() {
+    let bandera = false;
     if (this.checked) {
       this.OPedido.Estado = "ENV";
     } else {
       this.OPedido.Estado = "BRR";
     }
-    this.OPedido.Detalles = [...this.Pedidos];
-    console.log(this.OPedido);
-    this.crudService.Insertar(this.OPedido, "opedido").subscribe(res => {
-      this.snack.open("Orden de Pedido Registrada", "OK", { duration: 4000 });
-      this.cancelar();
+
+    this.Pedidos.forEach(i => {
+      if (i.Etiqueta == null) {
+        bandera = true;
+      }
     });
+
+    if (!bandera) {
+      this.OPedido.Detalles = [...this.Pedidos];
+      this.crudService.Insertar(this.OPedido, "opedido").subscribe(res => {
+        this.snack.open("Orden de Pedido Registrada", "OK", { duration: 4000 });
+        this.cancelar();
+      });
+    }
+    else{
+      this.snack.open("Orden de Pedido Incorrecta, Revise que todos los datos estén correctos", "OK", { duration: 4000 });
+    }
   }
 
   async openPopUp(data: any = {}, isNew?) {
@@ -173,7 +201,7 @@ export class OrdenpedidoComponent implements OnInit {
       response.forEach(i => {
         const nuevo = {
           Seleccionar: false,
-          Cantidad: 0,
+          Cantidad: null,
           Etiqueta: i.Descripcion,
           PrecioRef: 0,
           Saldo: 0,
