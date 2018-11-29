@@ -52,7 +52,8 @@ export class NavigationService {
         { name: "Cargo", state: "cargo" },
         { name: "Contribuyente", state: "contribuyente" },
         { name: "Tipo Emisor", state: "tipoemisor" },
-        { name: "Tipo Identifación", state: "tipoidentificacion" }
+        { name: "Tipo Identifación", state: "tipoidentificacion" },
+        { name: "Tipo Documento", state: "tipodocumento" },
       ]
     },
     {
@@ -72,7 +73,7 @@ export class NavigationService {
     {
       name: "Compras",
       type: "dropDown",
-      icon: "attach_money",
+      icon: "monetization_on",
       state: "modulos/compras",
       sub: [
         { name: "Proveedor", state: "proveedor" },
@@ -93,17 +94,17 @@ export class NavigationService {
     {
       name: "Localización",
       type: "dropDown",
-      icon: "attach_money",
+      icon: "pin_drop",
       state: "modulos/localizacion",
       sub: [
-        { name: "País", state: "pais" },
+        { name: "País", state: "pais", icon: "pin_drop" },
         { name: "Ciudad", state: "ciudad" }
       ]
     },
     {
       name: "Bodega",
       type: "dropDown",
-      icon: "attach_money",
+      icon: "location_city",
       state: "modulos/bodega",
       sub: [
         { name: "Bodega", state: "bodega" },

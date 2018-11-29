@@ -77,6 +77,8 @@ import { UsuariobodegaComponent } from './nomina/usuariobodega/usuariobodega.com
 import { VisualizarComponent } from './compras/listaopedido/borrador/visualizar/visualizar.component';
 import { AutorizarComponent } from './compras/listaopedido/autorizar/autorizar.component';
 import { AutorizarPopupComponent } from './compras/listaopedido/autorizar/popup/popup.component';
+import { TipodocumentoComponent } from './catalogos/tipodocumento/tipodocumento.component';
+import { PopupTipoDocumentoComponent } from './catalogos/tipodocumento/popup/popup.component';
 
 
 @NgModule({
@@ -161,7 +163,9 @@ import { AutorizarPopupComponent } from './compras/listaopedido/autorizar/popup/
     UsuariobodegaComponent,
     VisualizarComponent,
     AutorizarComponent,
-    AutorizarPopupComponent
+    AutorizarPopupComponent,
+    TipodocumentoComponent,
+    PopupTipoDocumentoComponent
 
   ],
   providers: [],
@@ -184,7 +188,8 @@ import { AutorizarPopupComponent } from './compras/listaopedido/autorizar/popup/
     PopupPaisComponent,
     PopupBodegaComponent,
     PopupTipoMovimientoComponent,
-    AutorizarPopupComponent
+    AutorizarPopupComponent,
+    PopupTipoDocumentoComponent
   ]
 })
 export class ModulosModule {
