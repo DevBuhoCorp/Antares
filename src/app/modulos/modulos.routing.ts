@@ -23,6 +23,7 @@ import { BorradorComponent } from "./compras/listaopedido/borrador/borrador.comp
 import { ListaComponent } from "./compras/listaopedido/borrador/lista/lista.component";
 import { VisualizarComponent } from './compras/listaopedido/borrador/visualizar/visualizar.component';
 import { AutorizarComponent } from './compras/listaopedido/autorizar/autorizar.component';
+import {TipodocumentoComponent} from './catalogos/tipodocumento/tipodocumento.component';
 
 
 export const ModulosRoutes: Routes = [
@@ -88,6 +89,14 @@ export const ModulosRoutes: Routes = [
     data: {
       title: "Configuración Tipo Identificación",
       breadcrumb: "CONFIGURACIÓN TIPO IDENTIFICACIÓN"
+    }
+  },
+  {
+    path: "catalogos/tipodocumento",
+    component: TipodocumentoComponent,
+    data: {
+      title: "Configuración Tipo Documento",
+      breadcrumb: "CONFIGURACIÓN TIPO DOCUMENTO"
     }
   },
   {

@@ -1,1 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+.price {
+  display: inline-block;
+}
+
+.price::first-letter {
+  padding-right: 0.3em;
+}
