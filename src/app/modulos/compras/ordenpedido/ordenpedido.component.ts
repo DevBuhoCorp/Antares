@@ -12,21 +12,14 @@ import {
   FormControl
 } from "@angular/forms";
 import { startWith, map } from "rxjs/operators";
-export interface Items {
-  ID: number;
-  Descripcion: string;
-}
 @Component({
   selector: "app-ordenpedido",
   templateUrl: "./ordenpedido.component.html",
   styleUrls: []
 })
 export class OrdenpedidoComponent implements OnInit {
-  item: any = {
-    ID: 0
-  };
-  Items: any = [];
-  itemCtrl = new FormControl();
+ 
+ 
   Pedidos: any = [];
   checked = false;
   Total = 0;
@@ -50,29 +43,15 @@ export class OrdenpedidoComponent implements OnInit {
     private fb: FormBuilder,
     private toolsService: ToolsService
   ) {
-    this.CargarAuto();
+   
     this.buildItemForm();
   }
 
   ngOnInit() {
-    this.item = this.itemCtrl.valueChanges.pipe(
-      startWith<string | Items>(""),
-      map(value => (typeof value === "string" ? value : value.Descripcion)),
-      map(item => (item ? this._filter(item) : this.Items.slice()))
-    );
+   
   }
-  private _filter(name: string): Items[] {
-    const filterValue = name.toLowerCase();
-    return this.Items.filter(option =>
-      option.Descripcion.toLowerCase().includes(filterValue)
-    );
-  }
-  displayFn(user?: Items): string | undefined {
-    return user ? user.Descripcion : undefined;
-  }
-  async CargarAuto() {
-    this.Items = await this.crudService.SeleccionarAsync("autocompleteitems");
-  }
+  
+  
   buildItemForm() {
     this.itemForm = this.fb.group({
       Estado: [{ value: "Borrador", disabled: true }],
@@ -119,17 +98,12 @@ export class OrdenpedidoComponent implements OnInit {
         duration: 4000
       });
     }
-    /*this.Total = this.Pedidos.reduce(
-      (a, b) => a + parseFloat(b.PrecioRef) * parseFloat(b.Cantidad),
-      0
-    );*/
     this.Total = 0;
     this.Pedidos.forEach(i => {
       if(parseFloat(i.Cantidad) || parseFloat(i.PrecioRef)){
         this.Total += parseFloat(i.Cantidad) * parseFloat(i.PrecioRef);
       }
     });
-    console.log(this.Total);
   }
   updateValueCheck(event, cell, rowIndex) {
     this.Pedidos[rowIndex][cell] = event.checked;
@@ -146,10 +120,6 @@ export class OrdenpedidoComponent implements OnInit {
 
     this.Pedidos = this.Pedidos.concat(nuevo);
 
-    try {
-      this.itemCtrl.value.Descripcion = "";
-    } catch {}
-    this.CargarAuto();
   }
 
   eliminar() {

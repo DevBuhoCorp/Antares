@@ -30,7 +30,7 @@ export class AutorizarComponent implements OnInit {
   }
 
   async loadApp() {
-    this.paginate = await this.crudService.SeleccionarAsync("opedido", {
+    this.paginate = await this.crudService.SeleccionarAsync("opedidoauth", {
       page: 1,
       psize: this.selPageSize,
       Estado: "ENV"
@@ -38,7 +38,7 @@ export class AutorizarComponent implements OnInit {
     this.paginate.data = this.crudService.SetBool(this.paginate.data);
   }
   async setPage(event) {
-    this.paginate = await this.crudService.SeleccionarAsync("opedido", {
+    this.paginate = await this.crudService.SeleccionarAsync("opedidoauth", {
       page: event.offset + 1,
       psize: this.selPageSize
     });

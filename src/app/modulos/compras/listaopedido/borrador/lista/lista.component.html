@@ -23,7 +23,7 @@
     <button
       mat-icon-button
       mat-sm-button
-      color="warn"
+      color="primary"
       class="mr-1"
       (click)="openPopUp({}, true)"
       matTooltip="Buscar Producto"
@@ -41,6 +41,9 @@
     >
       <mat-icon>save</mat-icon>
     </button>
+    <mat-checkbox *ngIf="Pedidos.length > 0" [(ngModel)]="checked"
+      >Enviar para Autorización</mat-checkbox
+    >
   </div>
   <mat-card-content class="p-0">
     <mat-card-title class="mat-bg-primary m-0">
@@ -89,16 +92,14 @@
           let-value="Etiqueta"
           let-row="row"
         >
-          <mat-form-field style="width: 50%;">
-            <input
-              #textboxMultiple
-              autofocus
-              matInput
-              (change)="updateValue($event, 'Etiqueta', rowIndex)"
-              type="text"
-              [value]="row?.Etiqueta"
-            />
-          </mat-form-field>
+          <input
+            #textboxMultiple
+            autofocus
+            matInput
+            (change)="updateValue($event, 'Etiqueta', rowIndex)"
+            type="text"
+            [value]="row?.Etiqueta"
+          />
         </ng-template>
       </ngx-datatable-column>
 
@@ -111,11 +112,13 @@
         >
           <input
             #cantidadMultiple
+            style="text-align: right;"
             autofocus
             matInput
             (change)="updateValue($event, 'Cantidad', rowIndex)"
             type="text"
             [value]="row?.Cantidad"
+            mask="0*.0000"
           />
         </ng-template>
       </ngx-datatable-column>
@@ -133,6 +136,7 @@
             matInput
             (change)="updateValue($event, 'PrecioRef', rowIndex)"
             type="text"
+            mask="0*.0000"
             [value]="row?.PrecioRef | currency"
           />
         </ng-template>
