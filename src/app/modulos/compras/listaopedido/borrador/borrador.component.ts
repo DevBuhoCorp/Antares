@@ -46,6 +46,21 @@ export class BorradorComponent implements OnInit {
     this.loadApp();
   }
 
+  async loadApp() {
+    this.paginate = await this.crudService.SeleccionarAsync("opedido", {
+      page: 1,
+      psize: this.selPageSize,
+      Estado: this.selEstado
+    });
+    this.paginate.data = this.crudService.SetBool(this.paginate.data);
+  }
+  async setPage(event) {
+    this.paginate = await this.crudService.SeleccionarAsync("opedido", {
+      page: event.offset + 1,
+      psize: this.selPageSize
+    });
+  }
+
   Guardar() {
     this.paginate.data.map(i => {
       if (i.Estado) {
@@ -64,18 +79,5 @@ export class BorradorComponent implements OnInit {
       }
     });
   }
-  async loadApp() {
-    this.paginate = await this.crudService.SeleccionarAsync("opedido", {
-      page: 1,
-      psize: this.selPageSize,
-      Estado: this.selEstado
-    });
-    this.paginate.data = this.crudService.SetBool(this.paginate.data);
-  }
-  async setPage(event) {
-    this.paginate = await this.crudService.SeleccionarAsync("opedido", {
-      page: event.offset + 1,
-      psize: this.selPageSize
-    });
-  }
+  
 }
