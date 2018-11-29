@@ -52,16 +52,6 @@ export class SigninComponent implements OnInit {
           localStorage.setItem('authToken', data.access_token);
           localStorage.setItem('tokenType', data.token_type);
           return window.location.href = `${ origin }/dashboard/`;
-          /*let dialogRef: MatDialogRef<any> = this.dialog.open(ChangeempresaComponent, {
-            width: '460px',
-            disableClose: true,
-            data: {title: 'Seleccionar empresa a contabilizar', payload: {}}
-          });
-          dialogRef.afterClosed().subscribe(response => {
-            if (response)
-              return window.location.href = `${ origin }/dashboard/`;
-          });*/
-
 
         }
       },

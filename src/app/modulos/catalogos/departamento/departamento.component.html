@@ -26,6 +26,11 @@
           {{ row?.Descripcion }}
         </ng-template>
       </ngx-datatable-column>
+      <ngx-datatable-column name="Nombre Corto" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.NombreCorto }}
+        </ng-template>
+      </ngx-datatable-column>
       <ngx-datatable-column name="Estado" [flexGrow]="1">
         <ng-template let-row="row" ngx-datatable-cell-template>
           <mat-chip mat-sm-chip [color]="'primary'" [selected]="row.Estado">{{row.Estado ? 'activo' : 'inactivo'}}</mat-chip>
