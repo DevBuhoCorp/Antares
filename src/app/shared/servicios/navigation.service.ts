@@ -84,7 +84,7 @@ export class NavigationService {
           //state: 'listaopedido',
           sub: [
             { name: "Nuevo", state: "ordenpedido" },
-            { name: "Borrador", state: "listaopedido/borrador" },
+            { name: "Lista", state: "listaopedido/borrador" },
             { name: "Autorizar", state: "listaopedido/autorizar" }
           ]
         }
