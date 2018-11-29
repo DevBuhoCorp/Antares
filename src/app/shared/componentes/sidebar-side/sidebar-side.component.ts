@@ -31,10 +31,12 @@ export class SidebarSideComponent implements OnInit, OnDestroy, AfterViewInit {
       //Checks item list has any icon type.
       this.hasIconTypeMenuItem = !!this.menuItems.filter(item => item.type === 'icon').length;
     });
-    /*this.DatosPersonales = await this.crudService.SeleccionarAsync("usuario/" + this.toolsService.getEmpresaActive().IDUsers);
-    if (this.DatosPersonales[0].FotoPerfil) {
-      this.DatosPersonales[0].FotoPerfil = 'data:image/jpeg;base64,' + this.DatosPersonales[0].FotoPerfil.replace(/,/g, '');
-    }*/
+
+    this.DatosPersonales = await this.crudService.SeleccionarAsync("colaborador_user");
+
+    // if (this.DatosPersonales[0].FotoPerfil) {
+    //   this.DatosPersonales[0].FotoPerfil = 'data:image/jpeg;base64,' + this.DatosPersonales[0].FotoPerfil.replace(/,/g, '');
+    // }
   }
   ngAfterViewInit() {
     setTimeout(() => {

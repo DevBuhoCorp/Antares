@@ -10,12 +10,14 @@
     <!-- Usuario de la barra lateral -->
     <div class="app-user">
       <div class="app-user-photo">
-        <img [src]="DatosPersonales[0]?.FotoPerfil | sinfoto" >
+        <img [src]="DatosPersonales?.FotoPerfil | sinfoto" >
       </div>
       <span class="app-user-name mb-05">
-        <!--<mat-icon class="icon-xs text-muted">lock</mat-icon>-->
-        {{ DatosPersonales[0]?.NombrePrimer }}
-        <b>{{ DatosPersonales[0]?.ApellidoPaterno }}</b>
+        {{ DatosPersonales?.NombrePrimero }}
+        <b>{{ DatosPersonales?.ApellidoPaterno }}</b>
+      </span>
+      <span class="app-user-name mb-05" [matTooltip]="DatosPersonales?.Tooltip" >
+        {{ DatosPersonales?.Departamento }} -  <b>{{ DatosPersonales?.Area }}</b>
       </span>
       <!-- Small buttons -->
       <div class="app-user-controls">

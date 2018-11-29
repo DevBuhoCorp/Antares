@@ -32,6 +32,7 @@ export class AreaPopupComponent implements OnInit {
   buildItemForm(item) {
     this.itemForm = this.fb.group({
       Descripcion: [item.Descripcion || '', Validators.required],
+      NombreCorto: [item.NombreCorto || '', Validators.required],
       IDDepartamento: [item.IDDepartamento || '', Validators.required],
       Estado: [item.Estado || false, Validators.required]
     })

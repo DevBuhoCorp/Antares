@@ -10,6 +10,12 @@
 
     <div fxFlex="50" class="pr-1">
       <mat-form-field class="full-width">
+        <input matInput name="Nombre Corto" [formControl]="itemForm.controls['NombreCorto']" placeholder="Nombre Corto">
+      </mat-form-field>
+    </div>
+
+    <div fxFlex="50" class="pr-1">
+      <mat-form-field class="full-width">
         <mat-select name="Departamento" placeholder="Departamento" [formControl]="itemForm.controls['IDDepartamento']">
           <mat-option *ngFor="let departamento of Departamentos" [value]="departamento.ID" ngDefaultControl>
             {{departamento.Descripcion}}

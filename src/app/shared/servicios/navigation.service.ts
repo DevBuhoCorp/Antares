@@ -45,15 +45,25 @@ export class NavigationService {
       name: "Catálogos",
       type: "dropDown",
       icon: "description",
-      state: "modulos/catalogos",
+      state: "modulos",
       sub: [
-        { name: "Área", state: "area" },
-        { name: "Departamento", state: "departamento" },
-        { name: "Cargo", state: "cargo" },
-        { name: "Contribuyente", state: "contribuyente" },
-        { name: "Tipo Emisor", state: "tipoemisor" },
-        { name: "Tipo Identifación", state: "tipoidentificacion" },
-        { name: "Tipo Documento", state: "tipodocumento" },
+        { name: "Área", state: "catalogos/area" },
+        { name: "Departamento", state: "catalogos/departamento" },
+        { name: "Cargo", state: "catalogos/cargo" },
+        {
+          name: "Localización",
+          state: "localizacion",
+          type: "dropDown",
+          sub: [
+            { name: "País", state: "pais"  },
+            { name: "Ciudad", state: "ciudad" },
+          ]
+
+        },
+        { name: "Contribuyente", state: "catalogos/contribuyente" },
+        { name: "Tipo Emisor", state: "catalogos/tipoemisor" },
+        { name: "Tipo Identifación", state: "catalogos/tipoidentificacion" },
+        { name: "Tipo Documento", state: "catalogos/tipodocumento" },
       ]
     },
     {
@@ -91,16 +101,16 @@ export class NavigationService {
         }
       ]
     },
-    {
-      name: "Localización",
-      type: "dropDown",
-      icon: "pin_drop",
-      state: "modulos/localizacion",
-      sub: [
-        { name: "País", state: "pais", icon: "pin_drop" },
-        { name: "Ciudad", state: "ciudad" }
-      ]
-    },
+    // {
+    //   name: "Localización",
+    //   type: "dropDown",
+    //   icon: "pin_drop",
+    //   state: "modulos/localizacion",
+    //   sub: [
+    //     { name: "País", state: "pais", icon: "pin_drop" },
+    //     { name: "Ciudad", state: "ciudad" }
+    //   ]
+    // },
     {
       name: "Bodega",
       type: "dropDown",
