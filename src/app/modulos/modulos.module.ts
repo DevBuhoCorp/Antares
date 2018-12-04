@@ -79,6 +79,11 @@ import { AutorizarComponent } from './compras/listaopedido/autorizar/autorizar.c
 import { AutorizarPopupComponent } from './compras/listaopedido/autorizar/popup/popup.component';
 import { TipodocumentoComponent } from './catalogos/tipodocumento/tipodocumento.component';
 import { PopupTipoDocumentoComponent } from './catalogos/tipodocumento/popup/popup.component';
+import { NuevacotizacionComponent } from './compras/cotizacion/nuevacotizacion/nuevacotizacion.component';
+import { ListacotizacionComponent } from './compras/cotizacion/nuevacotizacion/listacotizacion/listacotizacion.component';
+import { ListaprovcotizacionComponent } from './compras/cotizacion/listacotizacion/listacotizacion.component';
+import { AsignarprovComponent } from './compras/cotizacion/listacotizacion/asignarprov/asignarprov.component';
+
 
 
 @NgModule({
@@ -165,7 +170,11 @@ import { PopupTipoDocumentoComponent } from './catalogos/tipodocumento/popup/pop
     AutorizarComponent,
     AutorizarPopupComponent,
     TipodocumentoComponent,
-    PopupTipoDocumentoComponent
+    PopupTipoDocumentoComponent,
+    NuevacotizacionComponent,
+    ListacotizacionComponent,
+    ListaprovcotizacionComponent,
+    AsignarprovComponent
 
   ],
   providers: [],

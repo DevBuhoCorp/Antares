@@ -40,7 +40,8 @@ export class AutorizarComponent implements OnInit {
   async setPage(event) {
     this.paginate = await this.crudService.SeleccionarAsync("opedidoauth", {
       page: event.offset + 1,
-      psize: this.selPageSize
+      psize: this.selPageSize,
+      Estado: "ENV"
     });
   }
 

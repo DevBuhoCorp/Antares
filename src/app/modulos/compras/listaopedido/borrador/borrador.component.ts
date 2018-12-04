@@ -57,7 +57,8 @@ export class BorradorComponent implements OnInit {
   async setPage(event) {
     this.paginate = await this.crudService.SeleccionarAsync("opedido", {
       page: event.offset + 1,
-      psize: this.selPageSize
+      psize: this.selPageSize,
+      Estado: this.selEstado
     });
   }
 

@@ -1,0 +1,81 @@
+<mat-card class="p-0">
+  <mat-card-content class="p-0">
+    <div class="m-333">
+      <button
+        mat-icon-button
+        mat-sm-button
+        color="warn"
+        class="mr-1"
+        (click)="save()"
+        matTooltip="Guardar"
+      >
+        <mat-icon>save</mat-icon>
+      </button>
+    </div>
+    <ngx-datatable
+      class="material ml-0 mr-0"
+      [rows]="paginate"
+      [columnMode]="'flex'"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [limit]="10"
+      [rowHeight]="'auto'"
+    >
+      <ngx-datatable-column name="Etiqueta" [flexGrow]="1">
+        <ng-template
+          ngx-datatable-cell-template
+          let-rowIndex="rowIndex"
+          let-value="Etiqueta"
+          let-row="row"
+        >
+          {{ row?.Etiqueta }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Cantidad" [flexGrow]="0.12">
+        <ng-template
+          ngx-datatable-cell-template
+          let-rowIndex="rowIndex"
+          let-value="Cantidad"
+          let-row="row"
+        >
+          {{ row?.Cantidad }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Proveedor" [flexGrow]="1">
+        <ng-template
+          ngx-datatable-cell-template
+          let-rowIndex="rowIndex"
+          let-value="IDProveedor"
+          let-row="row"
+        >
+          <mat-form-field class="full-width">
+            <mat-select
+              (selectionChange)="updateValue($event, 'IDProveedor', rowIndex)"
+              [value]="row?.Proveedor"
+            >
+              <mat-option
+                *ngFor="let proveedor of Proveedores"
+                [value]="proveedor.ID"
+                >{{ proveedor.Etiqueta }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </mat-card-content>
+</mat-card>
+
+<div class="m-333">
+  <button
+    mat-raised-button
+    class="mb-05"
+    color="primary"
+    [routerLink]="['/modulos/compras/cotizacion/lista']"
+  >
+    <mat-icon>arrow_back</mat-icon>
+    Regresar
+  </button>
+</div>

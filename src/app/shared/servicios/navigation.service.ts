@@ -88,15 +88,23 @@ export class NavigationService {
       sub: [
         { name: "Proveedor", state: "proveedor" },
         { name: "Presupuesto", state: "presupuesto" },
-
         {
           name: "Orden de pedido",
           type: "dropDown",
-          //state: 'listaopedido',
           sub: [
             { name: "Nuevo", state: "ordenpedido" },
             { name: "Lista", state: "listaopedido/borrador" },
             { name: "Autorizar", state: "listaopedido/autorizar" }
+          ]
+        },
+        {
+          name: "Cotizaciones",
+          type: "dropDown",
+          state: "cotizacion",
+          sub: [
+            { name: "Nuevo", state: "nueva" },
+            { name: "Lista", state: "lista" },
+            //{ name: "Autorizar", state: "listaopedido/autorizar" }
           ]
         }
       ]

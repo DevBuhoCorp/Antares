@@ -24,6 +24,10 @@ import { ListaComponent } from "./compras/listaopedido/borrador/lista/lista.comp
 import { VisualizarComponent } from './compras/listaopedido/borrador/visualizar/visualizar.component';
 import { AutorizarComponent } from './compras/listaopedido/autorizar/autorizar.component';
 import {TipodocumentoComponent} from './catalogos/tipodocumento/tipodocumento.component';
+import { NuevacotizacionComponent } from './compras/cotizacion/nuevacotizacion/nuevacotizacion.component';
+import { ListacotizacionComponent } from './compras/cotizacion/nuevacotizacion/listacotizacion/listacotizacion.component';
+import { ListaprovcotizacionComponent } from './compras/cotizacion/listacotizacion/listacotizacion.component';
+import { AsignarprovComponent } from './compras/cotizacion/listacotizacion/asignarprov/asignarprov.component';
 
 
 export const ModulosRoutes: Routes = [
@@ -185,6 +189,26 @@ export const ModulosRoutes: Routes = [
       breadcrumb: "VER ORDEN DE PEDIDO"
     }
   },
+  {
+    path: "compras/cotizacion/nueva",
+    component: NuevacotizacionComponent,
+    data: { title: "Cotización", breadcrumb: "NUEVA COTIZACIÓN" }
+  },
+  {
+    path: "compras/cotizacion/nueva/visualizar/:id",
+    component: ListacotizacionComponent,
+    data: { title: "Cotización", breadcrumb: "NUEVA COTIZACIÓN" }
+  },
+  {
+    path: "compras/cotizacion/lista",
+    component: ListaprovcotizacionComponent,
+    data: { title: "Cotización", breadcrumb: "ASIGNAR PROVEEDORES COTIZACIÓN" }
+  },
+  {
+    path: "compras/cotizacion/lista/visualizar/:id",
+    component: AsignarprovComponent,
+    data: { title: "Cotización", breadcrumb: "ASIGNAR PROVEEDORES  COTIZACIÓN" }
+  },
 
   //#endregion
 
@@ -224,5 +248,5 @@ export const ModulosRoutes: Routes = [
   },
   //#endregion
 
-  
+ 
 ];
