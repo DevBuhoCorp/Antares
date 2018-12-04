@@ -13,6 +13,7 @@ export class PopupTipoMovimientoComponent implements OnInit {
   tipos: any = [
     { Abr: 'I', Descripcion: "Ingreso" },
     { Abr: 'E', Descripcion: "Egreso" },
+    { Abr: 'T', Descripcion: "Transacción" },
   ];
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               public dialogRef: MatDialogRef<PopupTipoMovimientoComponent>,

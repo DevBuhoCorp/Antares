@@ -1,0 +1,78 @@
+<mat-card class="pb-0 pt-0 mb-1">
+  <mat-card-content>
+
+
+    <!--<div class="example-selected-value">Your favorite season is: {{favoriteSeason}}</div>-->
+    <!--style="display: flex; justify-content: space-between; align-items: center;"-->
+    <div class="m-333"  fxLayout="column" fxLayoutAlign="space-around" >
+
+      <div style="margin: 10px 0;">
+        <span>Tipo de Movimiento:</span>
+        <mat-radio-group class="example-radio-group" [(ngModel)]="slTipo" (ngModelChange)="loadTMovimiento()">
+          <mat-radio-button style="margin: 5px;" *ngFor="let tipo of lsTipos" [value]="tipo">
+            {{ tipo.Descripcion }}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-between center" >
+        <div class="select-group">
+          <mat-form-field class="full-width">
+            <mat-select placeholder=" Seleccione Movimiento:" [(ngModel)]="slTipoMovimiento" (selectionChange)="loadTMovimientoReverso()" >
+              <mat-option *ngFor="let tipoM of CbTipoMovimientos" [value]="tipoM.ID"
+                          ngDefaultControl> {{ tipoM.Descripcion }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <button mat-raised-button class="mr-1" color="warn" (click)="cancel()">Cancelar</button>
+          <button mat-raised-button color="primary" [disabled]="!slTipoMovimiento" (click)="save()">Guardar</button>
+        </div>
+      </div>
+
+
+
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="p-0">
+  <mat-card-content class="p-0">
+    <ngx-datatable #MyDatatableComponent class="material ml-0 mr-0"
+                   [rows]="tipoMovimientosReverso"
+                   [columnMode]="'flex'"
+                   [headerHeight]="50"
+                   [footerHeight]="50"
+                   [rowHeight]="'auto'"
+                   [rowIdentity]="getID"
+                   [selected]="selectedtipoMovimientosReverso"
+                   [selectionType]="'checkbox'"
+                   [selectAllRowsOnPage]="false">
+
+      <ngx-datatable-column
+        [width]="30"
+        [sortable]="false"
+        [canAutoResize]="false"
+        [draggable]="false"
+        [resizeable]="false"
+        [headerCheckboxable]="true"
+        [checkboxable]="true">
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Descripción" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.Descripcion }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <!--<ngx-datatable-column name="Tipo " [flexGrow]="1">-->
+        <!--<ng-template let-row="row" ngx-datatable-cell-template>-->
+          <!--{{ row.Tipo == 'I' ? 'INGRESO' : 'EGRESO' }}-->
+        <!--</ng-template>-->
+      <!--</ngx-datatable-column>-->
+
+    </ngx-datatable>
+  </mat-card-content>
+</mat-card>

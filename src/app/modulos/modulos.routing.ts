@@ -24,6 +24,7 @@ import { ListaComponent } from "./compras/listaopedido/borrador/lista/lista.comp
 import { VisualizarComponent } from './compras/listaopedido/borrador/visualizar/visualizar.component';
 import { AutorizarComponent } from './compras/listaopedido/autorizar/autorizar.component';
 import {TipodocumentoComponent} from './catalogos/tipodocumento/tipodocumento.component';
+import {TipomovimientoreversoComponent} from './bodega/tipomovimientoreverso/tipomovimientoreverso.component';
 
 
 export const ModulosRoutes: Routes = [
@@ -219,8 +220,14 @@ export const ModulosRoutes: Routes = [
     }
   },
   {
+    path: "bodega/bodegatmovimiento",
     component: BodegatmovimientoComponent,
     data: {title: 'Bodega - Tipo Movimiento', breadcrumb: 'Bodega - Tipo Movimiento'}
+  },
+  {
+    path: "bodega/tmovimientoreverso",
+    component: TipomovimientoreversoComponent,
+    data: {title: 'T. Movimiento - Reverso', breadcrumb: 'T. Movimiento - Reverso'}
   },
   //#endregion
 

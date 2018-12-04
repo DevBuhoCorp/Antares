@@ -119,7 +119,8 @@ export class NavigationService {
       sub: [
         { name: "Bodega", state: "bodega" },
         { name: "Tipo Movimiento", state: "tipomovimiento" },
-        { name: "Bodega - T. Movimiento", state: "bodegatmovimiento" }
+        { name: "Bodega - T. Movimiento", state: "bodegatmovimiento" },
+        { name: "T. Movimiento - Reverso", state: "tmovimientoreverso" },
       ]
     }
   ];

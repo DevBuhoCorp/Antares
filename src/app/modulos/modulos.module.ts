@@ -8,6 +8,7 @@ import {
   MatIconModule,
   MatCardModule,
   MatMenuModule,
+  MatRadioModule,
   MatButtonModule,
   MatChipsModule,
   MatListModule,
@@ -79,6 +80,7 @@ import { AutorizarComponent } from './compras/listaopedido/autorizar/autorizar.c
 import { AutorizarPopupComponent } from './compras/listaopedido/autorizar/popup/popup.component';
 import { TipodocumentoComponent } from './catalogos/tipodocumento/tipodocumento.component';
 import { PopupTipoDocumentoComponent } from './catalogos/tipodocumento/popup/popup.component';
+import { TipomovimientoreversoComponent } from './bodega/tipomovimientoreverso/tipomovimientoreverso.component';
 
 
 @NgModule({
@@ -93,6 +95,7 @@ import { PopupTipoDocumentoComponent } from './catalogos/tipodocumento/popup/pop
     MatIconModule,
     MatCardModule,
     MatMenuModule,
+    MatRadioModule,
     MatButtonModule,
     MatChipsModule,
     MatListModule,
@@ -165,7 +168,8 @@ import { PopupTipoDocumentoComponent } from './catalogos/tipodocumento/popup/pop
     AutorizarComponent,
     AutorizarPopupComponent,
     TipodocumentoComponent,
-    PopupTipoDocumentoComponent
+    PopupTipoDocumentoComponent,
+    TipomovimientoreversoComponent
 
   ],
   providers: [],
