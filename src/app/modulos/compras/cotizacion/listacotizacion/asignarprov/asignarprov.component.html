@@ -1,0 +1,178 @@
+<mat-card class="p-0">
+  <mat-card-content class="mt-1">
+    <h1 matDialogTitle>Editar Cotización</h1>
+    <form [formGroup]="itemForm" (ngSubmit)="save()">
+      <div fxLayout="row wrap" fxLayout.lt-sm="column">
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              name="Referencia"
+              placeholder="Referencia"
+              value="Borrador"
+              [formControl]="itemForm.controls['Estado']"
+            />
+          </mat-form-field>
+        </div>
+
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              [formControl]="itemForm.controls['FechaIni']"
+              name="FechaInicio"
+              placeholder="Fecha de Inicio"
+              [matDatepicker]="appDatepicker"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="appDatepicker"
+            ></mat-datepicker-toggle>
+          </mat-form-field>
+          <mat-datepicker #appDatepicker></mat-datepicker>
+        </div>
+
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              [formControl]="itemForm.controls['FechaFin']"
+              name="FechaFin"
+              placeholder="Fecha Final"
+              [matDatepicker]="appDatepicker2"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="appDatepicker2"
+            ></mat-datepicker-toggle>
+          </mat-form-field>
+          <mat-datepicker #appDatepicker2></mat-datepicker>
+        </div>
+
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              name="Observacion"
+              placeholder="Observación"
+              [formControl]="itemForm.controls['Observacion']"
+            />
+          </mat-form-field>
+        </div>
+
+        <div
+          fxFlex="100"
+          class="pr-1"
+          style="display: flex; justify-content: space-between;"
+        >
+          <button
+            mat-raised-button
+            class="mb-05"
+            color="primary"
+            [disabled]="itemForm.invalid"
+          >
+            Guardar
+          </button>
+
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="p-0">
+  <mat-card-content class="p-0">
+    <div class="m-333">
+      <button
+        mat-icon-button
+        mat-sm-button
+        color="warn"
+        class="mr-1"
+        (click)="save()"
+        matTooltip="Guardar"
+      >
+        <mat-icon>save</mat-icon>
+      </button>
+      <mat-checkbox [(ngModel)]="checked"
+        >Asignar Un Solo Proveedor</mat-checkbox
+      >
+      <mat-form-field class="full-width" *ngIf="checked">
+        <mat-select
+          placeholder=" Seleccione Proveedor:"
+          [(ngModel)]="selProveedor"
+        >
+          <mat-option
+            *ngFor="let proveedor of Proveedores"
+            [value]="proveedor.ID"
+            >{{ proveedor.Etiqueta }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <ngx-datatable
+      class="material ml-0 mr-0"
+      [rows]="paginate.detalle"
+      [columnMode]="'flex'"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [limit]="10"
+      [rowHeight]="'auto'"
+    >
+      <ngx-datatable-column name="Etiqueta" [flexGrow]="1">
+        <ng-template
+          ngx-datatable-cell-template
+          let-rowIndex="rowIndex"
+          let-value="Etiqueta"
+          let-row="row"
+        >
+          {{ row?.Etiqueta }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Cantidad" [flexGrow]="0.12">
+        <ng-template
+          ngx-datatable-cell-template
+          let-rowIndex="rowIndex"
+          let-value="Cantidad"
+          let-row="row"
+        >
+          {{ row?.Cantidad }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Proveedor" [flexGrow]="1" *ngIf="!checked">
+        <ng-template
+          ngx-datatable-cell-template
+          let-rowIndex="rowIndex"
+          let-value="IDProveedor"
+          let-row="row"
+        >
+          <mat-form-field class="full-width">
+            <mat-select
+              (selectionChange)="updateValue($event, 'IDProveedor', rowIndex)"
+              [value]="row?.IDProveedor"
+            >
+              <mat-option
+                *ngFor="let proveedor of Proveedores"
+                [value]="proveedor.ID"
+                >{{ proveedor.Etiqueta }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </mat-card-content>
+</mat-card>
+
+<div class="m-333">
+  <button
+    mat-raised-button
+    class="mb-05"
+    color="primary"
+    [routerLink]="['/modulos/compras/cotizacion/lista']"
+  >
+    <mat-icon>arrow_back</mat-icon>
+    Regresar
+  </button>
+</div>

@@ -81,6 +81,11 @@ import { AutorizarPopupComponent } from './compras/listaopedido/autorizar/popup/
 import { TipodocumentoComponent } from './catalogos/tipodocumento/tipodocumento.component';
 import { PopupTipoDocumentoComponent } from './catalogos/tipodocumento/popup/popup.component';
 import { TipomovimientoreversoComponent } from './bodega/tipomovimientoreverso/tipomovimientoreverso.component';
+import { NuevacotizacionComponent } from './compras/cotizacion/nuevacotizacion/nuevacotizacion.component';
+import { ListacotizacionComponent } from './compras/cotizacion/nuevacotizacion/listacotizacion/listacotizacion.component';
+import { ListaprovcotizacionComponent } from './compras/cotizacion/listacotizacion/listacotizacion.component';
+import { AsignarprovComponent } from './compras/cotizacion/listacotizacion/asignarprov/asignarprov.component';
+
 
 
 @NgModule({
@@ -169,7 +174,12 @@ import { TipomovimientoreversoComponent } from './bodega/tipomovimientoreverso/t
     AutorizarPopupComponent,
     TipodocumentoComponent,
     PopupTipoDocumentoComponent,
-    TipomovimientoreversoComponent
+    TipomovimientoreversoComponent,
+    PopupTipoDocumentoComponent,
+    NuevacotizacionComponent,
+    ListacotizacionComponent,
+    ListaprovcotizacionComponent,
+    AsignarprovComponent
 
   ],
   providers: [],

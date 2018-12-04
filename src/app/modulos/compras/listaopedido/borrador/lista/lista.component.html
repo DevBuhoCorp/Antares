@@ -23,7 +23,7 @@
     <button
       mat-icon-button
       mat-sm-button
-      color="warn"
+      color="primary"
       class="mr-1"
       (click)="openPopUp({}, true)"
       matTooltip="Buscar Producto"
@@ -89,16 +89,14 @@
           let-value="Etiqueta"
           let-row="row"
         >
-          <mat-form-field style="width: 50%;">
-            <input
-              #textboxMultiple
-              autofocus
-              matInput
-              (change)="updateValue($event, 'Etiqueta', rowIndex)"
-              type="text"
-              [value]="row?.Etiqueta"
-            />
-          </mat-form-field>
+          <input
+            #textboxMultiple
+            autofocus
+            matInput
+            (change)="updateValue($event, 'Etiqueta', rowIndex)"
+            type="text"
+            [value]="row?.Etiqueta"
+          />
         </ng-template>
       </ngx-datatable-column>
 
@@ -111,11 +109,13 @@
         >
           <input
             #cantidadMultiple
+            style="text-align: right;"
             autofocus
             matInput
             (change)="updateValue($event, 'Cantidad', rowIndex)"
             type="text"
             [value]="row?.Cantidad"
+
           />
         </ng-template>
       </ngx-datatable-column>
@@ -133,6 +133,7 @@
             matInput
             (change)="updateValue($event, 'PrecioRef', rowIndex)"
             type="text"
+
             [value]="row?.PrecioRef | currency"
           />
         </ng-template>

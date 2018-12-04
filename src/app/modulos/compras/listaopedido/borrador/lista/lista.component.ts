@@ -8,20 +8,12 @@ import { ToolsService } from "../../../../../shared/servicios/tools.service";
 import { startWith, map } from "rxjs/operators";
 import { OPedidoPopupComponent } from "../../../ordenpedido/popup/popup.component";
 import { ActivatedRoute } from "@angular/router";
-export interface Items {
-  ID: number;
-  Descripcion: string;
-}
 @Component({
   selector: "app-lista",
   templateUrl: "./lista.component.html",
   styles: []
 })
 export class ListaComponent implements OnInit {
-  item: any = {
-    ID: 0
-  };
-  Items: any = [];
   Pedidos: any = [];
   checked = false;
   Total = 0;
@@ -49,7 +41,6 @@ export class ListaComponent implements OnInit {
     private toolsService: ToolsService,
     private router: ActivatedRoute
   ) {
-    this.CargarAuto();
   }
 
   ngOnInit() {
@@ -74,18 +65,8 @@ export class ListaComponent implements OnInit {
     //this.paginate.data = this.crudService.SetBool(this.paginate.data);
     this.Pedidos = [...this.paginate.data];
   }
-  private _filter(name: string): Items[] {
-    const filterValue = name.toLowerCase();
-    return this.Items.filter(option =>
-      option.Descripcion.toLowerCase().includes(filterValue)
-    );
-  }
-  displayFn(user?: Items): string | undefined {
-    return user ? user.Descripcion : undefined;
-  }
-  async CargarAuto() {
-    this.Items = await this.crudService.SeleccionarAsync("autocompleteitems");
-  }
+  
+ 
   updateValue(event, cell, rowIndex) {
     let bandera = false;
     if (cell == "Etiqueta") {
@@ -116,10 +97,7 @@ export class ListaComponent implements OnInit {
         parseFloat(this.Pedidos[rowIndex]["PrecioRef"]);
 
       this.Pedidos = [...this.Pedidos];
-      this.Total = this.Pedidos.reduce(
-        (a, b) => a + parseFloat(b.PrecioRef) * parseFloat(b.Cantidad),
-        0
-      );
+      
     } else {
       let textboxMultiple = this.textboxMultiple.toArray();
       textboxMultiple[rowIndex].nativeElement.value = null;
@@ -129,6 +107,12 @@ export class ListaComponent implements OnInit {
         duration: 4000
       });
     }
+    this.Total = 0;
+    this.Pedidos.forEach(i => {
+      if(parseFloat(i.Cantidad) || parseFloat(i.PrecioRef)){
+        this.Total += parseFloat(i.Cantidad) * parseFloat(i.PrecioRef);
+      }
+    });
   }
   updateValueCheck(event, cell, rowIndex) {
     this.Pedidos[rowIndex][cell] = event.checked;
@@ -147,7 +131,6 @@ export class ListaComponent implements OnInit {
     };
 
     this.Pedidos = this.Pedidos.concat(nuevo);
-    this.CargarAuto();
   }
 
   eliminar() {
@@ -197,23 +180,37 @@ export class ListaComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(response => {
-      console.log(response);
+      let bandera = false;
       if (!response) return;
       response.forEach(i => {
-        const nuevo = {
-          Seleccionar: false,
-          ID: null,
-          IdItem: i.ID,
-          IdOPedido: null,
-          Etiqueta: i.Descripcion,
-          PrecioRef: null,
-          Cantidad: null,
-          Saldo: null
-        };
-        this.Pedidos = this.Pedidos.concat(nuevo);
+        this.Pedidos.forEach(element => {
+          if (element.IdItem == i.ID) {
+            bandera = true;
+            return;
+          }
+        });
+        if (!bandera) {
+          const nuevo = {
+            Seleccionar: false,
+            Cantidad: null,
+            Etiqueta: i.Descripcion,
+            PrecioRef: 0,
+            Saldo: 0,
+            IdItem: i.ID
+          };
+          this.Pedidos = this.Pedidos.concat(nuevo);
+        }
+        else{
+          this.snack.open(
+            "Item repetido",
+            "OK",
+            { duration: 4000 }
+          );
+        }
+        bandera = false;
       });
 
-      console.log(this.Pedidos);
+
     });
   }
 }

@@ -1,0 +1,207 @@
+<mat-card class="p-0">
+  <mat-card-content class="mt-1">
+    <h1 matDialogTitle>Crear Nueva Cotización</h1>
+    <form [formGroup]="itemForm" (ngSubmit)="submitTransaccion()">
+      <div fxLayout="row wrap" fxLayout.lt-sm="column">
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              name="Referencia"
+              placeholder="Referencia"
+              value="Borrador"
+              [formControl]="itemForm.controls['Estado']"
+            />
+          </mat-form-field>
+        </div>
+
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              [formControl]="itemForm.controls['FechaIni']"
+              name="FechaInicio"
+              placeholder="Fecha de Inicio"
+              [matDatepicker]="appDatepicker"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="appDatepicker"
+            ></mat-datepicker-toggle>
+          </mat-form-field>
+          <mat-datepicker #appDatepicker></mat-datepicker>
+        </div>
+
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              [formControl]="itemForm.controls['FechaFin']"
+              name="FechaFin"
+              placeholder="Fecha Final"
+              [matDatepicker]="appDatepicker2"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="appDatepicker2"
+            ></mat-datepicker-toggle>
+          </mat-form-field>
+          <mat-datepicker #appDatepicker2></mat-datepicker>
+        </div>
+
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              name="Observacion"
+              placeholder="Observación"
+              [formControl]="itemForm.controls['Observacion']"
+            />
+          </mat-form-field>
+        </div>
+
+        <div
+          fxFlex="100"
+          class="pr-1"
+          style="display: flex; justify-content: space-between;"
+        >
+          <button
+            mat-raised-button
+            class="mb-05"
+            color="primary"
+            [disabled]="itemForm.invalid || Creado"
+          >
+            Crear
+          </button>
+
+          <a
+            mat-raised-button
+            class="mb-05"
+            color="primary"
+            (click)="cancelar()"
+          >
+            Cancelar
+          </a>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="p-0" *ngIf="Creado">
+  <div class="m-333">
+    <button
+      mat-icon-button
+      mat-sm-button
+      color="warn"
+      class="mr-1"
+      (click)="save()"
+      matTooltip="Guardar"
+      
+    >
+      <mat-icon>save</mat-icon>
+    </button>
+    <mat-checkbox [(ngModel)]="checked"
+      >Asignar Proveedores</mat-checkbox
+    >
+  </div>
+  <div class="m-333" style="display: flex; justify-content: space-between;">
+    <div class="select-group">
+      <mat-form-field class="full-width">
+        <mat-select
+          placeholder=" Seleccione número de ítems:"
+          [(ngModel)]="selPageSize"
+          (selectionChange)="loadApp()"
+        >
+          <mat-option
+            *ngFor="let page of pageSize"
+            [value]="page"
+            ngDefaultControl
+            >{{ page }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <mat-card-content class="p-0">
+    <h1 matDialogTitle style="text-align: center;">
+      Seleccione Ordenes de Pedido a Cotizar
+    </h1>
+    <ngx-datatable
+      class="material ml-0 mr-0"
+      [rows]="paginate.data"
+      [columnMode]="'flex'"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [rowHeight]="'auto'"
+      [externalPaging]="true"
+      [count]="paginate.total"
+      [limit]="paginate.per_page"
+      (page)="setPage($event)"
+    >
+      <ngx-datatable-column
+        [width]="50"
+        [sortable]="false"
+        [canAutoResize]="false"
+        [draggable]="false"
+        [resizeable]="false"
+        [flexGrow]="1"
+      >
+        <ng-template
+          ngx-datatable-cell-template
+          let-rowIndex="rowIndex"
+          let-value="Seleccionar"
+          let-row="row"
+          
+        >
+          <mat-checkbox  (change)="updateValueCheck($event, 'Seleccionar', rowIndex)" #checkboxMultiple></mat-checkbox>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Fecha Registro" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.FechaRegistro | date: "medium" }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Observación" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.Observacion }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Colaborador" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.Colaborador }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Área" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.Area }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Cargo" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.Cargo }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Detalles" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <a
+            mat-icon-button
+            mat-sm-button
+            color="warn"
+            target="_blank"
+            [routerLink]="['visualizar', row.ID]"
+          >
+            <mat-icon>list</mat-icon>
+          </a>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </mat-card-content>
+</mat-card>
