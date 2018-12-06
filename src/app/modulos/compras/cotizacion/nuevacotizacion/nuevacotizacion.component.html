@@ -3,7 +3,7 @@
     <h1 matDialogTitle>Crear Nueva Cotización</h1>
     <form [formGroup]="itemForm" (ngSubmit)="submitTransaccion()">
       <div fxLayout="row wrap" fxLayout.lt-sm="column">
-        <div fxFlex="50" class="pr-1">
+        <div fxFlex="33" class="pr-1">
           <mat-form-field class="full-width">
             <input
               matInput
@@ -15,7 +15,7 @@
           </mat-form-field>
         </div>
 
-        <div fxFlex="50" class="pr-1">
+        <div fxFlex="33" class="pr-1">
           <mat-form-field class="full-width">
             <input
               matInput
@@ -32,7 +32,7 @@
           <mat-datepicker #appDatepicker></mat-datepicker>
         </div>
 
-        <div fxFlex="50" class="pr-1">
+        <div fxFlex="33" class="pr-1">
           <mat-form-field class="full-width">
             <input
               matInput
@@ -49,7 +49,7 @@
           <mat-datepicker #appDatepicker2></mat-datepicker>
         </div>
 
-        <div fxFlex="50" class="pr-1">
+        <div fxFlex="100" class="pr-1">
           <mat-form-field class="full-width">
             <input
               matInput
@@ -79,6 +79,7 @@
             class="mb-05"
             color="primary"
             (click)="cancelar()"
+            [routerLink]="['/modulos/compras/cotizacion/lista']"
           >
             Cancelar
           </a>
@@ -196,7 +197,8 @@
             mat-sm-button
             color="warn"
             target="_blank"
-            [routerLink]="['visualizar', row.ID]"
+            
+            (click)="Modal(row.ID)"
           >
             <mat-icon>list</mat-icon>
           </a>

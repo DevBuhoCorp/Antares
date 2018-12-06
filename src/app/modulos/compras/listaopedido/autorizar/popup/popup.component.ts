@@ -13,7 +13,7 @@ export class AutorizarPopupComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               public dialogRef: MatDialogRef<AutorizarPopupComponent>,
               private fb: FormBuilder,
-              private crudService: CrudService) { }
+              ) { }
 
   ngOnInit() {
     this.buildItemForm(this.data.payload);

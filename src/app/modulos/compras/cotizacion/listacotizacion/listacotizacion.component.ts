@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { ToolsService } from 'src/app/shared/servicios/tools.service';
-import { CrudService } from 'src/app/shared/servicios/crud.service';
-import { MatSnackBar } from '@angular/material';
-import { FormBuilder } from '@angular/forms';
+import { Component, OnInit } from "@angular/core";
+import { ToolsService } from "src/app/shared/servicios/tools.service";
+import { CrudService } from "src/app/shared/servicios/crud.service";
+import { MatSnackBar, MatDialog } from "@angular/material";
+import { FormBuilder } from "@angular/forms";
+import { PopupemailComponent } from "./popupemail/popupemail.component";
 
 @Component({
-  selector: 'app-listacotizacion',
-  templateUrl: './listacotizacion.component.html',
+  selector: "app-listacotizacion",
+  templateUrl: "./listacotizacion.component.html",
   styleUrls: []
 })
 export class ListaprovcotizacionComponent implements OnInit {
@@ -21,9 +22,8 @@ export class ListaprovcotizacionComponent implements OnInit {
   constructor(
     private toolsService: ToolsService,
     private crudService: CrudService,
-    private snack: MatSnackBar,
-    private fb: FormBuilder
-  ) {  }
+    public composeDialog: MatDialog
+  ) {}
 
   ngOnInit() {
     this.loadApp();
@@ -44,5 +44,8 @@ export class ListaprovcotizacionComponent implements OnInit {
       Estado: "BRR"
     });
   }
-
+  openComposeDialog() {
+    let dialogRef = this.composeDialog.open(PopupemailComponent);
+    dialogRef.afterClosed().subscribe(result => {});
+  }
 }

@@ -32,7 +32,7 @@
           <mat-datepicker #appDatepicker></mat-datepicker>
         </div>
 
-        <div fxFlex="50" class="pr-1">
+        <div fxFlex="100" class="pr-1">
           <mat-form-field class="full-width">
             <input
               matInput
@@ -61,6 +61,7 @@
             class="mb-05"
             color="primary"
             (click)="cancelar()"
+            [routerLink]="['/modulos/compras/listaopedido/borrador']"
           >
             Cancelar
           </a>

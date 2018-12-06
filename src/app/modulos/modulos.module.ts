@@ -82,9 +82,11 @@ import { TipodocumentoComponent } from './catalogos/tipodocumento/tipodocumento.
 import { PopupTipoDocumentoComponent } from './catalogos/tipodocumento/popup/popup.component';
 import { TipomovimientoreversoComponent } from './bodega/tipomovimientoreverso/tipomovimientoreverso.component';
 import { NuevacotizacionComponent } from './compras/cotizacion/nuevacotizacion/nuevacotizacion.component';
-import { ListacotizacionComponent } from './compras/cotizacion/nuevacotizacion/listacotizacion/listacotizacion.component';
+import { PopUpListacotizacionComponent } from './compras/cotizacion/nuevacotizacion/listacotizacion/listacotizacion.component';
 import { ListaprovcotizacionComponent } from './compras/cotizacion/listacotizacion/listacotizacion.component';
 import { AsignarprovComponent } from './compras/cotizacion/listacotizacion/asignarprov/asignarprov.component';
+import { PopupemailComponent } from './compras/cotizacion/listacotizacion/popupemail/popupemail.component';
+import { QuillModule } from 'ngx-quill';
 
 
 
@@ -119,6 +121,7 @@ import { AsignarprovComponent } from './compras/cotizacion/listacotizacion/asign
     MatProgressBarModule,
     HttpClientModule,
     MatAutocompleteModule,
+    QuillModule,
     //PrimeNG
     TreeModule,
     NgxMaskModule.forRoot(),
@@ -177,9 +180,10 @@ import { AsignarprovComponent } from './compras/cotizacion/listacotizacion/asign
     TipomovimientoreversoComponent,
     PopupTipoDocumentoComponent,
     NuevacotizacionComponent,
-    ListacotizacionComponent,
+    PopUpListacotizacionComponent,
     ListaprovcotizacionComponent,
-    AsignarprovComponent
+    AsignarprovComponent,
+    PopupemailComponent
 
   ],
   providers: [],
@@ -203,7 +207,9 @@ import { AsignarprovComponent } from './compras/cotizacion/listacotizacion/asign
     PopupBodegaComponent,
     PopupTipoMovimientoComponent,
     AutorizarPopupComponent,
-    PopupTipoDocumentoComponent
+    PopupTipoDocumentoComponent,
+    PopUpListacotizacionComponent,
+    PopupemailComponent
   ]
 })
 export class ModulosModule {

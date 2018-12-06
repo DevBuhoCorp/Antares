@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChildren } from "@angular/core";
 import { ToolsService } from "../../../../shared/servicios/tools.service";
 import { CrudService } from "../../../../shared/servicios/crud.service";
-import { MatSnackBar, MatDialog } from "@angular/material";
+import { MatSnackBar, MatDialog, MatDialogRef } from "@angular/material";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { PopUpListacotizacionComponent } from "./listacotizacion/listacotizacion.component";
 
 @Component({
   selector: "app-nuevacotizacion",
@@ -29,7 +30,8 @@ export class NuevacotizacionComponent implements OnInit {
     private toolsService: ToolsService,
     private crudService: CrudService,
     private snack: MatSnackBar,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private dialog: MatDialog
   ) {
     this.buildItemForm();
   }
@@ -102,5 +104,21 @@ export class NuevacotizacionComponent implements OnInit {
       this.snack.open("Cotizacion Registrada", "OK", { duration: 4000 });
       this.cancelar();
     });
+  }
+
+  Modal(id){
+    let title = "Detalles Orden Pedido";
+      let dialogRef: MatDialogRef<any> = this.dialog.open(
+        PopUpListacotizacionComponent,
+        {
+          width: "1080px",
+          disableClose: true,
+          data: { title: title, payload: id }
+        }
+      );
+
+      dialogRef.afterClosed().subscribe(response => {
+        if (!response) return;
+      });
   }
 }

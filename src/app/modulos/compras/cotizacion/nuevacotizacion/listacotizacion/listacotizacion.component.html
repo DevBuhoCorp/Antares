@@ -9,7 +9,7 @@
       [rowHeight]="'auto'"
       [limit]="10"
     >
-      <ngx-datatable-column name="Etiqueta" [flexGrow]="1">
+      <ngx-datatable-column name="Etiqueta" [flexGrow]="0.75">
         <ng-template
           ngx-datatable-cell-template
           let-rowIndex="rowIndex"
@@ -51,7 +51,7 @@
     mat-raised-button
     class="mb-05"
     color="primary"
-    [routerLink]="['/modulos/compras/cotizacion/nueva']"
+    (click)="Cerrar()"
   >
     <mat-icon>arrow_back</mat-icon>
     Regresar

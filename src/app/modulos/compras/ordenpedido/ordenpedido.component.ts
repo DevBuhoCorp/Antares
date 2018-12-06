@@ -55,7 +55,7 @@ export class OrdenpedidoComponent implements OnInit {
   buildItemForm() {
     this.itemForm = this.fb.group({
       Estado: [{ value: "Borrador", disabled: true }],
-      FechaRegistro: ["", Validators.required],
+      FechaRegistro: [new Date(), Validators.required],
       Observacion: ["", Validators.required]
     });
   }

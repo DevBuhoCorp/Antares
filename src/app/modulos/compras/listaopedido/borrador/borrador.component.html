@@ -1,7 +1,5 @@
 <mat-card class="p-0">
   <div class="m-333" style="display: flex; justify-content: space-between;">
-   
-
     <div class="select-group">
       <mat-form-field class="full-width">
         <mat-select
@@ -33,14 +31,13 @@
       </mat-form-field>
     </div>
   </div>
-  <div class="m-333"   *ngIf="selEstado == 'BRR'">
-    <button
-      mat-raised-button
-      class="mb-05"
-      color="primary"
-      (click)="Guardar()"
-    >
+  <div class="m-333"  style="display: flex; justify-content: space-between;">
+    <button *ngIf="selEstado == 'BRR'" mat-raised-button class="mb-05" color="primary" (click)="Guardar()">
       Guardar
+    </button>
+  
+    <button mat-raised-button class="mb-05" color="primary" [routerLink]="['nueva']">
+      Nuevo Pedido
     </button>
   </div>
 
@@ -67,38 +64,52 @@
         <ng-template let-row="row" ngx-datatable-cell-template>
           {{ row?.Observacion }}
         </ng-template>
-      </ngx-datatable-column> 
+      </ngx-datatable-column>
 
-      <ngx-datatable-column name="Colaborador Autorizo" [flexGrow]="1" *ngIf="selEstado == 'RCH' || selEstado == 'ACT'">
+      <ngx-datatable-column
+        name="Colaborador Autorizo"
+        [flexGrow]="1"
+        *ngIf="selEstado == 'RCH' || selEstado == 'ACT'"
+      >
         <ng-template let-row="row" ngx-datatable-cell-template>
           {{ row?.Colaborador }}
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column name="Área" [flexGrow]="1">
+      <ngx-datatable-column
+        name="Área"
+        [flexGrow]="1"
+        *ngIf="selEstado == 'RCH' || selEstado == 'ACT'"
+      >
         <ng-template let-row="row" ngx-datatable-cell-template>
           {{ row?.Area }}
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column name="Cargo" [flexGrow]="1">
+      <ngx-datatable-column
+        name="Cargo"
+        [flexGrow]="1"
+        *ngIf="selEstado == 'RCH' || selEstado == 'ACT'"
+      >
         <ng-template let-row="row" ngx-datatable-cell-template>
           {{ row?.Cargo }}
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column name="Observación Autorizador" [flexGrow]="1"  *ngIf="selEstado == 'RCH'">
+      <ngx-datatable-column
+        name="Observación Autorizador"
+        [flexGrow]="1"
+        *ngIf="selEstado == 'RCH'"
+      >
         <ng-template let-row="row" ngx-datatable-cell-template>
           {{ row?.ObservacionAutorizacion }}
         </ng-template>
       </ngx-datatable-column>
 
-
       <ngx-datatable-column
         name="Enviar Ordenes para su autorización"
         [flexGrow]="1"
         *ngIf="selEstado == 'BRR'"
-        
       >
         <ng-template let-row="row" ngx-datatable-cell-template>
           <mat-checkbox [(ngModel)]="row.Estado"></mat-checkbox>

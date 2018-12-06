@@ -25,6 +25,10 @@ export class BorradorComponent implements OnInit {
     {
       value: "Rechazados",
       ID: "RCH"
+    },
+    {
+      value: "Cotizadas",
+      ID: "COT"
     }
   ];
   pageSize = this.toolsService.getPaginas();

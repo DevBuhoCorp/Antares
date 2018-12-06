@@ -78,9 +78,9 @@ export class ListaComponent implements OnInit {
         }
       });
     }
-    if (cell == "Cantidad") {
-      if (parseFloat(event.target.value) <= 0) {
-        this.snack.open("Cantidad debe ser mayor que 0", "OK", {
+    if (cell == "Cantidad" ) {
+      if (parseFloat(event.target.value) <= 0 || !parseFloat(event.target.value)) {
+        this.snack.open("Registre una Cantidad Correcta", "OK", {
           duration: 4000
         });
         let cantidadMultiple = this.cantidadMultiple.toArray();
@@ -90,6 +90,19 @@ export class ListaComponent implements OnInit {
         return;
       }
     }
+
+    if (cell == "PrecioRef"  ) {
+      if (parseFloat(event.target.value) <= 0 || !parseFloat(event.target.value)) {
+        this.snack.open("Registre una Cantidad Correcta", "OK", {
+          duration: 4000
+        });
+        
+        this.Pedidos[rowIndex][cell] = null;
+        this.Pedidos = [...this.Pedidos];
+        return;
+      }
+    }
+    
     if (!bandera) {
       this.Pedidos[rowIndex][cell] = event.target.value;
       this.Pedidos[rowIndex]["Saldo"] =
@@ -149,8 +162,9 @@ export class ListaComponent implements OnInit {
   save() {
     let bandera = false;
     this.Pedidos.forEach(i => {
-      if (i.Etiqueta == null || i.Cantidad == null) {
+      if (i.Etiqueta == null || i.Cantidad == null || !parseFloat(i.Cantidad) || !parseFloat(i.PrecioRef)) {
         bandera = true;
+        return;
       }
     });
     if (!bandera) {

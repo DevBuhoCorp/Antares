@@ -92,7 +92,6 @@ export class NavigationService {
           name: "Orden de pedido",
           type: "dropDown",
           sub: [
-            { name: "Nuevo", state: "ordenpedido" },
             { name: "Lista", state: "listaopedido/borrador" },
             { name: "Autorizar", state: "listaopedido/autorizar" }
           ]
@@ -102,9 +101,8 @@ export class NavigationService {
           type: "dropDown",
           state: "cotizacion",
           sub: [
-            { name: "Nuevo", state: "nueva" },
             { name: "Lista", state: "lista" },
-            //{ name: "Autorizar", state: "listaopedido/autorizar" }
+
           ]
         }
       ]

@@ -19,32 +19,21 @@ export class AsignarprovComponent implements OnInit {
   Cotizacion: any = [];
   checked = false;
   selProveedor:any;
-  public itemForm: FormGroup;
   constructor(
     private crudService: CrudService,
     private toolsService: ToolsService,
     private router: ActivatedRoute,
     private snack: MatSnackBar,
-    private fb: FormBuilder
   ) {
    
   }
 
-  buildItemForm() {
-    console.log(this.paginate);
-    this.itemForm = this.fb.group({
-      Estado: [{ value: "Borrador", disabled: true }],
-      FechaIni: ["", Validators.required],
-      FechaFin: ["", Validators.required],
-      Observacion: ["", Validators.required]
-    });
-  }
+
 
   ngOnInit() {
     this.router.params.subscribe(async params => {
       this.IDCotizacion = params["id"];
       this.loadApp();
-      this.buildItemForm();
     });
   }
   async loadApp() {
@@ -58,21 +47,18 @@ export class AsignarprovComponent implements OnInit {
   }
 
   updateValue(event, cell, rowIndex) {
-    this.paginate.detalle[rowIndex][cell] = event.value;
-    this.paginate.detalle = [...this.paginate.detalle];
+    this.paginate[rowIndex][cell] = event.value;
+    this.paginate = [...this.paginate];
   }
 
   save() {
-    this.itemForm.value.FechaIni = this.itemForm.value.FechaIni.toDateString();
-    this.itemForm.value.FechaFin = this.itemForm.value.FechaFin.toDateString();
-    this.Cotizacion = this.itemForm.value;
     let proveedor = [];
     let bandera = false;
     if(this.checked){
-      this.paginate.detalle.forEach(i => {
+      this.paginate.forEach(i => {
           proveedor.push(this.selProveedor);
       });
-      this.Cotizacion.Detalle = [...proveedor];
+      this.Cotizacion = [...proveedor];
       this.crudService
         .Actualizar(this.IDCotizacion, this.Cotizacion, "detallecotizacion/")
         .subscribe(res => {
@@ -84,7 +70,7 @@ export class AsignarprovComponent implements OnInit {
         });
     }
     else{
-      this.paginate.detalle.forEach(i => {
+      this.paginate.forEach(i => {
         if (i.IDProveedor) {
           proveedor.push(i.IDProveedor);
         } else {

@@ -1,14 +1,15 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Inject } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { ToolsService } from "../../../../../shared/servicios/tools.service";
 import { CrudService } from "../../../../../shared/servicios/crud.service";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 
 @Component({
-  selector: 'app-listacotizacion',
-  templateUrl: './listacotizacion.component.html',
+  selector: "app-listacotizacion",
+  templateUrl: "./listacotizacion.component.html",
   styles: []
 })
-export class ListacotizacionComponent implements OnInit {
+export class PopUpListacotizacionComponent implements OnInit {
   Total = 0;
   IDOrdenPedido: any;
   pageSize = this.toolsService.getPaginas();
@@ -21,22 +22,21 @@ export class ListacotizacionComponent implements OnInit {
   };
   Bandera: any;
   constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<PopUpListacotizacionComponent>,
     private crudService: CrudService,
     private toolsService: ToolsService,
     private router: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    this.router.params.subscribe(async params => {
-      this.IDOrdenPedido = params["id"];
-      this.Bandera = params["bandera"];
-      console.log(this.Bandera)
-      this.loadApp();
-    });
+    
+      this.loadApp(this.data.payload);
+    
   }
-  async loadApp() {
+  async loadApp(id) {
     this.paginate = await this.crudService.SeleccionarAsync(
-      "opedido/" + this.IDOrdenPedido,
+      "opedido/" + id,
       {
         page: 1,
         psize: this.selPageSize
@@ -45,5 +45,9 @@ export class ListacotizacionComponent implements OnInit {
     this.paginate.data.forEach(i => {
       this.Total += i.Saldo;
     });
+  }
+
+  Cerrar(){
+    this.dialogRef.close()
   }
 }
