@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { MatDialog } from "@angular/material";
+import { MatDialog, MatSnackBar } from "@angular/material";
 import { CrudService } from "src/app/shared/servicios/crud.service";
 
 @Component({
@@ -15,7 +15,7 @@ export class PopupemailComponent implements OnInit {
   Proveedores: any = [];
   //Correos: any = [];
   constructor(
-    private composeDialog: MatDialog,
+    private snack: MatSnackBar,
     private crudService: CrudService
   ) {}
 
@@ -30,6 +30,10 @@ export class PopupemailComponent implements OnInit {
 
   sendEmail() {
     console.log(this.mailForm.value);
+    this.crudService.Insertar(this.mailForm.value, "cotizacionmail").subscribe(res => {
+      this.snack.open("Cotizacion Enviada", "OK", { duration: 4000 });
+      this.closeDialog();
+    });
   }
 
   closeDialog() {}
