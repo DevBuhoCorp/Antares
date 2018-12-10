@@ -1,44 +1,49 @@
-<div class="m-333">
-  <mat-form-field class="full-width">
-    <mat-select
-      placeholder=" Seleccione Proveedor:"
-      [(ngModel)]="selProveedor"
-      (selectionChange)="getEmail()"
-    >
-      <mat-option
-        *ngFor="let proveedor of Proveedores"
-        [value]="proveedor.ID"
-        >{{ proveedor.Etiqueta }}</mat-option
-      >
-    </mat-select>
-  </mat-form-field>
-</div>
-<form [formGroup]="mailForm" novalidate (submit)="sendEmail()">
-  <div class="pb-1">
+<!--
+  <div class="m-333">
     <mat-form-field class="full-width">
-      <input matInput formControlName="to" placeholder="Para:"/>
+      <mat-select
+        placeholder=" Seleccione Proveedor:"
+        [(ngModel)]="selProveedor"
+        (selectionChange)="getEmail()"
+      >
+        <mat-option
+          *ngFor="let proveedor of Proveedores"
+          [value]="proveedor.ID"
+          >{{ proveedor.Etiqueta }}</mat-option
+        >
+      </mat-select>
     </mat-form-field>
-    <small
-      *ngIf="
-        mailForm.controls.to.errors &&
-        (mailForm.controls.to.dirty || mailForm.controls.to.touched) &&
-        mailForm.controls.to.errors.required
-      "
-      class="form-error-msg"
-    >
-      Email es requerido
-    </small>
-    <small
-      *ngIf="
-        mailForm.controls.to.errors &&
-        (mailForm.controls.to.dirty || mailForm.controls.to.touched) &&
-        mailForm.controls.to.errors.email
-      "
-      class="form-error-msg"
-    >
-      Dirección de Email Inválida
-    </small>
   </div>
+-->
+<h1 matDialogTitle>Cotización</h1>
+<form [formGroup]="mailForm" novalidate (submit)="sendEmail()">
+  <!--
+    <div class="pb-1">
+      <mat-form-field class="full-width">
+        <input matInput formControlName="to" placeholder="Para:"/>
+      </mat-form-field>
+      <small
+        *ngIf="
+          mailForm.controls.to.errors &&
+          (mailForm.controls.to.dirty || mailForm.controls.to.touched) &&
+          mailForm.controls.to.errors.required
+        "
+        class="form-error-msg"
+      >
+        Email es requerido
+      </small>
+      <small
+        *ngIf="
+          mailForm.controls.to.errors &&
+          (mailForm.controls.to.dirty || mailForm.controls.to.touched) &&
+          mailForm.controls.to.errors.email
+        "
+        class="form-error-msg"
+      >
+        Dirección de Email Inválida
+      </small>
+    </div>
+  -->
 
   <div class="pb-1">
     <mat-form-field class="full-width">
@@ -47,7 +52,7 @@
         name="subject"
         formControlName="subject"
         placeholder="Asunto"
-        value=""
+        
       />
     </mat-form-field>
     <small
@@ -76,12 +81,51 @@
       Mensaje es requerido
     </small>
   </div>
+  <div class="pb-1">
+    <mat-card class="p-0">
+      <mat-card-content class="p-0">
+        <ngx-datatable #MyDatatableComponent class="material ml-0 mr-0"
+                       [rows]="Proveedores"
+                       [columnMode]="'flex'"
+                       [headerHeight]="50"
+                       [footerHeight]="50"
+                       [rowHeight]="'auto'"
+                       [rowIdentity]="getID"
+                       [selected]="selectedProveedores"
+                       [selectionType]="'checkbox'"
+                       [selectAllRowsOnPage]="false">
+    
+          <ngx-datatable-column
+            [width]="30"
+            [sortable]="false"
+            [canAutoResize]="false"
+            [draggable]="false"
+            [resizeable]="false"
+            [headerCheckboxable]="true"
+            [checkboxable]="true">
+          </ngx-datatable-column>
+    
+          <ngx-datatable-column name="Descripción" [flexGrow]="1">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{ row?.Etiqueta }}
+            </ng-template>
+          </ngx-datatable-column>
 
+          <ngx-datatable-column name="Email" [flexGrow]="1">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              {{ row?.Email }}
+            </ng-template>
+          </ngx-datatable-column>
+
+        </ngx-datatable>
+      </mat-card-content>
+    </mat-card>
+  </div>
   <div class="">
     <button type="button" mat-button matDialogClose>Cancelar</button>
     <span fxFlex></span>
-    <button mat-icon-button><mat-icon>attachment</mat-icon></button>
-    <button mat-mini-fab class="mat-primary" type="submit">
+   <!--  <button mat-icon-button><mat-icon>attachment</mat-icon></button> -->
+    <button mat-mini-fab class="mat-primary"  type="submit">
       <mat-icon>send</mat-icon>
     </button>
   </div>

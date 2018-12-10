@@ -1,92 +1,107 @@
 <mat-card class="p-0">
+  <div class="m-333" style="display: flex; justify-content: space-between;">
+    <div class="select-group">
+      <mat-form-field class="full-width">
+        <mat-select
+          placeholder=" Seleccione Estado"
+          [(ngModel)]="selEstado"
+          (selectionChange)="loadApp()"
+        >
+          <mat-option *ngFor="let row of Estados" [value]="row.ID">
+            {{ row.value }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
 
-    <div class="m-333" style="display: flex; justify-content: space-between;">
-      <div class="select-group">
-        <mat-form-field class="full-width">
-          <mat-select
-            placeholder=" Seleccione número de ítems:"
-            [(ngModel)]="selPageSize"
-            (selectionChange)="loadApp()"
+    <div class="select-group">
+      <mat-form-field class="full-width">
+        <mat-select
+          placeholder=" Seleccione número de ítems:"
+          [(ngModel)]="selPageSize"
+          (selectionChange)="loadApp()"
+        >
+          <mat-option
+            *ngFor="let page of pageSize"
+            [value]="page"
+            ngDefaultControl
+            >{{ page }}</mat-option
           >
-            <mat-option
-              *ngFor="let page of pageSize"
-              [value]="page"
-              ngDefaultControl
-              >{{ page }}</mat-option
-            >
-          </mat-select>
-        </mat-form-field>
-      </div>
-    </div> 
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
 
-    <div class="m-333" >
-        <button mat-raised-button class="mb-05" color="primary" [routerLink]="['nueva']">
-          Nueva Cotización
-        </button>
-      </div>
-  
-    <mat-card-content class="p-0">
+  <div class="m-333">
+    <button
+      mat-raised-button
+      class="mb-05"
+      color="primary"
+      [routerLink]="['nueva']"
+    >
+      Nueva Cotización
+    </button>
+  </div>
 
-      <ngx-datatable
-        class="material ml-0 mr-0"
-        [rows]="paginate.data"
-        [columnMode]="'flex'"
-        [headerHeight]="50"
-        [footerHeight]="50"
-        [rowHeight]="'auto'"
-        [externalPaging]="true"
-        [count]="paginate.total"
-        [limit]="paginate.per_page"
-        (page)="setPage($event)"
-      >
-
+  <mat-card-content class="p-0">
+    <ngx-datatable
+      class="material ml-0 mr-0"
+      [rows]="paginate.data"
+      [columnMode]="'flex'"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [rowHeight]="'auto'"
+      [externalPaging]="true"
+      [count]="paginate.total"
+      [limit]="paginate.per_page"
+      (page)="setPage($event)"
+    >
       <ngx-datatable-column name="Fecha Registro" [flexGrow]="1">
-          <ng-template let-row="row" ngx-datatable-cell-template>
-            {{ row?.FechaReg | date: "medium"}}
-          </ng-template>
-        </ngx-datatable-column>
-  
-        <ngx-datatable-column name="Fecha Inicio" [flexGrow]="1">
-          <ng-template let-row="row" ngx-datatable-cell-template>
-            {{ row?.FechaIni | date: "medium" }}
-          </ng-template>
-        </ngx-datatable-column>
-  
-        <ngx-datatable-column name="Fecha Fin" [flexGrow]="1">
-          <ng-template let-row="row" ngx-datatable-cell-template>
-            {{ row?.FechaFin | date: "medium"}}
-          </ng-template>
-        </ngx-datatable-column>
-  
-        <ngx-datatable-column name="Observación" [flexGrow]="1">
-          <ng-template let-row="row" ngx-datatable-cell-template>
-            {{ row?.Observacion }}
-          </ng-template>
-        </ngx-datatable-column>
-  
-        
-  
-        <ngx-datatable-column name="Detalles" [flexGrow]="1">
-          <ng-template let-row="row" ngx-datatable-cell-template>
-            <a
-              mat-icon-button
-              mat-sm-button
-              color="warn"
-              [routerLink]="['visualizar', row.ID]"
-            >
-              <mat-icon>list</mat-icon>
-            </a>
-            <a
-              mat-icon-button
-              mat-sm-button
-              color="warn"
-              matTooltip="Enviar Cotización"
-              (click)="openComposeDialog()" 
-            >
-              <mat-icon>email</mat-icon>
-            </a>
-          </ng-template>
-        </ngx-datatable-column>
-      </ngx-datatable>
-    </mat-card-content>
-  </mat-card>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.FechaReg | date: "medium" }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Fecha Inicio" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.FechaIni | date: "medium" }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Fecha Fin" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.FechaFin | date: "medium" }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Observación" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.Observacion }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Detalles" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <a
+            mat-icon-button
+            mat-sm-button
+            color="warn"
+            [routerLink]="['visualizar', row.ID]"
+          >
+            <mat-icon>list</mat-icon>
+          </a>
+          <a
+            mat-icon-button
+            mat-sm-button
+            color="warn"
+            matTooltip="Enviar Cotización"
+            (click)="openComposeDialog(row)"
+            *ngIf="selEstado == 'BRR'"
+          >
+            <mat-icon>email</mat-icon>
+          </a>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </mat-card-content>
+</mat-card>

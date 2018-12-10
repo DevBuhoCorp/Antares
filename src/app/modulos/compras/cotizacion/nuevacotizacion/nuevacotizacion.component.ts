@@ -87,38 +87,41 @@ export class NuevacotizacionComponent implements OnInit {
   }
 
   save() {
-    if (this.checked) {
-      this.Cotizacion.Estado = "ENV";
-    } else {
-      this.Cotizacion.Estado = "BRR";
-    }
     let transacciones = [];
     this.paginate.data.forEach(i => {
       if (i.Seleccionar) {
         transacciones.push(i.ID);
       }
     });
-    this.Cotizacion.Detalles = [...transacciones];
-    console.log(this.Cotizacion);
-    this.crudService.Insertar(this.Cotizacion, "cotizacion").subscribe(res => {
-      this.snack.open("Cotizacion Registrada", "OK", { duration: 4000 });
-      this.cancelar();
-    });
+    if (transacciones.length > 0) {
+      this.Cotizacion.Estado = "BRR";
+      this.Cotizacion.Detalles = [...transacciones];
+      this.crudService
+        .Insertar(this.Cotizacion, "cotizacion")
+        .subscribe(res => {
+          this.snack.open("Cotizacion Registrada", "OK", { duration: 4000 });
+          this.cancelar();
+        });
+    } else {
+      this.snack.open("Seleccione por lo menos una O.Pedido", "OK", {
+        duration: 4000
+      });
+    }
   }
 
-  Modal(id){
+  Modal(id) {
     let title = "Detalles Orden Pedido";
-      let dialogRef: MatDialogRef<any> = this.dialog.open(
-        PopUpListacotizacionComponent,
-        {
-          width: "1080px",
-          disableClose: true,
-          data: { title: title, payload: id }
-        }
-      );
+    let dialogRef: MatDialogRef<any> = this.dialog.open(
+      PopUpListacotizacionComponent,
+      {
+        width: "1080px",
+        disableClose: true,
+        data: { title: title, payload: id }
+      }
+    );
 
-      dialogRef.afterClosed().subscribe(response => {
-        if (!response) return;
-      });
+    dialogRef.afterClosed().subscribe(response => {
+      if (!response) return;
+    });
   }
 }

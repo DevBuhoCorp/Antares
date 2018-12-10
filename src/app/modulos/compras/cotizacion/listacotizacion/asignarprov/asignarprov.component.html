@@ -2,33 +2,7 @@
 
 <mat-card class="p-0">
   <mat-card-content class="p-0">
-    <div class="m-333">
-      <button
-        mat-icon-button
-        mat-sm-button
-        color="warn"
-        class="mr-1"
-        (click)="save()"
-        matTooltip="Guardar"
-      >
-        <mat-icon>save</mat-icon>
-      </button>
-      <mat-checkbox [(ngModel)]="checked"
-        >Asignar Un Solo Proveedor</mat-checkbox
-      >
-      <mat-form-field class="full-width" *ngIf="checked">
-        <mat-select
-          placeholder=" Seleccione Proveedor:"
-          [(ngModel)]="selProveedor"
-        >
-          <mat-option
-            *ngFor="let proveedor of Proveedores"
-            [value]="proveedor.ID"
-            >{{ proveedor.Etiqueta }}</mat-option
-          >
-        </mat-select>
-      </mat-form-field>
-    </div>
+   
     <ngx-datatable
       class="material ml-0 mr-0"
       [rows]="paginate"
