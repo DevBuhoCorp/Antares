@@ -1,0 +1,106 @@
+<mat-card class="mb-1" style="padding: 5px 20px;">
+  <mat-card-content>
+
+
+    <div class="m-333" fxLayout="column" fxLayoutAlign="space-around">
+
+      <div style="margin: 10px 0;">
+        <span>Tipo de Movimiento:</span>
+        <mat-radio-group class="example-radio-group" [(ngModel)]="slTipo" (ngModelChange)="loadProductosTipo()">
+          <mat-radio-button style="margin: 5px;" *ngFor="let tipo of lsTipos" [value]="tipo">
+            {{ tipo.Descripcion }}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <div class="select-group">
+        <label> Bodega: </label>
+        <mat-form-field>
+          <mat-select placeholder=" Seleccione Bodega:" [(ngModel)]="slBodega"
+                      (selectionChange)="loadProductosTipo()">
+            <mat-option *ngFor="let bodega of lsBodega | async" [value]="bodega.ID"
+                        ngDefaultControl> {{ bodega.Descripcion }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="select-group">
+        <label> Movimiento: </label>
+        <mat-form-field>
+          <mat-select placeholder=" Seleccione Movimiento:" [(ngModel)]="slMovimiento">
+            <mat-option *ngFor="let movimiento of lsMovimientos  | async" [value]="movimiento.ID"
+                        ngDefaultControl> {{ movimiento.Descripcion }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div style="align-self: flex-end;">
+        <button mat-raised-button class="mr-1" color="warn" (click)="cancel()">Cancelar</button>
+        <button mat-raised-button color="primary" [disabled]="!slMovimiento" (click)="save()">Guardar</button>
+      </div>
+
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="p-0">
+  <mat-card-content class="p-0">
+    <ngx-datatable #MyDatatableComponent class="material ml-0 mr-0"
+                   [rows]="lsProductos"
+                   [columnMode]="'flex'"
+                   [headerHeight]="50"
+                   [footerHeight]="50"
+                   [rowHeight]="'auto'"
+                   [rowIdentity]="getID"
+                   [selected]="slProductos"
+                   [selectionType]="'checkbox'"
+                   [selectAllRowsOnPage]="false">
+
+      <ngx-datatable-column
+        *ngIf="slTipo.Value == 'I'"
+        [width]="30"
+        [sortable]="false"
+        [canAutoResize]="false"
+        [draggable]="false"
+        [resizeable]="false"
+        [headerCheckboxable]="true"
+        [checkboxable]="true">
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Nombre" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.Nombre }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Stock" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.Stock }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Cantidad" [flexGrow]="1">
+        <ng-template let-row="row" let-rowIndex="rowIndex" let-value="Cantidad" ngx-datatable-cell-template>
+
+          <input style="text-align: right;" autofocus matInput autocomplete="false"
+            (change)="updateValue($event, 'Cantidad', rowIndex)"
+            type="text" mask="0*.0000"/>
+
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Costo" [flexGrow]="1">
+        <ng-template let-row="row" let-rowIndex="rowIndex" let-value="Costo" ngx-datatable-cell-template>
+
+          <input style="text-align: right;" autofocus matInput autocomplete="false"
+            (change)="updateValue($event, 'Costo', rowIndex)"
+            type="text" currencyMask/>
+
+        </ng-template>
+      </ngx-datatable-column>
+
+    </ngx-datatable>
+  </mat-card-content>
+</mat-card>

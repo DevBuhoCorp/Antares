@@ -37,3 +37,11 @@
 
 // Open _views.scss and remove unnecessary view related files
 @import "scss/views";
+
+.select-group {
+  //outline: #0d4b73 solid 2px;
+}
+
+.select-group label {
+  margin-right: 8px;
+}

@@ -126,6 +126,15 @@ export class NavigationService {
         { name: "Bodega", state: "bodega" },
         { name: "Tipo Movimiento", state: "tipomovimiento" },
         { name: "Bodega - T. Movimiento", state: "bodegatmovimiento" },
+      ]
+    },
+    {
+      name: "Movimiento",
+      type: "dropDown",
+      icon: "location_city",
+      state: "modulos/movimiento",
+      sub: [
+        { name: "Movimientos", state: "movimiento" },
         { name: "T. Movimiento - Reverso", state: "tmovimientoreverso" },
       ]
     }

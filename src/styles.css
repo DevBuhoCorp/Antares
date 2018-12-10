@@ -6,3 +6,7 @@
 .price::first-letter {
   padding-right: 0.3em;
 }
+
+.select-group {
+  outline: #0d4b73 solid 2px;
+}

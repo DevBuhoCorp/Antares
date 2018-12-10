@@ -80,15 +80,27 @@ import { AutorizarComponent } from './compras/listaopedido/autorizar/autorizar.c
 import { AutorizarPopupComponent } from './compras/listaopedido/autorizar/popup/popup.component';
 import { TipodocumentoComponent } from './catalogos/tipodocumento/tipodocumento.component';
 import { PopupTipoDocumentoComponent } from './catalogos/tipodocumento/popup/popup.component';
-import { TipomovimientoreversoComponent } from './bodega/tipomovimientoreverso/tipomovimientoreverso.component';
+import { TipomovimientoreversoComponent } from './movimiento/tipomovimientoreverso/tipomovimientoreverso.component';
 import { NuevacotizacionComponent } from './compras/cotizacion/nuevacotizacion/nuevacotizacion.component';
 import { PopUpListacotizacionComponent } from './compras/cotizacion/nuevacotizacion/listacotizacion/listacotizacion.component';
 import { ListaprovcotizacionComponent } from './compras/cotizacion/listacotizacion/listacotizacion.component';
 import { AsignarprovComponent } from './compras/cotizacion/listacotizacion/asignarprov/asignarprov.component';
 import { PopupemailComponent } from './compras/cotizacion/listacotizacion/popupemail/popupemail.component';
 import { QuillModule } from 'ngx-quill';
+import { MovimientoComponent } from './movimiento/movimiento/movimiento.component';
+import {NgxCurrencyModule} from 'ngx-currency';
 
-
+export const customCurrencyMaskConfig = {
+  align: "right",
+  allowNegative: false,
+  allowZero: true,
+  decimal: ".",
+  precision: 4,
+  prefix: "$ ",
+  suffix: "",
+  thousands: ",",
+  nullable: false
+};
 
 @NgModule({
   imports: [
@@ -124,6 +136,7 @@ import { QuillModule } from 'ngx-quill';
     QuillModule,
     //PrimeNG
     TreeModule,
+    NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
     NgxMaskModule.forRoot(),
     RouterModule.forChild(ModulosRoutes)
   ],
@@ -183,7 +196,8 @@ import { QuillModule } from 'ngx-quill';
     PopUpListacotizacionComponent,
     ListaprovcotizacionComponent,
     AsignarprovComponent,
-    PopupemailComponent
+    PopupemailComponent,
+    MovimientoComponent
 
   ],
   providers: [],
