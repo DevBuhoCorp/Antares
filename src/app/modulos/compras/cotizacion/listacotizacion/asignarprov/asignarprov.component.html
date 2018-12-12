@@ -23,6 +23,17 @@
         </ng-template>
       </ngx-datatable-column>
 
+      <ngx-datatable-column name="Orden de Pedido" [flexGrow]="1">
+        <ng-template
+          ngx-datatable-cell-template
+          let-rowIndex="rowIndex"
+          let-value="Cantidad"
+          let-row="row"
+        >
+          {{ row?.OrdenPedido }}
+        </ng-template>
+      </ngx-datatable-column>
+
       <ngx-datatable-column name="Cantidad" [flexGrow]="0.12">
         <ng-template
           ngx-datatable-cell-template
@@ -33,6 +44,30 @@
           {{ row?.Cantidad }}
         </ng-template>
       </ngx-datatable-column>
+
+      <ngx-datatable-column name="Precio Referencia" [flexGrow]="0.12">
+        <ng-template
+          ngx-datatable-cell-template
+          let-rowIndex="rowIndex"
+          let-value="Cantidad"
+          let-row="row"
+        >
+          {{ row?.PrecioRef | currency }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Total" [flexGrow]="0.12">
+        <ng-template
+          ngx-datatable-cell-template
+          let-rowIndex="rowIndex"
+          let-value="Cantidad"
+          let-row="row"
+        >
+          {{ row?.Saldo | currency }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      
 
     </ngx-datatable>
   </mat-card-content>

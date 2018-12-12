@@ -40,60 +40,12 @@ export class AsignarprovComponent implements OnInit {
     this.paginate = await this.crudService.SeleccionarAsync(
       "cotizacion/" + this.IDCotizacion
     );
-    this.Proveedores = await this.crudService.SeleccionarAsync(
-      "proveedorcombo"
-    );
+    console.log(this.paginate);
     
   }
 
-  updateValue(event, cell, rowIndex) {
-    this.paginate[rowIndex][cell] = event.value;
-    this.paginate = [...this.paginate];
-  }
-
-  save() {
-    let proveedor = [];
-    let bandera = false;
-    if(this.checked){
-      this.paginate.forEach(i => {
-          proveedor.push(this.selProveedor);
-      });
-      this.Cotizacion = [...proveedor];
-      this.crudService
-        .Actualizar(this.IDCotizacion, this.Cotizacion, "detallecotizacion/")
-        .subscribe(res => {
-          this.snack.open("Cotización Actualizada", "OK", {
-            duration: 4000
-          });
-          this.loadApp();
-
-        });
-    }
-    else{
-      this.paginate.forEach(i => {
-        if (i.IDProveedor) {
-          proveedor.push(i.IDProveedor);
-        } else {
-          bandera = true;
-          return;
-        }
-      });
-      if (!bandera) {
-        this.Cotizacion.Detalle = [...proveedor];
-        this.crudService
-          .Actualizar(this.IDCotizacion, this.Cotizacion, "detallecotizacion/")
-          .subscribe(res => {
-            this.snack.open("Cotización Actualizada", "OK", {
-              duration: 4000
-            });
-            this.loadApp();
-          });
-      } else {
-        this.snack.open("Seleccione Proveedor!", "OK", { duration: 4000 });
-        this.Cotizacion = [];
-      }
-    }
+ 
    
     
-  }
+  
 }

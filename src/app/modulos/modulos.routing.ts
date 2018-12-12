@@ -204,7 +204,7 @@ export const ModulosRoutes: Routes = [
   {
     path: 'compras/cotizacion/lista/visualizar/:id',
     component: AsignarprovComponent,
-    data: {title: 'Cotización', breadcrumb: 'ASIGNAR PROVEEDORES  COTIZACIÓN'}
+    data: {title: 'Cotización', breadcrumb: 'COTIZACIÓN'}
   },
 
   //#endregion
