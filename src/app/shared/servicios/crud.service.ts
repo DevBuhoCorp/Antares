@@ -98,14 +98,13 @@ export class CrudService {
 
   SendFile(objeto, api) {
     var body = objeto;
-    const HttpUploadOptions = {
-      headers: new HttpHeaders({ "Accept": "application/json" })
-    };
-    //var requestOptions = new RequestOptions({ method: RequestMethod.Post, headers: headerOptions });
-    console.log(body);
-    return this.httpClient
-      .post(this.puerto + api, body,HttpUploadOptions)
-      //.map(res => res.json());
+    var requestOptions = new RequestOptions({
+      method: RequestMethod.Post,
+      headers: this.getHeaders2()
+    });
+    return this.http
+      .post(this.puerto + api, body, requestOptions)
+      .map(res => res.json());
   }
 
   Eliminar(ID, api) {
@@ -124,6 +123,18 @@ export class CrudService {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*"
     });
+    if (localStorage.getItem("authToken"))
+      header.append(
+        "Authorization",
+        `${localStorage.getItem("tokenType")} ${localStorage.getItem(
+          "authToken"
+        )}`
+      );
+    return header;
+  }
+
+  getHeaders2() {
+    let header=  new Headers({ "Accept": "application/json" })
     if (localStorage.getItem("authToken"))
       header.append(
         "Authorization",

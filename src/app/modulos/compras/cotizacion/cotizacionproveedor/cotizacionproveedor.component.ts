@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, ViewChildren } from "@angular/core";
 import { CrudService } from "src/app/shared/servicios/crud.service";
 import { ToolsService } from "src/app/shared/servicios/tools.service";
 import { ActivatedRoute } from "@angular/router";
@@ -20,6 +20,9 @@ export class CotizacionproveedorComponent implements OnInit {
   @Input() fileExt: string = "XLSX"; //extensiones aceptadas para ingreso
   @Input() maxFiles: number = 5; //máximo de imágenes aceptadas en drag and drop
   @Input() maxSize: number = 1; // 1MB
+  @ViewChildren("checkboxMultiple") private checkboxesMultiple: any;
+  @ViewChildren("textboxMultiple") private textboxMultiple: any;
+  @ViewChildren("cantidadMultiple") private cantidadMultiple: any;
   FotoPerfil: any;
   constructor(
     private crudService: CrudService,
@@ -37,11 +40,11 @@ export class CotizacionproveedorComponent implements OnInit {
   }
 
   async loadApp() {
-    console.log(this.paginate);
     this.paginate = await this.crudService.SeleccionarAsync(
       "detallecotizacionprov/",
       { IDCotizacion: this.IDCotizacion, IDProveedor: this.selProveedor }
     );
+    
   }
 
   async loadCombo() {
@@ -56,6 +59,115 @@ export class CotizacionproveedorComponent implements OnInit {
     input.onchange = this.Upload;
     input.click();
   }
+
+  updateValue(event, cell, rowIndex) {
+    let bandera = false;
+    if (cell == "Etiqueta") {
+      this.paginate.forEach(i => {
+        if (i.Etiqueta == event.target.value) {
+          bandera = true;
+          return;
+        }
+      });
+    }
+    if (cell == "Cantidad" ) {
+      if (parseFloat(event.target.value) <= 0 || !parseFloat(event.target.value)) {
+        this.snack.open("Registre una Cantidad Correcta", "OK", {
+          duration: 4000
+        });
+        let cantidadMultiple = this.cantidadMultiple.toArray();
+        cantidadMultiple[rowIndex].nativeElement.value = null;
+        this.paginate[rowIndex][cell] = null;
+        this.paginate = [...this.paginate];
+        return;
+      }
+    }
+
+    if (cell == "Precio"  ) {
+      if (parseFloat(event.target.value) <= 0 || !parseFloat(event.target.value)) {
+        this.snack.open("Registre una Cantidad Correcta", "OK", {
+          duration: 4000
+        });
+        
+        this.paginate[rowIndex][cell] = null;
+        this.paginate = [...this.paginate];
+        return;
+      }
+    }
+    
+    if (!bandera) {
+      this.paginate[rowIndex][cell] = event.target.value;
+      this.paginate[rowIndex]["Saldo"] =
+        parseFloat(this.paginate[rowIndex]["Cantidad"]) *
+        parseFloat(this.paginate[rowIndex]["Precio"]);
+
+      this.paginate = [...this.paginate];
+      
+    } else {
+      let textboxMultiple = this.textboxMultiple.toArray();
+      textboxMultiple[rowIndex].nativeElement.value = null;
+      this.paginate[rowIndex][cell] = null;
+      this.paginate = [...this.paginate];
+      this.snack.open("Dato Incorrecto, Ingrese Otro", "OK", {
+        duration: 4000
+      });
+    }
+    
+    
+  }
+  updateValueCheck(event, cell, rowIndex) {
+    this.paginate[rowIndex][cell] = event.checked;
+    this.paginate = [...this.paginate];
+  }
+  agregar() {
+    const nuevo = {
+      Etiqueta: null,
+      CantidadDeseada: null,
+      Cantidad: null,
+      Precio: null,      
+    };
+
+    this.paginate = this.paginate.concat(nuevo);
+  }
+
+  eliminar() {
+    let count = 0;
+    let checkboxesArray = this.checkboxesMultiple.toArray();
+    let nuevo = this.paginate.filter(function seleccionado(i) {
+      checkboxesArray[count].checked = false;
+      count++;
+      if (!i.Seleccionar) {
+        return i;
+      }
+    });
+    this.paginate = [...nuevo];
+  }
+
+  save() {
+    let bandera = false;
+    this.paginate.forEach(i => {
+      if (i.Cantidad == null || !parseFloat(i.Cantidad) || !parseFloat(i.Precio)) {
+        bandera = true;
+        return;
+      }
+    });
+    if (!bandera) {
+      this.crudService
+        .Insertar(this.paginate, "detallecotizacionprov/")
+        .subscribe(res => {
+          this.snack.open("Cotización Actualizada", "OK", {
+            duration: 4000
+          });
+        });
+    } else {
+      this.snack.open(
+        "Cotización Incorrecta, Revise que todos los datos estén correctos",
+        "OK",
+        { duration: 4000 }
+      );
+    }
+  }
+
 
   Upload(e) {
     e.preventDefault();
@@ -82,6 +194,8 @@ export class CotizacionproveedorComponent implements OnInit {
         input.append("IDCotizacion", this.IDCotizacion);
         input.append("file", file);
         input.append("IDProveedor", this.selProveedor);
+        input.append("Nombre", file.name);
+        console.log(file.name);
         this.crudService.SendFile(input, "cotizacionimport/").subscribe(
           data => {
             this.snack.open("Registros Actualizados!", "OK", {

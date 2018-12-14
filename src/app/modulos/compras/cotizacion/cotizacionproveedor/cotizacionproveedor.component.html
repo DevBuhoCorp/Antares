@@ -23,6 +23,40 @@
         Adjuntar Cotización
       </button>
     </div>
+    
+  </div>
+  <div class="m-333" *ngIf="selProveedor">
+    <!-- <button
+      mat-icon-button
+      mat-sm-button
+      color="primary"
+      class="mr-1"
+      (click)="agregar()"
+      matTooltip="Agregar"
+    >
+      <mat-icon>add</mat-icon>
+    </button> 
+    <button
+      mat-icon-button
+      mat-sm-button
+      color="warn"
+      class="mr-1"
+      (click)="eliminar()"
+      matTooltip="Eliminar"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>-->
+    <button
+      mat-icon-button
+      mat-sm-button
+      color="warn"
+      class="mr-1"
+      (click)="save()"
+      matTooltip="Guardar"
+     
+    >
+      <mat-icon>save</mat-icon>
+    </button>
   </div>
   <mat-card-content class="p-0">
     <ngx-datatable
@@ -34,16 +68,74 @@
       [limit]="10"
       [rowHeight]="'auto'"
     >
-      <ngx-datatable-column name="Etiqueta" [flexGrow]="1">
+    <!-- <ngx-datatable-column
+        [width]="50"
+        [sortable]="false"
+        [canAutoResize]="false"
+        [draggable]="false"
+        [resizeable]="false"
+        [flexGrow]="1"
+      >
         <ng-template
           ngx-datatable-cell-template
           let-rowIndex="rowIndex"
-          let-value="Etiqueta"
+          let-value="Seleccionar"
           let-row="row"
         >
-          {{ row?.Etiqueta }}
+          <mat-checkbox
+            #checkboxMultiple
+            (change)="updateValueCheck($event, 'Seleccionar', rowIndex)"
+          ></mat-checkbox>
         </ng-template>
-      </ngx-datatable-column>
+      </ngx-datatable-column> -->
+    <ngx-datatable-column name="Etiqueta" [flexGrow]="1">
+      <ng-template
+        ngx-datatable-cell-template
+        let-rowIndex="rowIndex"
+        let-value="Etiqueta"
+        let-row="row"
+      >
+        <input
+          #textboxMultiple
+          autofocus
+          matInput
+          (change)="updateValue($event, 'Etiqueta', rowIndex)"
+          type="text"
+          [value]="row?.Etiqueta"
+        />
+      </ng-template>
+    </ngx-datatable-column>
+
+     <ngx-datatable-column name="Cantidad Deseada" [flexGrow]="0.12">
+      <ng-template
+        ngx-datatable-cell-template
+        let-rowIndex="rowIndex"
+        let-value="CantidadDeseada"
+        let-row="row"
+      >
+        {{ row?.CantidadDeseada }}
+      </ng-template>
+    </ngx-datatable-column> 
+
+    <!-- <ngx-datatable-column name="Cantidad Deseada" [flexGrow]="0.12">
+      <ng-template
+        ngx-datatable-cell-template
+        let-rowIndex="rowIndex"
+        let-value="CantidadDeseada"
+        let-row="row"
+      >
+        <input
+          #cantidadMultiple
+          style="text-align: right;"
+          autofocus
+          matInput
+          (change)="updateValue($event, 'CantidadDeseada', rowIndex)"
+          type="text"
+          [value]="row?.CantidadDeseada"
+
+        />
+      </ng-template>
+    </ngx-datatable-column> -->
 
       <ngx-datatable-column name="Cantidad" [flexGrow]="0.12">
         <ng-template
@@ -52,7 +144,16 @@
           let-value="Cantidad"
           let-row="row"
         >
-          {{ row?.Cantidad }}
+          <input
+            #cantidadMultiple
+            style="text-align: right;"
+            autofocus
+            matInput
+            (change)="updateValue($event, 'Cantidad', rowIndex)"
+            type="text"
+            [value]="row?.Cantidad"
+
+          />
         </ng-template>
       </ngx-datatable-column>
 
@@ -60,10 +161,18 @@
         <ng-template
           ngx-datatable-cell-template
           let-rowIndex="rowIndex"
-          let-value="Cantidad"
+          let-value="Precio"
           let-row="row"
         >
-          {{ row?.Precio | currency }}
+          <input
+            style="text-align: right;"
+            autofocus
+            matInput
+            (change)="updateValue($event, 'Precio', rowIndex)"
+            type="text"
+
+            [value]="row?.Precio | currency"
+          />
         </ng-template>
       </ngx-datatable-column>
 
@@ -71,7 +180,7 @@
         <ng-template
           ngx-datatable-cell-template
           let-rowIndex="rowIndex"
-          let-value="Cantidad"
+          let-value="Total"
           let-row="row"
         >
           {{ row?.Cantidad * row?.Precio | currency }}
