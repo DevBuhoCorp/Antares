@@ -29,6 +29,7 @@ import {NuevacotizacionComponent} from './compras/cotizacion/nuevacotizacion/nue
 import {ListaprovcotizacionComponent} from './compras/cotizacion/listacotizacion/listacotizacion.component';
 import {AsignarprovComponent} from './compras/cotizacion/listacotizacion/asignarprov/asignarprov.component';
 import {MovimientoComponent} from './movimiento/movimiento/movimiento.component';
+import { CotizacionproveedorComponent } from './compras/cotizacion/cotizacionproveedor/cotizacionproveedor.component';
 
 
 export const ModulosRoutes: Routes = [
@@ -204,6 +205,12 @@ export const ModulosRoutes: Routes = [
   {
     path: 'compras/cotizacion/lista/visualizar/:id',
     component: AsignarprovComponent,
+    data: {title: 'Cotización', breadcrumb: 'COTIZACIÓN'}
+  },
+
+  {
+    path: 'compras/cotizacion/lista/proveedor/:id',
+    component: CotizacionproveedorComponent,
     data: {title: 'Cotización', breadcrumb: 'COTIZACIÓN'}
   },
 

@@ -89,6 +89,7 @@ import { PopupemailComponent } from './compras/cotizacion/listacotizacion/popupe
 import { QuillModule } from 'ngx-quill';
 import { MovimientoComponent } from './movimiento/movimiento/movimiento.component';
 import {NgxCurrencyModule} from 'ngx-currency';
+import { CotizacionproveedorComponent } from './compras/cotizacion/cotizacionproveedor/cotizacionproveedor.component';
 
 export const customCurrencyMaskConfig = {
   align: "right",
@@ -197,7 +198,8 @@ export const customCurrencyMaskConfig = {
     ListaprovcotizacionComponent,
     AsignarprovComponent,
     PopupemailComponent,
-    MovimientoComponent
+    MovimientoComponent,
+    CotizacionproveedorComponent
 
   ],
   providers: [],

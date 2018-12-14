@@ -1,15 +1,18 @@
-import { Injectable } from '@angular/core';
-import 'rxjs/add/operator/delay';
-import { Http, Headers, RequestOptions, RequestMethod } from '@angular/http';
-import { HttpClient, HttpHeaders } from '../../../../node_modules/@angular/common/http';
-import {AuthGuard} from './auth/auth.guard';
+import { Injectable } from "@angular/core";
+import "rxjs/add/operator/delay";
+import { Http, Headers, RequestOptions, RequestMethod } from "@angular/http";
+import {
+  HttpClient,
+  HttpHeaders
+} from "../../../../node_modules/@angular/common/http";
+import { AuthGuard } from "./auth/auth.guard";
 
 @Injectable()
 export class CrudService {
   readonly puerto = "http://localhost:8000/";
   private header: Headers;
 
-  constructor(private http: Http, private httpClient: HttpClient ) {
+  constructor(private http: Http, private httpClient: HttpClient) {
     // this.header = new Headers({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
     // if(localStorage.getItem('authToken'))
     //   this.header.append('Authorization', `${ localStorage.getItem('tokenType') } ${ localStorage.getItem('authToken') }`);
@@ -17,33 +20,44 @@ export class CrudService {
 
   Seleccionar(api, param?) {
     //var headerOptions = new Headers({ 'Authorization': `${ this.authGuard.tokenType } ${ this.authGuard.authToken }` ,  'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' })
-    return this.http.get(this.puerto + api, { params: param, headers: this.getHeaders() });
+    return this.http.get(this.puerto + api, {
+      params: param,
+      headers: this.getHeaders()
+    });
   }
 
   Ejecutar(api, param?) {
-    return this.http.get(this.puerto + api, { params: param, headers: this.getHeaders() });
+    return this.http.get(this.puerto + api, {
+      params: param,
+      headers: this.getHeaders()
+    });
   }
 
   SeleccionarAsync(api, param?) {
-    var headerOptions = new HttpHeaders( this.getHeaders().toJSON() )
-    return this.httpClient.get(this.puerto + api, { params: param, headers: headerOptions }).toPromise();
+    var headerOptions = new HttpHeaders(this.getHeaders().toJSON());
+    return this.httpClient
+      .get(this.puerto + api, { params: param, headers: headerOptions })
+      .toPromise();
   }
 
   login(api, objeto) {
     var body = objeto;
     // var headerOptions = new Headers({ 'Content-Type': 'application/json' });
-    var requestOptions = new RequestOptions({  method: RequestMethod.Post, headers: this.getHeaders() });
-    return this.http.post(this.puerto + api, body, requestOptions).map(res => res.json());
+    var requestOptions = new RequestOptions({
+      method: RequestMethod.Post,
+      headers: this.getHeaders()
+    });
+    return this.http
+      .post(this.puerto + api, body, requestOptions)
+      .map(res => res.json());
   }
 
   SetBool(datos) {
     let index = 0;
     for (let i of datos) {
-
-      if (i.Estado == 'ACT') {
+      if (i.Estado == "ACT") {
         datos[index].Estado = true;
-      }
-      else {
+      } else {
         datos[index].Estado = false;
       }
       index++;
@@ -53,33 +67,70 @@ export class CrudService {
   }
 
   _listParams(api, params?) {
-    return this.httpClient.post(this.puerto + api + '/list', params).toPromise();
+    return this.httpClient
+      .post(this.puerto + api + "/list", params)
+      .toPromise();
   }
 
   Actualizar(id, objeto, api) {
     var body = objeto;
     //var headerOptions = new Headers({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
-    var requestOptions = new RequestOptions({ method: RequestMethod.Put, headers: this.getHeaders(),  });
-    return this.http.put(this.puerto + api + id, body, requestOptions).map(res => res.json());
+    var requestOptions = new RequestOptions({
+      method: RequestMethod.Put,
+      headers: this.getHeaders()
+    });
+    return this.http
+      .put(this.puerto + api + id, body, requestOptions)
+      .map(res => res.json());
   }
 
   Insertar(objeto, api) {
     var body = objeto;
     //var headerOptions = new Headers({ 'Content-Type': 'application/json' });
-    var requestOptions = new RequestOptions({ method: RequestMethod.Post, headers: this.getHeaders() });
-    return this.http.post(this.puerto + api, body, requestOptions).map(res => res.json());
+    var requestOptions = new RequestOptions({
+      method: RequestMethod.Post,
+      headers: this.getHeaders()
+    });
+    return this.http
+      .post(this.puerto + api, body, requestOptions)
+      .map(res => res.json());
+  }
+
+  SendFile(objeto, api) {
+    var body = objeto;
+    const HttpUploadOptions = {
+      headers: new HttpHeaders({ "Accept": "application/json" })
+    };
+    //var requestOptions = new RequestOptions({ method: RequestMethod.Post, headers: headerOptions });
+    console.log(body);
+    return this.httpClient
+      .post(this.puerto + api, body,HttpUploadOptions)
+      //.map(res => res.json());
   }
 
   Eliminar(ID, api) {
     //var headerOptions = new Headers({ 'Content-Type': 'application/json' });
-    var requestOptions = new RequestOptions({ method: RequestMethod.Delete, headers: this.getHeaders() });
-    return this.http.delete(this.puerto + api + ID, requestOptions).map(res => res.json());
+    var requestOptions = new RequestOptions({
+      method: RequestMethod.Delete,
+      headers: this.getHeaders()
+    });
+    return this.http
+      .delete(this.puerto + api + ID, requestOptions)
+      .map(res => res.json());
   }
 
-  getHeaders(){
-    let header = new Headers({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
-    if(localStorage.getItem('authToken'))
-      header.append('Authorization', `${ localStorage.getItem('tokenType') } ${ localStorage.getItem('authToken') }`);
+  getHeaders() {
+    let header = new Headers({
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*"
+    });
+    if (localStorage.getItem("authToken"))
+      header.append(
+        "Authorization",
+        `${localStorage.getItem("tokenType")} ${localStorage.getItem(
+          "authToken"
+        )}`
+      );
     return header;
   }
 }

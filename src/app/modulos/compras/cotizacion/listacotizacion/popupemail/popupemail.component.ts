@@ -44,7 +44,8 @@ export class PopupemailComponent implements OnInit {
         [Validators.required]
       ),
       message: new FormControl("", [Validators.required]),
-      cotizacion: new FormControl(this.data.payload.ID, [Validators.required])
+      cotizacion: new FormControl(this.data.payload.ID, [Validators.required]),
+      proveedor: new FormControl("", [Validators.required])
     });
     console.log(this.mailForm);
     this.loadApp();
@@ -56,9 +57,10 @@ export class PopupemailComponent implements OnInit {
 
   sendEmail() {
     let selected = this.ngxDatatable.selected.map(row => row.Email);
-
+    let proveedores = this.ngxDatatable.selected.map(row => row.ID);
     if (selected.length > 0) {
       this.mailForm.controls["to"].setValue(selected);
+      this.mailForm.controls["proveedor"].setValue(proveedores);
       this.closeDialog();
       this.snack.open("Cotizacion Enviada", "OK", { duration: 4000 });
       this.crudService

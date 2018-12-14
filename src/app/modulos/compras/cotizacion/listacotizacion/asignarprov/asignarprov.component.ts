@@ -15,7 +15,6 @@ export class AsignarprovComponent implements OnInit {
   pageSize = this.toolsService.getPaginas();
   selPageSize: any = this.pageSize[0];
   paginate: any = [];
-  Proveedores: any = [];
   Cotizacion: any = [];
   checked = false;
   selProveedor:any;
@@ -36,11 +35,13 @@ export class AsignarprovComponent implements OnInit {
       this.loadApp();
     });
   }
+
+  
+
   async loadApp() {
     this.paginate = await this.crudService.SeleccionarAsync(
       "cotizacion/" + this.IDCotizacion
     );
-    console.log(this.paginate);
     
   }
 
