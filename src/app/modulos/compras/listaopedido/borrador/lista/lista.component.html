@@ -1,46 +1,14 @@
 <mat-card class="p-0">
   <div class="m-333">
-    <button
-      mat-icon-button
-      mat-sm-button
-      color="primary"
-      class="mr-1"
-      (click)="agregar()"
-      matTooltip="Agregar"
-    >
-      <mat-icon>add</mat-icon>
-    </button>
-    <button
-      mat-icon-button
-      mat-sm-button
-      color="warn"
-      class="mr-1"
-      (click)="eliminar()"
-      matTooltip="Eliminar"
-    >
-      <mat-icon>delete</mat-icon>
-    </button>
-    <button
-      mat-icon-button
-      mat-sm-button
-      color="primary"
-      class="mr-1"
-      (click)="openPopUp({}, true)"
-      matTooltip="Buscar Producto"
-    >
-      <mat-icon>search</mat-icon>
-    </button>
-    <button
-      mat-icon-button
-      mat-sm-button
-      color="warn"
-      class="mr-1"
-      (click)="save()"
-      matTooltip="Guardar"
-      *ngIf="Pedidos.length > 0"
-    >
-      <mat-icon>save</mat-icon>
-    </button>
+     
+    <button mat-raised-button class="mr-1" color="primary" (click)="agregar()" > Agregar Producto</button> 
+
+    <button mat-raised-button class="mr-1" color="primary" (click)="eliminar()" > Eliminar Producto</button>
+
+    <button mat-raised-button class="mr-1" color="primary" (click)="openPopUp({}, true)" > Buscar Producto</button>
+
+   <button mat-raised-button class="mr-1" color="primary" (click)="save()" *ngIf="Pedidos.length > 0"> Guardar Orden Pedido</button>
+   
   </div>
   <mat-card-content class="p-0">
     <mat-card-title class="mat-bg-primary m-0">

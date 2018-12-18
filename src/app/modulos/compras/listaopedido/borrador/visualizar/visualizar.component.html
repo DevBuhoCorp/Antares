@@ -29,7 +29,7 @@
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column name="Cantidad" [flexGrow]="0.12">
+      <ngx-datatable-column name="Cantidad" [flexGrow]="0.12" >
         <ng-template
           ngx-datatable-cell-template
           let-rowIndex="rowIndex"
@@ -46,8 +46,9 @@
           let-rowIndex="rowIndex"
           let-value="PrecioRef"
           let-row="row"
+          style="text-align: right;"
         >
-          {{row?.PrecioRef}}
+          {{row?.PrecioRef | currency}}
         </ng-template>
       </ngx-datatable-column>
     </ngx-datatable>

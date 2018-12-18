@@ -21,7 +21,7 @@ export class PopupemailComponent implements OnInit {
   Proveedores: any = [];
   //Correos: any = [];
   selectedProveedores: any = [];
-
+  temp: any = [];
   @ViewChild("MyDatatableComponent") ngxDatatable: DatatableComponent;
 
   constructor(
@@ -78,8 +78,36 @@ export class PopupemailComponent implements OnInit {
   }
 
   async loadApp() {
-    this.Proveedores = await this.crudService.SeleccionarAsync(
+    this.Proveedores = this.temp = await this.crudService.SeleccionarAsync(
       "proveedorcombo"
     );
+  }
+
+  updateFilter(event) {
+    const val = event.target.value.toLowerCase();
+    var columns = Object.keys(this.temp[0]);
+    // Removes last "$$index" from "column"
+    columns.splice(columns.length - 1);
+
+    // console.log(columns);
+    if (!columns.length) return;
+
+    const rows = this.temp.filter(function(d) {
+      for (let i = 0; i <= columns.length; i++) {
+        var column = columns[i];
+        // console.log(d[column]);
+        if (
+          d[column] &&
+          d[column]
+            .toString()
+            .toLowerCase()
+            .indexOf(val) > -1
+        ) {
+          return true;
+        }
+      }
+    });
+
+    this.Proveedores = rows;
   }
 }
