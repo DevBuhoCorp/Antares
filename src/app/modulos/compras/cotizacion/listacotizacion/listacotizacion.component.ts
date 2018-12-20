@@ -37,7 +37,6 @@ export class ListaprovcotizacionComponent implements OnInit {
     private crudService: CrudService,
     public composeDialog: MatDialog,
     private dialog: MatDialog,
-    private snack: MatSnackBar
   ) {
     
   }
@@ -58,7 +57,7 @@ export class ListaprovcotizacionComponent implements OnInit {
     this.paginate = await this.crudService.SeleccionarAsync("cotizacion", {
       page: event.offset + 1,
       psize: this.selPageSize,
-      Estado: "BRR"
+      Estado: this.selEstado
     });
   }
   openComposeDialog(row) {

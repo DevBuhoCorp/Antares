@@ -30,6 +30,7 @@ import {ListaprovcotizacionComponent} from './compras/cotizacion/listacotizacion
 import {AsignarprovComponent} from './compras/cotizacion/listacotizacion/asignarprov/asignarprov.component';
 import {MovimientoComponent} from './movimiento/movimiento/movimiento.component';
 import { CotizacionproveedorComponent } from './compras/cotizacion/cotizacionproveedor/cotizacionproveedor.component';
+import { ListaocompraComponent } from './compras/ordencompra/listaocompra/listaocompra.component';
 
 
 export const ModulosRoutes: Routes = [
@@ -212,6 +213,12 @@ export const ModulosRoutes: Routes = [
     path: 'compras/cotizacion/lista/proveedor/:id',
     component: CotizacionproveedorComponent,
     data: {title: 'Cotización', breadcrumb: 'COTIZACIÓN'}
+  },
+
+  {
+    path: 'compras/ordencompra/lista',
+    component: ListaocompraComponent,
+    data: {title: 'Ordenes de Compra', breadcrumb: 'ORDENES DE COMPRA'}
   },
 
   //#endregion

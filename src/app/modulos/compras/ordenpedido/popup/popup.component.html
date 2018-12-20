@@ -62,9 +62,9 @@
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column name="Stock" [flexGrow]="0.5">
+      <ngx-datatable-column name="Stock" [flexGrow]="0.25">
         <ng-template let-row="row" ngx-datatable-cell-template>
-          {{ row?.Stock }}
+          <div style="text-align: right;"> {{ row?.Stock }} </div>
         </ng-template>
       </ngx-datatable-column>
     </ngx-datatable>

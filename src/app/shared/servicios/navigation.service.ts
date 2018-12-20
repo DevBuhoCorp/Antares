@@ -98,12 +98,16 @@ export class NavigationService {
         },
         {
           name: "Cotizaciones",
-          type: "dropDown",
-          state: "cotizacion",
-          sub: [
+          /* type: "dropDown", */
+          state: "cotizacion/lista",
+         /*  sub: [
             { name: "Lista", state: "lista" },
 
-          ]
+          ] */
+        },
+        {
+          name: "Ordenes de Compra",
+          state: "ordencompra/lista",
         }
       ]
     },
