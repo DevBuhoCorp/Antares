@@ -64,6 +64,17 @@ export class NavigationService {
         { name: "Tipo Emisor", state: "catalogos/tipoemisor" },
         { name: "Tipo Identifación", state: "catalogos/tipoidentificacion" },
         { name: "Tipo Documento", state: "catalogos/tipodocumento" },
+        {
+          name: "Pagos",
+          state: "catalogos",
+          type: "dropDown",
+          sub: [
+            { name: "Condiciones de Pago", state: "condicionespago" },
+            { name: "Modos de Pago", state: "formaspago" },
+          ]
+
+        },
+       
       ]
     },
     {

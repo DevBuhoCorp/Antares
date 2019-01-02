@@ -15,6 +15,10 @@ export class ToolsService {
     return [ 5, 10, 20];
   }
 
+  getCotizacionesMinimas(){
+    return 3;
+  }
+
 
 
 }

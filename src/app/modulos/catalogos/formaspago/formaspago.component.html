@@ -1,9 +1,8 @@
 <div class="m-333" style="display: flex; justify-content: space-between;">
-  <h1 matDialogTitle>Seleccione Items a Pedir</h1>
-
-  <span fxFlex></span>
- 
-  <!-- <div class="select-group">
+  <button mat-raised-button class="mb-05" color="primary" (click)="openPopUp()">
+    Agregar
+  </button>
+  <div class="select-group">
     <mat-form-field class="full-width">
       <mat-select
         placeholder=" Seleccione número de ítems:"
@@ -18,7 +17,7 @@
         >
       </mat-select>
     </mat-form-field>
-  </div> -->
+  </div>
 </div>
 
 <mat-card class="p-0">
@@ -35,57 +34,41 @@
       [limit]="paginate.per_page" [offset]="paginate?.current_page - 1"
       (page)="setPage($event)"
     >
-      <ngx-datatable-column
-        [width]="50"
-        [sortable]="false"
-        [canAutoResize]="false"
-        [draggable]="false"
-        [resizeable]="false"
-        [flexGrow]="1"
-      >
-        <ng-template
-          ngx-datatable-cell-template
-          let-rowIndex="rowIndex"
-          let-value="Seleccionar"
-          let-row="row"
-        >
-          <mat-checkbox
-            #checkboxMultiple
-            (change)="updateValueCheck($event, 'Seleccionar', rowIndex)"
-          ></mat-checkbox>
+      <ngx-datatable-column name="Etiqueta" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.Etiqueta }}
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column name="Item" [flexGrow]="1">
+      <ngx-datatable-column name="Estado" [flexGrow]="1">
         <ng-template let-row="row" ngx-datatable-cell-template>
-          {{ row?.Descripcion }}
+          <mat-chip mat-sm-chip [color]="'primary'" [selected]="row.Estado">{{
+            row.Estado ? "activo" : "inactivo"
+          }}</mat-chip>
         </ng-template>
       </ngx-datatable-column>
-
-      <ngx-datatable-column name="Stock" [flexGrow]="0.25">
+      <ngx-datatable-column name="Acciones" [flexGrow]="1">
         <ng-template let-row="row" ngx-datatable-cell-template>
-          <div style="text-align: right;"> {{ row?.Stock }} </div>
+          <button
+            mat-icon-button
+            mat-sm-button
+            color="primary"
+            class="mr-1"
+            (click)="openPopUp(false, row)"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            mat-sm-button
+            color="warn"
+            class="mr-1"
+            (click)="deleteItem(row)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
         </ng-template>
       </ngx-datatable-column>
     </ngx-datatable>
   </mat-card-content>
 </mat-card>
-
-
-<div class="m-333">
-
-  
-  <button mat-raised-button color="primary" (click)="submit(false)">
-    Seleccionar
-  </button>
-  <span fxFlex></span>
-  <button
-    mat-button
-    color="warn"
-    type="button"
-    (click)="dialogRef.close(false)"
-  >
-    Cancelar
-  </button>
-  
-</div>

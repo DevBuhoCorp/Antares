@@ -1,6 +1,6 @@
 <mat-card class="p-0">
   <div class="m-333" style="display: flex; justify-content: space-between;">
-    <!-- <div class="select-group">
+    <div class="select-group">
       <mat-form-field class="full-width">
         <mat-select
           placeholder=" Seleccione Estado"
@@ -12,7 +12,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-    </div> -->
+    </div>
 
     <div class="select-group">
       <mat-form-field class="full-width">
@@ -54,35 +54,54 @@
       [externalPaging]="true"
       [count]="paginate.total"
       [limit]="paginate.per_page"
+      [offset]="paginate?.current_page - 1"
       (page)="setPage($event)"
     >
       <ngx-datatable-column name="Fecha Registro" [flexGrow]="1">
         <ng-template let-row="row" ngx-datatable-cell-template>
-          {{ row?.FechaReg | date: "medium" }}
+          {{ row?.FechaRegistro | date: "medium" }}
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column name="Fecha Inicio" [flexGrow]="1">
+      <ngx-datatable-column name="Fecha Entrega" [flexGrow]="1">
         <ng-template let-row="row" ngx-datatable-cell-template>
-          {{ row?.FechaIni | date: "medium" }}
+          {{ row?.FechaEntrega | date: "medium" }}
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column name="Fecha Fin" [flexGrow]="1">
-        <ng-template let-row="row" ngx-datatable-cell-template>
-          {{ row?.FechaFin | date: "medium" }}
-        </ng-template>
-      </ngx-datatable-column>
-
-      <ngx-datatable-column name="Observación" [flexGrow]="1">
+      <ngx-datatable-column name="Etiqueta" [flexGrow]="1">
         <ng-template let-row="row" ngx-datatable-cell-template>
           {{ row?.Observacion }}
         </ng-template>
       </ngx-datatable-column>
 
+      <ngx-datatable-column name="Proveedor" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.RazonSocial }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Realizo Orden Compra" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.Nombre }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Modo de Pago" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.ModoPago }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Condición de Pago" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.CondicionPago }}
+        </ng-template>
+      </ngx-datatable-column>
+
       <ngx-datatable-column name="Detalles" [flexGrow]="1">
         <ng-template let-row="row" ngx-datatable-cell-template>
-          <a
+         <!-- <a
             mat-icon-button
             mat-sm-button
             color="warn"
@@ -90,7 +109,7 @@
           >
             <mat-icon>list</mat-icon>
           </a>
-         <!--  <a
+            <a
             mat-icon-button
             mat-sm-button
             color="warn"
@@ -110,7 +129,7 @@
             <mat-icon>attachment</mat-icon>
           </a> -->
 
-         <!--  <a
+          <!--  <a
             mat-icon-button
             mat-sm-button
             color="warn"

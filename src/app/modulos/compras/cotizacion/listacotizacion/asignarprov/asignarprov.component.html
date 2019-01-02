@@ -1,6 +1,15 @@
 
 
 <mat-card class="p-0">
+    <mat-card-title class="mat-bg-primary m-0">
+        <div class="card-title-text">
+          <span
+            >Total estimado a pagar de la Cotización:
+            {{ Total | currency: "USD":"symbol":".2-4" }}</span
+          >
+        </div>
+        <mat-divider></mat-divider>
+      </mat-card-title>
   <mat-card-content class="p-0">
    
     <ngx-datatable
@@ -52,18 +61,18 @@
           let-value="Cantidad"
           let-row="row"
         >
-        <div style="text-align: right;">  {{ row?.PrecioRef | currency }}  </div>
+        <div style="text-align: right;">  {{ row?.PrecioRef | currency: "USD":"symbol":".2-4" }}  </div>
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column name="Total" [flexGrow]="0.25">
+      <ngx-datatable-column name="Total Estimado" [flexGrow]="0.25">
         <ng-template
           ngx-datatable-cell-template
           let-rowIndex="rowIndex"
           let-value="Cantidad"
           let-row="row"
         >
-        <div style="text-align: right;">     {{ row?.Saldo | currency }} </div>
+        <div style="text-align: right;">     {{ row?.PrecioRef * row?.Cantidad | currency: "USD":"symbol":".2-4" }} </div>
         </ng-template>
       </ngx-datatable-column>
 

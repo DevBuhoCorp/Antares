@@ -31,6 +31,9 @@ import {AsignarprovComponent} from './compras/cotizacion/listacotizacion/asignar
 import {MovimientoComponent} from './movimiento/movimiento/movimiento.component';
 import { CotizacionproveedorComponent } from './compras/cotizacion/cotizacionproveedor/cotizacionproveedor.component';
 import { ListaocompraComponent } from './compras/ordencompra/listaocompra/listaocompra.component';
+import { NuevaocompraComponent } from './compras/ordencompra/nuevaocompra/nuevaocompra.component';
+import { CondicionespagoComponent } from './catalogos/condicionespago/condicionespago.component';
+import { FormaspagoComponent } from './catalogos/formaspago/formaspago.component';
 
 
 export const ModulosRoutes: Routes = [
@@ -123,6 +126,16 @@ export const ModulosRoutes: Routes = [
     path: 'catalogos/cargo',
     component: CargoComponent,
     data: {title: 'Configuración Cargo', breadcrumb: 'CONFIGURACIÓN CARGO'}
+  },
+  {
+    path: 'catalogos/condicionespago',
+    component: CondicionespagoComponent,
+    data: {title: 'Configuración Condiciones Pago', breadcrumb: 'CONFIGURACIÓN CONDICIONES PAGO'}
+  },
+  {
+    path: 'catalogos/formaspago',
+    component: FormaspagoComponent,
+    data: {title: 'Configuración Formas Pago', breadcrumb: 'CONFIGURACIÓN FORMAS PAGO'}
   },
 
   //#endregion
@@ -219,6 +232,11 @@ export const ModulosRoutes: Routes = [
     path: 'compras/ordencompra/lista',
     component: ListaocompraComponent,
     data: {title: 'Ordenes de Compra', breadcrumb: 'ORDENES DE COMPRA'}
+  },
+  {
+    path: 'compras/ordencompra/lista/nueva',
+    component: NuevaocompraComponent,
+    data: {title: 'Ordenes de Compra', breadcrumb: 'NUEVA ORDEN DE COMPRA'}
   },
 
   //#endregion

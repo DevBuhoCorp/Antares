@@ -91,6 +91,11 @@ import { MovimientoComponent } from './movimiento/movimiento/movimiento.componen
 import {NgxCurrencyModule} from 'ngx-currency';
 import { CotizacionproveedorComponent } from './compras/cotizacion/cotizacionproveedor/cotizacionproveedor.component';
 import { ListaocompraComponent } from './compras/ordencompra/listaocompra/listaocompra.component';
+import { NuevaocompraComponent } from './compras/ordencompra/nuevaocompra/nuevaocompra.component';
+import { CondicionespagoComponent } from './catalogos/condicionespago/condicionespago.component';
+import { PopupCondicionesPagoComponent } from './catalogos/condicionespago/popup/popup.component';
+import { FormaspagoComponent } from './catalogos/formaspago/formaspago.component';
+import { PopupFormasPagoComponent } from './catalogos/formaspago/popup/popup.component';
 
 export const customCurrencyMaskConfig = {
   align: "right",
@@ -201,7 +206,12 @@ export const customCurrencyMaskConfig = {
     PopupemailComponent,
     MovimientoComponent,
     CotizacionproveedorComponent,
-    ListaocompraComponent
+    ListaocompraComponent,
+    NuevaocompraComponent,
+    CondicionespagoComponent,
+    PopupCondicionesPagoComponent,
+    FormaspagoComponent,
+    PopupFormasPagoComponent
 
   ],
   providers: [],
@@ -227,7 +237,9 @@ export const customCurrencyMaskConfig = {
     AutorizarPopupComponent,
     PopupTipoDocumentoComponent,
     PopUpListacotizacionComponent,
-    PopupemailComponent
+    PopupemailComponent,
+    PopupCondicionesPagoComponent,
+    PopupFormasPagoComponent
   ]
 })
 export class ModulosModule {

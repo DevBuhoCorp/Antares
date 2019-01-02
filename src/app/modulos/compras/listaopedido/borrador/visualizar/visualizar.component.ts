@@ -43,7 +43,7 @@ export class VisualizarComponent implements OnInit {
       }
     );
     this.paginate.data.forEach(i => {
-      this.Total += i.Saldo;
+      this.Total += i.PrecioRef * i.Cantidad;
     });
   }
 }

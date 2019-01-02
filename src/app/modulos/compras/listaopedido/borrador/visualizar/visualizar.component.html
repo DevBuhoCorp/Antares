@@ -4,7 +4,7 @@
       <div class="card-title-text">
         <span
           >Total estimado a pagar de la Orden Pedida:
-          {{ Total | currency }}</span
+          {{ Total | currency: "USD":"symbol":".2-4" }}</span
         >
       </div>
       <mat-divider></mat-divider>
@@ -48,9 +48,22 @@
           let-row="row"
           style="text-align: right;"
         >
-        <div style="text-align: right;"> {{row?.PrecioRef | currency}} </div>
+        <div style="text-align: right;"> {{row?.PrecioRef | currency: "USD":"symbol":".2-4"}} </div>
         </ng-template>
       </ngx-datatable-column>
+
+      <ngx-datatable-column name="Total Estimado" [flexGrow]="0.25">
+        <ng-template
+          ngx-datatable-cell-template
+          let-rowIndex="rowIndex"
+          let-value="PrecioRef"
+          let-row="row"
+          style="text-align: right;"
+        >
+        <div style="text-align: right;"> {{row?.PrecioRef * row?.Cantidad | currency: "USD":"symbol":".2-4"}} </div>
+        </ng-template>
+      </ngx-datatable-column>
+
     </ngx-datatable>
   </mat-card-content>
 </mat-card>

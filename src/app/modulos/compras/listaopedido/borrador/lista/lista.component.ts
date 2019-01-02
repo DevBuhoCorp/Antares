@@ -60,7 +60,7 @@ export class ListaComponent implements OnInit {
       }
     );
     this.paginate.data.forEach(i => {
-      this.Total += i.Saldo;
+      this.Total += i.PrecioRef * i.Cantidad;
     });
     //this.paginate.data = this.crudService.SetBool(this.paginate.data);
     this.Pedidos = [...this.paginate.data];

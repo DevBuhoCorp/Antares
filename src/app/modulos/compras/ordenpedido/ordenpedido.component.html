@@ -90,7 +90,7 @@
       <div class="card-title-text">
         <span
           >Total estimado a pagar de la Orden Pedida:
-          {{ Total | currency }}</span
+          {{ Total | currency: "USD":"symbol":".2-4" }}</span
         >
       </div>
       <mat-divider></mat-divider>
@@ -177,7 +177,7 @@
             (change)="updateValue($event, 'PrecioRef', rowIndex)"
             type="text"
             mask="0*.0000"
-            [value]="row?.PrecioRef | currency"
+            [value]="row?.PrecioRef | currency: "USD":"symbol":".2-4""
           />
         </ng-template>
       </ngx-datatable-column>

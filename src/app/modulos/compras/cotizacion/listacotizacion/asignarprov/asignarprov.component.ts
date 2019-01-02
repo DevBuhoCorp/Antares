@@ -17,17 +17,14 @@ export class AsignarprovComponent implements OnInit {
   paginate: any = [];
   Cotizacion: any = [];
   checked = false;
-  selProveedor:any;
+  selProveedor: any;
+  Total: number = 0;
   constructor(
     private crudService: CrudService,
     private toolsService: ToolsService,
     private router: ActivatedRoute,
-    private snack: MatSnackBar,
-  ) {
-   
-  }
-
-
+    private snack: MatSnackBar
+  ) {}
 
   ngOnInit() {
     this.router.params.subscribe(async params => {
@@ -36,17 +33,12 @@ export class AsignarprovComponent implements OnInit {
     });
   }
 
-  
-
   async loadApp() {
     this.paginate = await this.crudService.SeleccionarAsync(
       "cotizacion/" + this.IDCotizacion
     );
-    
+    this.paginate.forEach(i => {
+      this.Total += i.Cantidad * i.PrecioRef;
+    });
   }
-
- 
-   
-    
-  
 }

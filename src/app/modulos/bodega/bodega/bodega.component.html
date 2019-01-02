@@ -19,7 +19,7 @@
                    [rowHeight]="'auto'"
                    [externalPaging]="true"
                    [count]="paginate.total"
-                   [limit]="paginate.per_page"
+                   [limit]="paginate.per_page" [offset]="paginate?.current_page - 1"
                    (page)='setPage($event)' >
 
       <ngx-datatable-column name="Descripción" [flexGrow]="1">

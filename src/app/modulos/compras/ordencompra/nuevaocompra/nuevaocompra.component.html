@@ -1,9 +1,9 @@
 <mat-card class="p-0">
   <mat-card-content class="mt-1">
-    <h1 matDialogTitle>Crear Nueva Cotización</h1>
+    <h1 matDialogTitle>Crear Nueva Orden Compra</h1>
     <form [formGroup]="itemForm" (ngSubmit)="submitTransaccion()">
       <div fxLayout="row wrap" fxLayout.lt-sm="column">
-        <div fxFlex="33" class="pr-1">
+        <div fxFlex="20" class="pr-1">
           <mat-form-field class="full-width">
             <input
               matInput
@@ -15,30 +15,61 @@
           </mat-form-field>
         </div>
 
-        <div fxFlex="33" class="pr-1">
+        <div fxFlex="20" class="pr-1">
           <mat-form-field class="full-width">
-            <input
-              matInput
-              [formControl]="itemForm.controls['FechaIni']"
-              name="FechaInicio"
-              placeholder="Fecha de Inicio"
-              [matDatepicker]="appDatepicker"
-            />
-            <mat-datepicker-toggle
-              matSuffix
-              [for]="appDatepicker"
-            ></mat-datepicker-toggle>
+            <mat-select
+              placeholder="Proveedor:"
+              [formControl]="itemForm.controls['IDProveedor']"
+            >
+              <mat-option
+                *ngFor="let proveedor of Proveedores"
+                [value]="proveedor.ID"
+                ngDefaultControl
+                >{{ proveedor.RazonSocial }}</mat-option
+              >
+            </mat-select>
           </mat-form-field>
-          <mat-datepicker #appDatepicker></mat-datepicker>
         </div>
 
-        <div fxFlex="33" class="pr-1">
+        <div fxFlex="20" class="pr-1">
+          <mat-form-field class="full-width">
+            <mat-select
+              placeholder="Condiciones de Pago:"
+              [formControl]="itemForm.controls['IDCondicionPago']"
+            >
+              <mat-option
+                *ngFor="let cpago of CondicionesPago"
+                [value]="cpago.ID"
+                ngDefaultControl
+                >{{ cpago.Etiqueta }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div fxFlex="20" class="pr-1">
+          <mat-form-field class="full-width">
+            <mat-select
+              placeholder="Forma de Pago:"
+              [formControl]="itemForm.controls['IDModoPago']"
+            >
+              <mat-option
+                *ngFor="let fpago of FormasPago"
+                [value]="fpago.ID"
+                ngDefaultControl
+                >{{ fpago.Etiqueta }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div fxFlex="20" class="pr-1">
           <mat-form-field class="full-width">
             <input
               matInput
-              [formControl]="itemForm.controls['FechaFin']"
+              [formControl]="itemForm.controls['FechaEntrega']"
               name="FechaFin"
-              placeholder="Fecha Final"
+              placeholder="Fecha prevista de entrega"
               [matDatepicker]="appDatepicker2"
             />
             <mat-datepicker-toggle
@@ -78,8 +109,7 @@
             mat-raised-button
             class="mb-05"
             color="primary"
-            (click)="cancelar()"
-            [routerLink]="['/modulos/compras/cotizacion/lista']"
+            [routerLink]="['/modulos/compras/ordencompra/lista']"
           >
             Cancelar
           </a>
@@ -91,18 +121,15 @@
 
 <mat-card class="p-0" *ngIf="Creado">
   <div class="m-333">
-    <button
-      mat-icon-button
-      mat-sm-button
-      color="warn"
-      class="mr-1"
+      <button
+      mat-raised-button
+      class="mb-05"
+      color="primary"
       (click)="save()"
-      matTooltip="Guardar"
-      
+      [disabled]="selectedItems.length == 0"
     >
-      <mat-icon>save</mat-icon>
+      Guardar
     </button>
-    
   </div>
   <div class="m-333" style="display: flex; justify-content: space-between;">
     <div class="select-group">
@@ -125,81 +152,79 @@
 
   <mat-card-content class="p-0">
     <h1 matDialogTitle style="text-align: center;">
-      Seleccione Ordenes de Pedido a Cotizar
+      Seleccione Items a Comprar
     </h1>
     <ngx-datatable
+      #MyDatatableComponent
       class="material ml-0 mr-0"
-      [rows]="paginate.data"
+      [rows]="paginate"
       [columnMode]="'flex'"
       [headerHeight]="50"
       [footerHeight]="50"
       [rowHeight]="'auto'"
-      [externalPaging]="true"
-      [count]="paginate.total"
-      [limit]="paginate.per_page" [offset]="paginate?.current_page - 1"
-      (page)="setPage($event)"
+      [rowIdentity]="getID"
+      [selected]="selectedItems"
+      [selectionType]="'checkbox'"
+      [selectAllRowsOnPage]="true"
+      [limit]="10"
     >
       <ngx-datatable-column
-        [width]="50"
+        [width]="30"
         [sortable]="false"
         [canAutoResize]="false"
         [draggable]="false"
         [resizeable]="false"
-        [flexGrow]="1"
+        [headerCheckboxable]="true"
+        [checkboxable]="true"
       >
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Producto" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.Descripcion }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Cotizacion" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.Cotizacion }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Orden de Pedido" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.OrdenPedido }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Cantidad" [flexGrow]="0.25">
+        <!-- <ng-template let-row="row" ngx-datatable-cell-template>
+            <div style="text-align: right;">{{ row?.Cantidad }}</div>
+          </ng-template> -->
         <ng-template
           ngx-datatable-cell-template
           let-rowIndex="rowIndex"
-          let-value="Seleccionar"
+          let-value="Cantidad"
           let-row="row"
-          
         >
-          <mat-checkbox  (change)="updateValueCheck($event, 'Seleccionar', rowIndex)" #checkboxMultiple></mat-checkbox>
+          <input
+            #cantidadMultiple
+            style="text-align: right;"
+            autofocus
+            matInput
+            (change)="updateValue($event, 'Cantidad', rowIndex)"
+            type="text"
+            [value]="row?.Cantidad"
+        
+          />
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column name="Fecha Registro" [flexGrow]="1">
+      <ngx-datatable-column name="Precio" [flexGrow]="0.25">
         <ng-template let-row="row" ngx-datatable-cell-template>
-          {{ row?.FechaRegistro | date: "medium" }}
-        </ng-template>
-      </ngx-datatable-column>
-
-      <ngx-datatable-column name="Observación" [flexGrow]="1">
-        <ng-template let-row="row" ngx-datatable-cell-template>
-          {{ row?.Observacion }}
-        </ng-template>
-      </ngx-datatable-column>
-
-      <ngx-datatable-column name="Colaborador" [flexGrow]="1">
-        <ng-template let-row="row" ngx-datatable-cell-template>
-          {{ row?.Colaborador }}
-        </ng-template>
-      </ngx-datatable-column>
-
-      <ngx-datatable-column name="Área" [flexGrow]="1">
-        <ng-template let-row="row" ngx-datatable-cell-template>
-          {{ row?.Area }}
-        </ng-template>
-      </ngx-datatable-column>
-
-      <ngx-datatable-column name="Cargo" [flexGrow]="1">
-        <ng-template let-row="row" ngx-datatable-cell-template>
-          {{ row?.Cargo }}
-        </ng-template>
-      </ngx-datatable-column>
-
-      <ngx-datatable-column name="Detalles" [flexGrow]="1">
-        <ng-template let-row="row" ngx-datatable-cell-template>
-          <a
-            mat-icon-button
-            mat-sm-button
-            color="warn"
-            target="_blank"
-            
-            (click)="Modal(row.ID)"
-          >
-            <mat-icon>list</mat-icon>
-          </a>
+          <div style="text-align: right;">
+            {{ row?.Precio | currency: "USD":"symbol":".2-4" }}
+          </div>
         </ng-template>
       </ngx-datatable-column>
     </ngx-datatable>

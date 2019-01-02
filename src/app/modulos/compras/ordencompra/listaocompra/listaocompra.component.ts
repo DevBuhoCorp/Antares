@@ -17,6 +17,17 @@ export class ListaocompraComponent implements OnInit {
     total: 0,
     per_page: 0
   };
+  Estados: any = [
+    {
+      value: "Borrador",
+      ID: "BRR"
+    },
+    {
+      value: "Enviados",
+      ID: "ENV"
+    }
+  ];
+  selEstado: any;
   constructor(
     private toolsService: ToolsService,
     private crudService: CrudService,
@@ -25,22 +36,22 @@ export class ListaocompraComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.loadApp();
+   
   }
 
   async loadApp() {
-    this.paginate = await this.crudService.SeleccionarAsync("cotizacion", {
+    this.paginate = await this.crudService.SeleccionarAsync("ordencompra", {
       page: 1,
       psize: this.selPageSize,
-     // Estado: this.selEstado
+      Estado: this.selEstado
     });
   }
 
   async setPage(event) {
-    this.paginate = await this.crudService.SeleccionarAsync("cotizacion", {
+    this.paginate = await this.crudService.SeleccionarAsync("ordencompra", {
       page: event.offset + 1,
       psize: this.selPageSize,
-      // Estado: this.selEstado
+      Estado: this.selEstado
     });
   }
 }
