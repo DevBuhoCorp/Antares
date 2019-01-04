@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChildren } from "@angular/core";
+import { Component, OnInit, ViewChildren, ViewChild } from "@angular/core";
 import { ToolsService } from "../../../../shared/servicios/tools.service";
 import { CrudService } from "../../../../shared/servicios/crud.service";
 import { MatSnackBar, MatDialog, MatDialogRef } from "@angular/material";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { PopUpListacotizacionComponent } from "./listacotizacion/listacotizacion.component";
+import { DatatableComponent } from "@swimlane/ngx-datatable";
 
 @Component({
   selector: "app-nuevacotizacion",
@@ -25,7 +26,8 @@ export class NuevacotizacionComponent implements OnInit {
   Creado: boolean = false;
   checked = false;
   public itemForm: FormGroup;
-  @ViewChildren("checkboxMultiple") private checkboxesMultiple: any;
+  selectedItems: any = [];
+  @ViewChild("MyDatatableComponent") ngxDatatable: DatatableComponent;
   constructor(
     private toolsService: ToolsService,
     private crudService: CrudService,
@@ -38,6 +40,9 @@ export class NuevacotizacionComponent implements OnInit {
 
   ngOnInit() {
     // this.loadApp();
+  }
+  getID(row) {
+    return row.ID;
   }
 
   buildItemForm() {
@@ -88,10 +93,14 @@ export class NuevacotizacionComponent implements OnInit {
 
   save() {
     let transacciones = [];
-    this.paginate.data.forEach(i => {
+    /* this.paginate.data.forEach(i => {
       if (i.Seleccionar) {
         transacciones.push(i.ID);
       }
+    }); */
+    let data  = this.ngxDatatable.selected.map(i => {
+        transacciones.push(i.ID);
+    
     });
     if (transacciones.length > 0) {
       this.Cotizacion.Estado = "BRR";
@@ -115,6 +124,7 @@ export class NuevacotizacionComponent implements OnInit {
       PopUpListacotizacionComponent,
       {
         width: "1080px",
+        minHeight: "20px",
         disableClose: true,
         data: { title: title, payload: id }
       }

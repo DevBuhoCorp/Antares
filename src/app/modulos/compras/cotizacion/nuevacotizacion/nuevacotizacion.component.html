@@ -98,11 +98,9 @@
       class="mr-1"
       (click)="save()"
       matTooltip="Guardar"
-      
     >
       <mat-icon>save</mat-icon>
     </button>
-    
   </div>
   <div class="m-333" style="display: flex; justify-content: space-between;">
     <div class="select-group">
@@ -128,18 +126,34 @@
       Seleccione Ordenes de Pedido a Cotizar
     </h1>
     <ngx-datatable
+      #MyDatatableComponent
       class="material ml-0 mr-0"
       [rows]="paginate.data"
       [columnMode]="'flex'"
       [headerHeight]="50"
       [footerHeight]="50"
       [rowHeight]="'auto'"
+      [rowIdentity]="getID"
+      [selected]="selectedItems"
+      [selectionType]="'checkbox'"
+      [selectAllRowsOnPage]="true"
       [externalPaging]="true"
       [count]="paginate.total"
-      [limit]="paginate.per_page" [offset]="paginate?.current_page - 1"
+      [limit]="paginate.per_page"
+      [offset]="paginate?.current_page - 1"
       (page)="setPage($event)"
     >
       <ngx-datatable-column
+        [width]="30"
+        [sortable]="false"
+        [canAutoResize]="false"
+        [draggable]="false"
+        [resizeable]="false"
+        [headerCheckboxable]="true"
+        [checkboxable]="true"
+      >
+      </ngx-datatable-column>
+      <!-- <ngx-datatable-column
         [width]="50"
         [sortable]="false"
         [canAutoResize]="false"
@@ -156,7 +170,7 @@
         >
           <mat-checkbox  (change)="updateValueCheck($event, 'Seleccionar', rowIndex)" #checkboxMultiple></mat-checkbox>
         </ng-template>
-      </ngx-datatable-column>
+      </ngx-datatable-column> -->
 
       <ngx-datatable-column name="Fecha Registro" [flexGrow]="1">
         <ng-template let-row="row" ngx-datatable-cell-template>
@@ -195,7 +209,6 @@
             mat-sm-button
             color="warn"
             target="_blank"
-            
             (click)="Modal(row.ID)"
           >
             <mat-icon>list</mat-icon>

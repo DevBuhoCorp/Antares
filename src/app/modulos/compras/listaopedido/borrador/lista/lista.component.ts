@@ -106,9 +106,7 @@ export class ListaComponent implements OnInit {
     if (!bandera) {
       this.Pedidos[rowIndex][cell] = event.target.value;
       this.Pedidos[rowIndex]["Saldo"] =
-        parseFloat(this.Pedidos[rowIndex]["Cantidad"]) *
-        parseFloat(this.Pedidos[rowIndex]["PrecioRef"]);
-
+        parseFloat(this.Pedidos[rowIndex]["Cantidad"]) 
       this.Pedidos = [...this.Pedidos];
       
     } else {
@@ -187,8 +185,8 @@ export class ListaComponent implements OnInit {
   async openPopUp(data: any = {}, isNew?) {
     let title = isNew ? "Agregar" : "Actualizar";
     let dialogRef: MatDialogRef<any> = this.dialog.open(OPedidoPopupComponent, {
-      width: "1080px",
-      height: "720px",
+      width: '1080px',
+      minHeight: '20px',
       disableClose: true,
       data: { title: title, payload: data }
     });
@@ -207,7 +205,7 @@ export class ListaComponent implements OnInit {
           const nuevo = {
             Seleccionar: false,
             Cantidad: null,
-            Etiqueta: i.Descripcion,
+            Etiqueta: i.Nombre,
             PrecioRef: 0,
             Saldo: 0,
             IdItem: i.ID

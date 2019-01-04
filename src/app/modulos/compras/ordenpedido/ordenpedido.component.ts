@@ -90,8 +90,7 @@ export class OrdenpedidoComponent implements OnInit {
     if (!bandera) {
       this.Pedidos[rowIndex][cell] = event.target.value;
       this.Pedidos[rowIndex]["Saldo"] =
-        parseFloat(this.Pedidos[rowIndex]["Cantidad"]) *
-        parseFloat(this.Pedidos[rowIndex]["PrecioRef"]);
+        parseFloat(this.Pedidos[rowIndex]["Cantidad"])
 
       this.Pedidos = [...this.Pedidos];
       

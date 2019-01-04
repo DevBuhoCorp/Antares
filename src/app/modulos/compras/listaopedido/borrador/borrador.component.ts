@@ -1,7 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { ToolsService } from "../../../../shared/servicios/tools.service";
 import { CrudService } from "../../../../shared/servicios/crud.service";
 import { MatSnackBar } from "@angular/material";
+import { DatatableComponent } from "@swimlane/ngx-datatable";
 
 @Component({
   selector: "app-borrador",
@@ -40,6 +41,8 @@ export class BorradorComponent implements OnInit {
     per_page: 0
   };
   selEstado: any;
+  selectedItems: any = [];
+  @ViewChild("MyDatatableComponent") ngxDatatable: DatatableComponent;
   constructor(
     private toolsService: ToolsService,
     private crudService: CrudService,
@@ -66,9 +69,14 @@ export class BorradorComponent implements OnInit {
     });
   }
 
+  getID(row) {
+    return row.ID;
+  }
+
+
   Guardar() {
-    this.paginate.data.map(i => {
-      if (i.Estado) {
+    let data  = this.ngxDatatable.selected.map(i => {
+      
         i.Estado = "ENV";
         this.crudService.Actualizar(i.ID, i, "opedido/").subscribe(
           async data => {
@@ -81,7 +89,7 @@ export class BorradorComponent implements OnInit {
             this.snack.open(error._body, "OK", { duration: 4000 });
           }
         );
-      }
+      
     });
   }
   

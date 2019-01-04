@@ -164,7 +164,7 @@
             (change)="updateValue($event, 'Precio', rowIndex)"
             type="text"
 
-            [value]="row?.Precio | currency: "USD":"symbol":".2-4""
+            [value]="row?.Precio | currency"
           />
         </ng-template>
       </ngx-datatable-column>

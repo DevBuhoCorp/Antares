@@ -31,29 +31,59 @@
       </mat-form-field>
     </div>
   </div>
-  <div class="m-333"  style="display: flex; justify-content: space-between;">
-    <button *ngIf="selEstado == 'BRR'" mat-raised-button class="mb-05" color="primary" (click)="Guardar()">
+  <div class="m-333" style="display: flex; justify-content: space-between;">
+    <button
+      *ngIf="selEstado == 'BRR'"
+      mat-raised-button
+      class="mb-05"
+      color="primary"
+      (click)="Guardar()"
+      [disabled]="selectedItems.length == 0"
+    >
       Guardar
     </button>
-  
-    <button mat-raised-button class="mb-05" color="primary" [routerLink]="['nueva']">
+
+    <button
+      mat-raised-button
+      class="mb-05"
+      color="primary"
+      [routerLink]="['nueva']"
+    >
       Nuevo Pedido
     </button>
   </div>
 
   <mat-card-content class="p-0">
     <ngx-datatable
+      #MyDatatableComponent
       class="material ml-0 mr-0"
       [rows]="paginate.data"
       [columnMode]="'flex'"
       [headerHeight]="50"
       [footerHeight]="50"
       [rowHeight]="'auto'"
+      [rowIdentity]="getID"
+      [selected]="selectedItems"
+      [selectionType]="'checkbox'"
+      [selectAllRowsOnPage]="true"
       [externalPaging]="true"
       [count]="paginate.total"
-      [limit]="paginate.per_page" [offset]="paginate?.current_page - 1"
+      [limit]="paginate.per_page"
+      [offset]="paginate?.current_page - 1"
       (page)="setPage($event)"
     >
+      <ngx-datatable-column
+        *ngIf="selEstado == 'BRR'"
+        [width]="30"
+        [sortable]="false"
+        [canAutoResize]="false"
+        [draggable]="false"
+        [resizeable]="false"
+        [headerCheckboxable]="true"
+        [checkboxable]="true"
+      >
+      </ngx-datatable-column>
+
       <ngx-datatable-column name="Fecha Registro" [flexGrow]="1">
         <ng-template let-row="row" ngx-datatable-cell-template>
           {{ row?.FechaRegistro | date: "medium" }}
@@ -106,7 +136,7 @@
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column
+      <!-- <ngx-datatable-column
         name="Enviar Ordenes para su autorización"
         [flexGrow]="1"
         *ngIf="selEstado == 'BRR'"
@@ -114,7 +144,8 @@
         <ng-template let-row="row" ngx-datatable-cell-template>
           <mat-checkbox [(ngModel)]="row.Estado"></mat-checkbox>
         </ng-template>
-      </ngx-datatable-column>
+      </ngx-datatable-column> -->
+
       <ngx-datatable-column
         *ngIf="selEstado == 'BRR'"
         name="Detalles Orden Pedido"

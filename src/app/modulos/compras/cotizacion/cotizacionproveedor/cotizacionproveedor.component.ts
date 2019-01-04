@@ -195,7 +195,6 @@ export class CotizacionproveedorComponent implements OnInit {
         input.append("file", file);
         input.append("IDProveedor", this.selProveedor);
         input.append("Nombre", file.name);
-        console.log(file.name);
         this.crudService.SendFile(input, "cotizacionimport/").subscribe(
           data => {
             this.snack.open("Registros Actualizados!", "OK", {
@@ -204,8 +203,8 @@ export class CotizacionproveedorComponent implements OnInit {
             this.loadApp();
           },
           error => {
-            console.log(error.error);
-            this.snack.open(error.error, "OK", {
+            console.log(error);
+            this.snack.open(error._body, "OK", {
               duration: 4000
             });
           }

@@ -32,6 +32,7 @@ export class PopUpListacotizacionComponent implements OnInit {
   ngOnInit() {
     
       this.loadApp(this.data.payload);
+      this.IDOrdenPedido = this.data.payload;
     
   }
   async loadApp(id) {
@@ -42,9 +43,17 @@ export class PopUpListacotizacionComponent implements OnInit {
         psize: this.selPageSize
       }
     );
-    this.paginate.data.forEach(i => {
-      this.Total += i.Saldo;
-    });
+  
+  }
+
+  async setPage(event) {
+    this.paginate = await this.crudService.SeleccionarAsync(
+      "opedido/" + this.IDOrdenPedido,
+      {
+        page:  event.offset + 1,
+        psize: this.selPageSize
+      }
+    );
   }
 
   Cerrar(){

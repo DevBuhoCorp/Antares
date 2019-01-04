@@ -7,7 +7,11 @@
       [headerHeight]="50"
       [footerHeight]="50"
       [rowHeight]="'auto'"
-      [limit]="10"
+      [externalPaging]="true"
+      [count]="paginate.total"
+      [limit]="paginate.per_page"
+      [offset]="paginate?.current_page - 1"
+      (page)="setPage($event)"
     >
       <ngx-datatable-column name="Etiqueta" [flexGrow]="0.75">
         <ng-template
@@ -16,7 +20,7 @@
           let-value="Etiqueta"
           let-row="row"
         >
-          {{row?.Etiqueta}}
+          {{ row?.Etiqueta }}
         </ng-template>
       </ngx-datatable-column>
 
@@ -27,7 +31,7 @@
           let-value="Cantidad"
           let-row="row"
         >
-          {{row?.Cantidad}}
+          {{ row?.Cantidad }}
         </ng-template>
       </ngx-datatable-column>
 
@@ -38,23 +42,16 @@
           let-value="PrecioRef"
           let-row="row"
         >
-          {{row?.PrecioRef}}
+          {{ row?.PrecioRef }}
         </ng-template>
       </ngx-datatable-column>
     </ngx-datatable>
   </mat-card-content>
 </mat-card>
 
-
 <div class="m-333">
-  <button
-    mat-raised-button
-    class="mb-05"
-    color="primary"
-    (click)="Cerrar()"
-  >
+  <button mat-raised-button class="mb-05" color="primary" (click)="Cerrar()">
     <mat-icon>arrow_back</mat-icon>
     Regresar
   </button>
 </div>
-
