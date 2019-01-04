@@ -73,14 +73,32 @@
 
 <mat-card class="p-0" *ngIf="Creado">
   <div class="m-333">
-  
-    <button mat-raised-button class="mr-1" color="primary" (click)="agregar()" > Agregar Producto</button> 
- 
-    <button mat-raised-button class="mr-1" color="primary" (click)="eliminar()" > Eliminar Producto</button>
-   
-    <button mat-raised-button class="mr-1" color="primary" (click)="openPopUp({}, true)" > Buscar Producto</button>
-    
-    <button mat-raised-button class="mr-1" color="primary" (click)="save()" *ngIf="Pedidos.length > 0"> Guardar Orden Pedido</button>
+    <button mat-raised-button class="mr-1" color="primary" (click)="agregar()">
+      Agregar Producto
+    </button>
+
+    <button mat-raised-button class="mr-1" color="primary" (click)="eliminar()">
+      Eliminar Producto
+    </button>
+
+    <button
+      mat-raised-button
+      class="mr-1"
+      color="primary"
+      (click)="openPopUp({}, true)"
+    >
+      Buscar Producto
+    </button>
+
+    <button
+      mat-raised-button
+      class="mr-1"
+      color="primary"
+      (click)="save()"
+      *ngIf="Pedidos.length > 0"
+    >
+      Guardar Orden Pedido
+    </button>
     <mat-checkbox *ngIf="Pedidos.length > 0" [(ngModel)]="checked"
       >Enviar para Autorización</mat-checkbox
     >
@@ -96,12 +114,17 @@
       <mat-divider></mat-divider>
     </mat-card-title>
     <ngx-datatable
+      #MyDatatableComponent
       class="material ml-0 mr-0"
       [rows]="Pedidos"
       [columnMode]="'flex'"
       [headerHeight]="50"
       [footerHeight]="50"
       [rowHeight]="'auto'"
+      [rowIdentity]="getID"
+      [selected]="selectedItems"
+      [selectionType]="'checkbox'"
+      [selectAllRowsOnPage]="true"
       [limit]="10"
     >
       <ngx-datatable-column
@@ -177,7 +200,7 @@
             (change)="updateValue($event, 'PrecioRef', rowIndex)"
             type="text"
             mask="0*.0000"
-            [value]="row?.PrecioRef | currency: "USD":"symbol":".2-4""
+            [value]="row?.PrecioRef | currency"
           />
         </ng-template>
       </ngx-datatable-column>

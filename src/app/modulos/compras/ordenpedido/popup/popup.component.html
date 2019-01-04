@@ -2,40 +2,29 @@
   <h1 matDialogTitle>Seleccione Items a Pedir</h1>
 
   <span fxFlex></span>
- 
-  <!-- <div class="select-group">
-    <mat-form-field class="full-width">
-      <mat-select
-        placeholder=" Seleccione número de ítems:"
-        [(ngModel)]="selPageSize"
-        (selectionChange)="loadApp()"
-      >
-        <mat-option
-          *ngFor="let page of pageSize"
-          [value]="page"
-          ngDefaultControl
-          >{{ page }}</mat-option
-        >
-      </mat-select>
-    </mat-form-field>
-  </div> -->
 </div>
 
 <mat-card class="p-0">
   <mat-card-content class="p-0">
     <ngx-datatable
+      #MyDatatableComponent
       class="material ml-0 mr-0"
       [rows]="paginate.data"
       [columnMode]="'flex'"
       [headerHeight]="50"
       [footerHeight]="50"
       [rowHeight]="'auto'"
+      [rowIdentity]="getID"
+      [selected]="selectedItems"
+      [selectionType]="'checkbox'"
+      [selectAllRowsOnPage]="true"
       [externalPaging]="true"
       [count]="paginate.total"
-      [limit]="paginate.per_page" [offset]="paginate?.current_page - 1"
+      [limit]="paginate.per_page"
+      [offset]="paginate?.current_page - 1"
       (page)="setPage($event)"
     >
-      <ngx-datatable-column
+      <!-- <ngx-datatable-column
         [width]="50"
         [sortable]="false"
         [canAutoResize]="false"
@@ -54,27 +43,35 @@
             (change)="updateValueCheck($event, 'Seleccionar', rowIndex)"
           ></mat-checkbox>
         </ng-template>
+      </ngx-datatable-column> -->
+
+      <ngx-datatable-column
+        [width]="30"
+        [sortable]="false"
+        [canAutoResize]="false"
+        [draggable]="false"
+        [resizeable]="false"
+        [headerCheckboxable]="true"
+        [checkboxable]="true"
+      >
       </ngx-datatable-column>
 
       <ngx-datatable-column name="Item" [flexGrow]="1">
         <ng-template let-row="row" ngx-datatable-cell-template>
-          {{ row?.Descripcion }}
+          {{ row?.Nombre }}
         </ng-template>
       </ngx-datatable-column>
 
       <ngx-datatable-column name="Stock" [flexGrow]="0.25">
         <ng-template let-row="row" ngx-datatable-cell-template>
-          <div style="text-align: right;"> {{ row?.Stock }} </div>
+          <div style="text-align: right;">{{ row?.Stock }}</div>
         </ng-template>
       </ngx-datatable-column>
     </ngx-datatable>
   </mat-card-content>
 </mat-card>
 
-
 <div class="m-333">
-
-  
   <button mat-raised-button color="primary" (click)="submit(false)">
     Seleccionar
   </button>
@@ -87,5 +84,4 @@
   >
     Cancelar
   </button>
-  
 </div>

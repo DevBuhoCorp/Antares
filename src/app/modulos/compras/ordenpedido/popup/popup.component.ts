@@ -1,8 +1,9 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormBuilder } from '@angular/forms';
 import { CrudService } from '../../../../shared/servicios/crud.service';
 import { ToolsService } from '../../../../shared/servicios/tools.service';
+import { DatatableComponent } from '@swimlane/ngx-datatable';
 
 @Component({
   selector: 'app-popup',
@@ -18,6 +19,9 @@ export class OPedidoPopupComponent implements OnInit {
     total: 0,
     per_page: 0
   };
+  selectedItems: any = [];
+  @ViewChild("MyDatatableComponent") ngxDatatable: DatatableComponent;
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
   public dialogRef: MatDialogRef<OPedidoPopupComponent>,
   private fb: FormBuilder,
@@ -29,21 +33,20 @@ export class OPedidoPopupComponent implements OnInit {
   }
 
   async loadApp(){
-    this.paginate = await this.crudService.SeleccionarAsync('items', { page: 1 , psize: this.selPageSize });
+    this.paginate = await this.crudService.SeleccionarAsync('productos', { page: 1 , psize: this.selPageSize });
   }
 
   async setPage(event){
-    this.paginate = await this.crudService.SeleccionarAsync('items', { page: event.offset + 1 , psize: this.selPageSize });
+    this.paginate = await this.crudService.SeleccionarAsync('productos', { page: event.offset + 1 , psize: this.selPageSize });
   }
 
   submit() {
-    let data = [];
-    this.paginate.data.forEach(i => {
-      if(i.Seleccionar){
-        data = data.concat(i);
-      }      
-    });
+    let data  = this.ngxDatatable.selected.map(row => row);
     this.dialogRef.close(data)
+  }
+
+  getID(row) {
+    return row.ID;
   }
 
   updateValueCheck(event, cell, rowIndex) {

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren } from "@angular/core";
+import { Component, OnInit, ViewChildren, ViewChild } from "@angular/core";
 import { CrudService } from "../../../shared/servicios/crud.service";
 import { MatDialog, MatSnackBar, MatDialogRef } from "@angular/material";
 import { AppLoaderService } from "../../../shared/servicios/app-loader/app-loader.service";
@@ -12,6 +12,7 @@ import {
   FormControl
 } from "@angular/forms";
 import { startWith, map } from "rxjs/operators";
+import { DatatableComponent } from "@swimlane/ngx-datatable";
 @Component({
   selector: "app-ordenpedido",
   templateUrl: "./ordenpedido.component.html",
@@ -28,6 +29,8 @@ export class OrdenpedidoComponent implements OnInit {
   OPedido: any = {
     Detalles: []
   };
+  selectedItems: any = [];
+  @ViewChild("MyDatatableComponent") ngxDatatable: DatatableComponent;
 
   @ViewChildren("checkboxMultiple") private checkboxesMultiple: any;
   @ViewChildren("textboxMultiple") private textboxMultiple: any;
@@ -51,7 +54,10 @@ export class OrdenpedidoComponent implements OnInit {
    
   }
   
-  
+  getID(row) {
+    return row.ID;
+  }
+
   buildItemForm() {
     this.itemForm = this.fb.group({
       Estado: [{ value: "Borrador", disabled: true }],
@@ -132,8 +138,8 @@ export class OrdenpedidoComponent implements OnInit {
         return i;
       }
     });
-    this.Pedidos = [...nuevo];
-  }
+  this.Pedidos = [...nuevo];
+}
 
   submitTransaccion() {
     this.snack.open("Agregado!", "OK", { duration: 4000 });
@@ -182,13 +188,16 @@ export class OrdenpedidoComponent implements OnInit {
   async openPopUp(data: any = {}, isNew?) {
     let title = isNew ? "Agregar" : "Actualizar";
     let dialogRef: MatDialogRef<any> = this.dialog.open(OPedidoPopupComponent, {
-      width: "1080px",
-      height: "720px",
+      /* width: "1080px",
+      height: "720px", */
+      width: '1080px',
+      minHeight: '20px',
       disableClose: true,
       data: { title: title, payload: data }
     });
 
     dialogRef.afterClosed().subscribe(response => {
+      console.log(response);
       let bandera = false;
       if (!response) return;
       response.forEach(i => {
@@ -202,7 +211,7 @@ export class OrdenpedidoComponent implements OnInit {
           const nuevo = {
             Seleccionar: false,
             Cantidad: null,
-            Etiqueta: i.Descripcion,
+            Etiqueta: i.Nombre,
             PrecioRef: 0,
             Saldo: 0,
             IdItem: i.ID
