@@ -23,7 +23,6 @@ export class AsignarprovComponent implements OnInit {
     private crudService: CrudService,
     private toolsService: ToolsService,
     private router: ActivatedRoute,
-    private snack: MatSnackBar
   ) {}
 
   ngOnInit() {

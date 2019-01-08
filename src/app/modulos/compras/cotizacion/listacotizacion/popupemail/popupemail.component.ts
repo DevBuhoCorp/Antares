@@ -62,10 +62,19 @@ export class PopupemailComponent implements OnInit {
       this.mailForm.controls["to"].setValue(selected);
       this.mailForm.controls["proveedor"].setValue(proveedores);
       this.closeDialog();
-      this.snack.open("Cotizacion Enviada", "OK", { duration: 4000 });
       this.crudService
         .Insertar(this.mailForm.value, "cotizacionmail")
-        .subscribe(res => {});
+        .subscribe(
+          res => {
+            this.snack.open("Cotizacion Enviada", "OK", { duration: 4000 });
+          },
+          error => {
+            console.log(error);
+            this.snack.open(error._body, "OK", {
+              duration: 4000
+            });
+          }
+        );
     } else {
       this.snack.open("Seleccione al menos un Proveedor", "OK", {
         duration: 4000

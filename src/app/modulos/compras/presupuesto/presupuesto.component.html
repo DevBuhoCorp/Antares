@@ -33,22 +33,22 @@
 
         <div fxFlex="50" class="pr-1" *ngIf="selAnio">
           <mat-form-field class="full-width">
-            <input matInput [value]="rowData.PInicial | currency: "USD":"symbol":".2-4"" placeholder="Presupuesto Inicial" [disabled]="true">
+            <input matInput [value]="rowData.PInicial | currency" placeholder="Presupuesto Inicial" [disabled]="true">
           </mat-form-field>
         </div>
         <div fxFlex="50" class="pr-1" *ngIf="selAnio">
           <mat-form-field class="full-width">
-            <input matInput [value]="rowData.OPedido | currency: "USD":"symbol":".2-4"" placeholder="O. Pedido" [disabled]="true">
+            <input matInput [value]="rowData.OPedido | currency" placeholder="O. Pedido" [disabled]="true">
           </mat-form-field>
         </div>
         <div fxFlex="50" class="pr-1" *ngIf="selAnio">
           <mat-form-field class="full-width">
-            <input matInput [value]="rowData.OCompra | currency: "USD":"symbol":".2-4"" placeholder="O. Compras" [disabled]="true">
+            <input matInput [value]="rowData.OCompra | currency" placeholder="O. Compras" [disabled]="true">
           </mat-form-field>
         </div>
         <div fxFlex="50" class="pr-1" *ngIf="selAnio">
           <mat-form-field class="full-width">
-            <input matInput [value]="rowData.Compras | currency: "USD":"symbol":".2-4"" placeholder="Compra Facturada" [disabled]="true">
+            <input matInput [value]="rowData.Compras | currency" placeholder="Compra Facturada" [disabled]="true">
           </mat-form-field>
         </div>
 
@@ -107,13 +107,12 @@
           <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="Precio" let-row="row">
             <input
               autofocus
-
               matInput
               (change)="updateValue($event, 'Precio', rowIndex)"
               type="text"
               mask='0*.0000'
               style="text-align: right;"
-              [value]="row?.Precio | currency: "USD":"symbol":".2-4""
+              [value]="row?.Precio | currency"
             />
           </ng-template>
 

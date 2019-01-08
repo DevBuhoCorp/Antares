@@ -29,6 +29,7 @@ export class NuevaocompraComponent implements OnInit {
     IDCotProv: []
   };
   selectedItems: any = [];
+  temp: any = [];
   @ViewChild("MyDatatableComponent") ngxDatatable: DatatableComponent;
   @ViewChildren("cantidadMultiple") private cantidadMultiple: any;
 
@@ -67,7 +68,7 @@ export class NuevaocompraComponent implements OnInit {
   }
 
   async loadApp() {
-    this.paginate = await this.crudService.SeleccionarAsync(
+    this.paginate = this.temp = await this.crudService.SeleccionarAsync(
       "ordencompraitems",
       {
         page: 1,
@@ -124,6 +125,34 @@ export class NuevaocompraComponent implements OnInit {
       this.paginate[rowIndex][cell] = event.target.value;
       this.paginate = [...this.paginate];
     }
+  }
+
+  updateFilter(event) {
+    const val = event.target.value.toLowerCase();
+    var columns = Object.keys(this.temp[0]);
+    // Removes last "$$index" from "column"
+    columns.splice(columns.length - 1);
+
+    // console.log(columns);
+    if (!columns.length) return;
+
+    const rows = this.temp.filter(function(d) {
+      for (let i = 0; i <= columns.length; i++) {
+        var column = columns[i];
+        // console.log(d[column]);
+        if (
+          d[column] &&
+          d[column]
+            .toString()
+            .toLowerCase()
+            .indexOf(val) > -1
+        ) {
+          return true;
+        }
+      }
+    });
+
+    this.paginate = rows;
   }
 
   cancelar() {

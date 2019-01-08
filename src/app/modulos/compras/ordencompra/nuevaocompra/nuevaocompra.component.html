@@ -131,7 +131,7 @@
       Guardar
     </button>
   </div>
-  <div class="m-333" style="display: flex; justify-content: space-between;">
+ <!--  <div class="m-333" style="display: flex; justify-content: space-between;">
     <div class="select-group">
       <mat-form-field class="full-width">
         <mat-select
@@ -148,12 +148,19 @@
         </mat-select>
       </mat-form-field>
     </div>
-  </div>
+  </div> -->
 
   <mat-card-content class="p-0">
     <h1 matDialogTitle style="text-align: center;">
       Seleccione Items a Comprar
     </h1>
+    <mat-form-field class="margin-333" style="width: 100%">
+      <input
+        matInput
+        placeholder="Escriba para filtrar por items"
+        (keyup)="updateFilter($event)"
+      />
+    </mat-form-field>
     <ngx-datatable
       #MyDatatableComponent
       class="material ml-0 mr-0"
@@ -166,7 +173,6 @@
       [selected]="selectedItems"
       [selectionType]="'checkbox'"
       [selectAllRowsOnPage]="true"
-      [limit]="10"
     >
       <ngx-datatable-column
         [width]="30"

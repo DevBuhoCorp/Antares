@@ -96,6 +96,7 @@ import { CondicionespagoComponent } from './catalogos/condicionespago/condicione
 import { PopupCondicionesPagoComponent } from './catalogos/condicionespago/popup/popup.component';
 import { FormaspagoComponent } from './catalogos/formaspago/formaspago.component';
 import { PopupFormasPagoComponent } from './catalogos/formaspago/popup/popup.component';
+import { VerocompraComponent } from './compras/ordencompra/listaocompra/verocompra/verocompra.component';
 
 export const customCurrencyMaskConfig = {
   align: "right",
@@ -211,7 +212,8 @@ export const customCurrencyMaskConfig = {
     CondicionespagoComponent,
     PopupCondicionesPagoComponent,
     FormaspagoComponent,
-    PopupFormasPagoComponent
+    PopupFormasPagoComponent,
+    VerocompraComponent
 
   ],
   providers: [],

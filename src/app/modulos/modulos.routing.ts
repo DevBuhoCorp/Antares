@@ -34,6 +34,7 @@ import { ListaocompraComponent } from './compras/ordencompra/listaocompra/listao
 import { NuevaocompraComponent } from './compras/ordencompra/nuevaocompra/nuevaocompra.component';
 import { CondicionespagoComponent } from './catalogos/condicionespago/condicionespago.component';
 import { FormaspagoComponent } from './catalogos/formaspago/formaspago.component';
+import { VerocompraComponent } from './compras/ordencompra/listaocompra/verocompra/verocompra.component';
 
 
 export const ModulosRoutes: Routes = [
@@ -231,6 +232,11 @@ export const ModulosRoutes: Routes = [
   {
     path: 'compras/ordencompra/lista',
     component: ListaocompraComponent,
+    data: {title: 'Ordenes de Compra', breadcrumb: 'ORDENES DE COMPRA'}
+  },
+  {
+    path: 'compras/ordencompra/lista/visualizar/:id',
+    component: VerocompraComponent,
     data: {title: 'Ordenes de Compra', breadcrumb: 'ORDENES DE COMPRA'}
   },
   {

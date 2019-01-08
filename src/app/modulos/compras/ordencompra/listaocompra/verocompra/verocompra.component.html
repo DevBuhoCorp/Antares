@@ -1,0 +1,83 @@
+
+
+<mat-card class="p-0">
+    <mat-card-title class="mat-bg-primary m-0">
+        <div class="card-title-text">
+          <span
+            >Total a pagar de la Orden de Compra:
+            {{ Total | currency: "USD":"symbol":".2-4" }}</span
+          >
+        </div>
+        <mat-divider></mat-divider>
+      </mat-card-title>
+  <mat-card-content class="p-0">
+   
+    <ngx-datatable
+      class="material ml-0 mr-0"
+      [rows]="paginate"
+      [columnMode]="'flex'"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [rowHeight]="'auto'"
+    >
+      <ngx-datatable-column name="Etiqueta" [flexGrow]="1">
+        <ng-template
+          ngx-datatable-cell-template
+          let-rowIndex="rowIndex"
+          let-value="Etiqueta"
+          let-row="row"
+        >
+          {{ row?.Descripcion }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Cantidad" [flexGrow]="0.25">
+        <ng-template
+          ngx-datatable-cell-template
+          let-rowIndex="rowIndex"
+          let-value="Cantidad"
+          let-row="row"
+        >
+        <div style="text-align: right;">   {{ row?.Cantidad }}</div>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Precio Referencia" [flexGrow]="0.25">
+        <ng-template
+          ngx-datatable-cell-template
+          let-rowIndex="rowIndex"
+          let-value="Cantidad"
+          let-row="row"
+        >
+        <div style="text-align: right;">  {{ row?.Precio | currency: "USD":"symbol":".2-4" }}  </div>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Total" [flexGrow]="0.25">
+        <ng-template
+          ngx-datatable-cell-template
+          let-rowIndex="rowIndex"
+          let-value="Cantidad"
+          let-row="row"
+        >
+        <div style="text-align: right;">     {{ row?.Precio * row?.Cantidad | currency: "USD":"symbol":".2-4" }} </div>
+        </ng-template>
+      </ngx-datatable-column>
+
+      
+
+    </ngx-datatable>
+  </mat-card-content>
+</mat-card>
+
+<div class="m-333">
+  <button
+    mat-raised-button
+    class="mb-05"
+    color="primary"
+    [routerLink]="['/modulos/compras/ordencompra/lista']"
+  >
+    <mat-icon>arrow_back</mat-icon>
+    Regresar
+  </button>
+</div>
